@@ -1,3 +1,19 @@
+SLASH_GLOCKFARMER1 = "/Glockfarmer"
+SlashCmdList["GLOCKFARMER"] = function(Cmd, ...)
+    if(msg == "show")
+    then
+        frame:Show();
+    elseif(msg == "hide")
+    then
+        frame:Hide();
+    elseif(msg == "scan")
+    then
+        PrintBags();        
+    else
+        print("Proper argument not given!")
+    end
+end
+
 Glockfarmer = LibStub("AceAddon-3.0"):NewAddon("Glockfarmer");
 local AceGUI = LibStub("AceGUI-3.0");
 
@@ -63,6 +79,8 @@ optsGroup:AddChild(leatherCheckbox);
 local itemsGroup = AceGUI:Create("InlineGroup");
 itemsGroup:SetTitle("Items");
 scroll:AddChild(itemsGroup);
+frame:Show()
+    
 
 --Herbs
 local DeathBlossomBagCount = 0;
@@ -115,26 +133,6 @@ local PallidBoneBagCount = 0;
 local PallidBoneReagentCount = 0;
 local CallousHideBagCount = 0;
 local CallousHideReagentCount = 0;
-
-function Glockfarmer:OnInitialize()
-	SLASH_GLOCKFARMER1 = "/Glockfarmer"
-	SlashCmdList["GLOCKFARMER"] = function(Cmd, ...)
-		if(msg == "show")
-        then
-            frame:Show();
-        elseif(msg == "hide")
-        then
-            frame:Hide();
-        elseif(msg == "scan")
-        then
-            PrintBags();        
-        else
-            print("Proper argument not given!")
-        end
-    end
-    frame:Show()
-    PrintBags();
-end
 
 function PrintBags()
     GetPersonalBags();
@@ -567,3 +565,5 @@ eventFrame:SetScript("OnEvent", function(self,event, ...)
         PrintBags();
     end
 end)
+
+PrintBags();
