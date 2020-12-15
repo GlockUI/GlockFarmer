@@ -28,6 +28,7 @@ frame:AddChild(scroll)
 local optsGroup = AceGUI:Create("InlineGroup");
 optsGroup:SetTitle("Professions");
 optsGroup:SetLayout("Flow")
+optsGroup:SetFullWidth(true)
 scroll:AddChild(optsGroup);
 
 local herbCheckbox = AceGUI:Create("CheckBox");
@@ -78,6 +79,7 @@ optsGroup:AddChild(leatherCheckbox);
 
 local itemsGroup = AceGUI:Create("InlineGroup");
 itemsGroup:SetTitle("Items");
+itemsGroup:SetFullWidth(true)
 scroll:AddChild(itemsGroup);
 frame:Show()
     
@@ -137,11 +139,10 @@ local CallousHideReagentCount = 0;
 function PrintBags()
     GetPersonalBags();
 
-    if(IsReagentBankUnlocked()){
+    if(IsReagentBankUnlocked())
+    then
         GetReagentBank();
-    }
-
-
+    end
     ReloadLabel();
 end
 function GetPersonalBags(args)
@@ -415,25 +416,30 @@ end
 function ReloadLabel()
     itemsGroup:ReleaseChildren()
     
-    if(herbCheckbox:GetValue()){
+    if(herbCheckbox:GetValue())
+    then
         PrintHerbs();
-    }
+    end
 
-    if(fishingCheckbox:GetValue()){
+    if(fishingCheckbox:GetValue())
+    then
         PrintFish();
-    }
+    end
 
-    if(clothCheckbox:GetValue()){
+    if(clothCheckbox:GetValue())
+    then
         PrintCloth();
-    }
+    end
 
-    if(oreCheckbox:GetValue()){
+    if(oreCheckbox:GetValue())
+    then
         PrintOre();
-    }
+    end
     
-    if(leatherCheckbox:GetValue()){
+    if(leatherCheckbox:GetValue())
+    then
         PrintLeather();
-    }
+    end
 end
 function PrintHerbs()
     local herbsGroup = AceGUI:Create("InlineGroup");
