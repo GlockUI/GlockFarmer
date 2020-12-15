@@ -42,6 +42,15 @@ clothCheckbox:SetCallback("OnValueChanged", function(widget)
 end);
 optsGroup:AddChild(clothCheckbox);
 
+local oreCheckbox = AceGUI:Create("CheckBox");
+oreCheckbox:SetType("checkbox");
+oreCheckbox:SetLabel("Show Ore");
+oreCheckbox:SetValue(1);
+oreCheckbox:SetCallback("OnValueChanged", function(widget) 
+    PrintBags();
+end);
+optsGroup:AddChild(oreCheckbox);
+
 local itemsGroup = AceGUI:Create("InlineGroup");
 itemsGroup:SetTitle("Items");
 scroll:AddChild(itemsGroup);
@@ -77,6 +86,19 @@ local ShroudedClothBagCount = 0;
 local ShroudedClothReagentCount = 0;
 local LightlessSilkBagCount = 0;
 local LightlessSilkReagentCount = 0;
+--Ore
+local LaestriteOreBagCount = 0;
+local LaestriteOreReagentCount = 0;
+local ElethiumOreBagCount = 0;
+local ElethiumOreReagentCount = 0;
+local SoleniumOreBagCount = 0;
+local SoleniumOreReagentCount = 0;
+local OxxeinOreBagCount = 0;
+local OxxeinOreReagentCount = 0;
+local PhaedrumOreBagCount = 0;
+local PhaedrumOreReagentCount = 0;
+local SinvyrOreBagCount = 0;
+local SinvyrOreReagentCount = 0;
 
 function Glockfarmer:OnInitialize()
 	SLASH_GLOCKFARMER1 = "/Glockfarmer"
@@ -124,6 +146,14 @@ function GetPersonalBags(args)
     fishingETCount = 0;
     clothSCCount = 0;
     clothLSCount = 0;
+    laestriteOreCount = 0;
+    elethiumOreCount = 0;
+    soleniumOreCount = 0;
+    oxxeinOreCount = 0;
+    phaedrumOreCount = 0;
+    sinvyrOreCount = 0;
+
+
 
     for i=0,5 do
         local slots = GetContainerNumSlots(i);
@@ -174,6 +204,25 @@ function GetPersonalBags(args)
             elseif(itemID == 173204)
             then
                 clothLSCount = clothLSCount + itemCount;
+            --Ore
+            elseif(itemID == 171828)
+            then
+                laestriteOreCount = laestriteOreCount + itemCount;
+            elseif(itemID == 171833)
+            then
+                elethiumOreCount = elethiumOreCount + itemCount;
+            elseif(itemID == 171829)
+            then
+                soleniumOreCount = soleniumOreCount + itemCount;
+            elseif(itemID == 171830)
+            then
+                oxxeinOreCount = oxxeinOreCount + itemCount;
+            elseif(itemID == 171831)
+            then
+                phaedrumOreCount = phaedrumOreCount + itemCount;
+            elseif(itemID == 171832)
+            then
+                sinvyrOreCount = sinvyrOreCount + itemCount;
             end
         end
     end
@@ -193,6 +242,13 @@ function GetPersonalBags(args)
 
     LightlessSilkBagCount = clothLSCount;
     ShroudedClothBagCount = clothSCCount;
+
+    LaestriteOreBagCount = laestriteOreCount;
+    ElethiumOreBagCount = elethiumOreCount;
+    SoleniumOreBagCount = soleniumOreCount;
+    OxxeinOreBagCount = oxxeinOreCount
+    PhaedrumOreBagCount = PhaedrumOreBagCount;
+    SinvyrOreBagCount = sinvyrOreCount;
 end
 function GetReagentBank(args)
     herbDBCount = 0;
@@ -256,6 +312,25 @@ function GetReagentBank(args)
         elseif(itemID == 173204)
         then
             clothLSCount = clothLSCount + itemCount;
+        --Ore
+        elseif(itemID == 171828)
+        then
+            laestriteOreCount = laestriteOreCount + itemCount;
+        elseif(itemID == 171833)
+        then
+            elethiumOreCount = elethiumOreCount + itemCount;
+        elseif(itemID == 171829)
+        then
+            soleniumOreCount = soleniumOreCount + itemCount;
+        elseif(itemID == 171830)
+        then
+            oxxeinOreCount = oxxeinOreCount + itemCount;
+        elseif(itemID == 171831)
+        then
+            phaedrumOreCount = phaedrumOreCount + itemCount;
+        elseif(itemID == 171832)
+        then
+            sinvyrOreCount = sinvyrOreCount + itemCount;
         end
     end
 
@@ -275,6 +350,13 @@ function GetReagentBank(args)
 
     LightlessSilkReagentCount = clothLSCount;
     ShroudedClothReagentCount = clothSCCount;
+
+    LaestriteOreReagentCount = laestriteOreCount;
+    ElethiumOreReagentCount = elethiumOreCount;
+    SoleniumOreReagentCount = soleniumOreCount;
+    OxxeinOreReagentCount = oxxeinOreCount
+    PhaedrumOreReagentCount = PhaedrumOreBagCount;
+    SinvyrOreReagentCount = sinvyrOreCount;
 end
 function ReloadLabel()
     itemsGroup:ReleaseChildren()
@@ -289,6 +371,10 @@ function ReloadLabel()
 
     if(clothCheckbox:GetValue()){
         PrintCloth();
+    }
+
+    if(oreCheckbox:GetValue()){
+        PrintOre();
     }
     
 end
@@ -365,6 +451,36 @@ function PrintCloth()
     local LightlessLabel = AceGUI:Create("Label")
     LightlessLabel:SetText("Lightless Silk: Bag:" .. LightlessSilkBagCount .. " Reagent: " .. LightlessSilkReagentCount)
     clothGroup:AddChild(LightlessLabel)
+end
+function PrintOre()
+    local oreGroup = AceGUI:Create("InlineGroup");
+    oreGroup:SetTitle("Ore");
+    oreGroup:SetLayout("Flow")
+    itemsGroup:AddChild(oreGroup);
+
+    local laestriteOreLabel = AceGUI:Create("Label")
+    laestriteOreLabel:SetText("Laestrite Ore: Bag:" .. LaestriteOreBagCount .. " Reagent: " .. LaestriteOreReagentCount)
+    oreGroup:AddChild(laestriteOreLabel)
+
+    local ElethiumLabel = AceGUI:Create("Label")
+    ElethiumLabel:SetText("Elethium Ore: Bag:" .. ElethiumOreBagCount .. " Reagent: " .. ElethiumOreReagentCount)
+    oreGroup:AddChild(ElethiumLabel)
+
+    local SoleniumLabel = AceGUI:Create("Label")
+    SoleniumLabel:SetText("Solenium Ore: Bag:" .. SoleniumOreBagCount .. " Reagent: " .. SoleniumOreReagentCount)
+    oreGroup:AddChild(SoleniumLabel)
+
+    local OxxeinOreLabel = AceGUI:Create("Label")
+    OxxeinOreLabel:SetText("Oxxein Ore: Bag:" .. OxxeinOreBagCount .. " Reagent: " .. OxxeinOreReagentCount)
+    oreGroup:AddChild(OxxeinOreLabel)
+
+    local PhaedrumOreLabel = AceGUI:Create("Label")
+    PhaedrumOreLabel:SetText("Phaedrum Ore: Bag:" .. PhaedrumOreBagCount .. " Reagent: " .. PhaedrumOreReagentCount)
+    oreGroup:AddChild(PhaedrumOreLabel)
+
+    local SinvyrOreLabel = AceGUI:Create("Label")
+    SinvyrOreLabel:SetText("Sinvyr Ore: Bag:" .. SinvyrOreBagCount .. " Reagent: " .. SinvyrOreReagentCount)
+    oreGroup:AddChild(SinvyrOreLabel)
 end
 local eventFrame= CreateFrame("Frame")
 eventFrame:RegisterEvent("BAG_UPDATE");
