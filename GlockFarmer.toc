@@ -1,8 +1,9 @@
 ## Interface: 90001
 
-## Title: GlockMountHunter
+## Title: GlockFarmer
 ## Author: Glockness
 ## Version: 0.0.1
-## Notes: Allows for Tracking which mounts u need to obtain within the daily/weekly time
+## Notes: Allows for Tracking all of our Farmed Items
+## SavedVariables: GlockFarmerDB
 
 Core.lua
