@@ -51,6 +51,15 @@ oreCheckbox:SetCallback("OnValueChanged", function(widget)
 end);
 optsGroup:AddChild(oreCheckbox);
 
+local leatherCheckbox = AceGUI:Create("CheckBox");
+leatherCheckbox:SetType("checkbox");
+leatherCheckbox:SetLabel("Show Leather");
+leatherCheckbox:SetValue(1);
+leatherCheckbox:SetCallback("OnValueChanged", function(widget) 
+    PrintBags();
+end);
+optsGroup:AddChild(leatherCheckbox);
+
 local itemsGroup = AceGUI:Create("InlineGroup");
 itemsGroup:SetTitle("Items");
 scroll:AddChild(itemsGroup);
@@ -99,6 +108,13 @@ local PhaedrumOreBagCount = 0;
 local PhaedrumOreReagentCount = 0;
 local SinvyrOreBagCount = 0;
 local SinvyrOreReagentCount = 0;
+--leather
+local DesolateLeatherBagCount = 0;
+local DesolateLeatherReagentCount = 0;
+local PallidBoneBagCount = 0;
+local PallidBoneReagentCount = 0;
+local CallousHideBagCount = 0;
+local CallousHideReagentCount = 0;
 
 function Glockfarmer:OnInitialize()
 	SLASH_GLOCKFARMER1 = "/Glockfarmer"
@@ -152,7 +168,9 @@ function GetPersonalBags(args)
     oxxeinOreCount = 0;
     phaedrumOreCount = 0;
     sinvyrOreCount = 0;
-
+    desolateLeatherCount = 0;
+    pallidBoneCount = 0;
+    callousHideCount = 0;
 
 
     for i=0,5 do
@@ -223,6 +241,16 @@ function GetPersonalBags(args)
             elseif(itemID == 171832)
             then
                 sinvyrOreCount = sinvyrOreCount + itemCount;
+            --leather
+            elseif(itemID == 172089)
+            then
+                desolateLeatherCount = desolateLeatherCount + itemCount;
+            elseif(itemID == 172092)
+            then
+                pallidBoneCount = pallidBoneCount + itemCount;
+            elseif(itemID == 172094)
+            then
+                callousHideCount = callousHideCount + itemCount;
             end
         end
     end
@@ -249,6 +277,10 @@ function GetPersonalBags(args)
     OxxeinOreBagCount = oxxeinOreCount
     PhaedrumOreBagCount = PhaedrumOreBagCount;
     SinvyrOreBagCount = sinvyrOreCount;
+
+    DesolateLeatherBagCount = desolateLeatherCount;
+    PallidBoneBagCount = pallidBoneCount;
+    CallousHideBagCount = callousHideCount;
 end
 function GetReagentBank(args)
     herbDBCount = 0;
@@ -263,7 +295,18 @@ function GetReagentBank(args)
     fishingIACount = 0;
     fishingSpineCount = 0;
     fishingETCount = 0;
-    
+    clothSCCount = 0;
+    clothLSCount = 0;
+    laestriteOreCount = 0;
+    elethiumOreCount = 0;
+    soleniumOreCount = 0;
+    oxxeinOreCount = 0;
+    phaedrumOreCount = 0;
+    sinvyrOreCount = 0;
+    desolateLeatherCount = 0;
+    pallidBoneCount = 0;
+    callousHideCount = 0;
+
     local slots = GetContainerNumSlots(-3);
     for s=0,slots do
         icon, itemCount, locked, quality, readable, lootable, itemLink, isFiltered, noValue, itemID = GetContainerItemInfo(-3, s)  
@@ -331,6 +374,15 @@ function GetReagentBank(args)
         elseif(itemID == 171832)
         then
             sinvyrOreCount = sinvyrOreCount + itemCount;
+        --leather
+        elseif(itemID == 172089)
+        then
+            desolateLeatherCount = desolateLeatherCount + itemCount;
+        elseif(itemID == 172092)
+        then
+            pallidBoneCount = pallidBoneCount + itemCount;
+        elseif(itemID == 172094)
+        then
         end
     end
 
@@ -357,6 +409,10 @@ function GetReagentBank(args)
     OxxeinOreReagentCount = oxxeinOreCount
     PhaedrumOreReagentCount = PhaedrumOreBagCount;
     SinvyrOreReagentCount = sinvyrOreCount;
+
+    DesolateLeatherReagentCount = desolateLeatherCount;
+    PallidBoneReagentCount = pallidBoneCount;
+    CallousHideReagentCount = CallousHideReagentCount;
 end
 function ReloadLabel()
     itemsGroup:ReleaseChildren()
@@ -377,6 +433,9 @@ function ReloadLabel()
         PrintOre();
     }
     
+    if(leatherCheckbox:GetValue()){
+        PrintLeather();
+    }
 end
 function PrintHerbs()
     local herbsGroup = AceGUI:Create("InlineGroup");
@@ -481,6 +540,24 @@ function PrintOre()
     local SinvyrOreLabel = AceGUI:Create("Label")
     SinvyrOreLabel:SetText("Sinvyr Ore: Bag:" .. SinvyrOreBagCount .. " Reagent: " .. SinvyrOreReagentCount)
     oreGroup:AddChild(SinvyrOreLabel)
+end
+function PrintLeather()
+    local leatherGroup = AceGUI:Create("InlineGroup");
+    leatherGroup:SetTitle("Leather");
+    leatherGroup:SetLayout("Flow")
+    itemsGroup:AddChild(leatherGroup);
+
+    local DesolateLeatherLabel = AceGUI:Create("Label")
+    DesolateLeatherLabel:SetText("Desolate Leather: Bag:" .. DesolateLeatherBagCount .. " Reagent: " .. DesolateLeatherReagentCount)
+    leatherGroup:AddChild(DesolateLeatherLabel)
+
+    local PallidBoneLabel = AceGUI:Create("Label")
+    PallidBoneLabel:SetText("Pallid Bone: Bag:" .. PallidBoneBagCount .. " Reagent: " .. PallidBoneReagentCount)
+    leatherGroup:AddChild(PallidBoneLabel)
+
+    local CallousHideLabel = AceGUI:Create("Label")
+    CallousHideLabel:SetText("Callous Hide: Bag:" .. CallousHideBagCount .. " Reagent: " .. CallousHideReagentCount)
+    leatherGroup:AddChild(CallousHideLabel)
 end
 local eventFrame= CreateFrame("Frame")
 eventFrame:RegisterEvent("BAG_UPDATE");
