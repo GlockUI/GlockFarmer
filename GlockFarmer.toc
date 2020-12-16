@@ -2,7 +2,7 @@
 
 ## Title: GlockFarmer
 ## Author: Glockness
-## Version: 0.0.3
+## Version: 0.0.6
 ## Notes: Allows for Tracking all of our Farmed Items
 ## SavedVariables: GlockFarmerDB
 

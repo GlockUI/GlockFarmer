@@ -1,6 +1,6 @@
 Glockfarmer = LibStub("AceAddon-3.0"):NewAddon("Glockfarmer", "AceConsole-3.0", "AceEvent-3.0");
 local AceGUI = LibStub("AceGUI-3.0");
-
+local playerName = UnitName("player");
 local frame = AceGUI:Create("Frame")
 frame:SetLayout("Fill")
 frame:SetTitle("Glock Farmer") 
@@ -12,59 +12,164 @@ local Defaults = {
         ShowCloth = true,
         ShowOre = true,
         ShowLeather = true,
+        ShowAllCharacters = false,
+    },
+    global = {
+        ["**"] = {
+            Herbs = {
+                ["**"] = {
+                    Bag = 0,
+                    ReagentBank = 0,
+                    Bank = 0
+                },
+                DeathBlossom = {
+                    Bag = 0,
+                    ReagentBank = 0,
+                    Bank = 0
+                },
+                NightShade = {
+                    Bag = 0,
+                    ReagentBank = 0,
+                    Bank = 0
+                },
+                RisingGlory = {
+                    Bag = 0,
+                    ReagentBank = 0,
+                    Bank = 0
+                },
+                Marrowroot = {
+                    Bag = 0,
+                    ReagentBank = 0,
+                    Bank = 0
+                },
+                VigilsTorch = {
+                    Bag = 0,
+                    ReagentBank = 0,
+                    Bank = 0
+                },
+                RisingGlory = {
+                    Bag = 0,
+                    ReagentBank = 0,
+                    Bank = 0
+                }
+            },
+            Fish = {
+                ["**"] = {
+                    Bag = 0,
+                    ReagentBank = 0,
+                    Bank = 0
+                },
+                LostSole = {
+                    Bag = 0,
+                    ReagentBank = 0,
+                    Bank = 0
+                },
+                SilverPike = {
+                    Bag = 0,
+                    ReagentBank = 0,
+                    Bank = 0
+                },
+                PoketBoneFish = {
+                    Bag = 0,
+                    ReagentBank = 0,
+                    Bank = 0
+                },
+                Iridescent = {
+                    Bag = 0,
+                    ReagentBank = 0,
+                    Bank = 0
+                },
+                SpinefinPiranha = {
+                    Bag = 0,
+                    ReagentBank = 0,
+                    Bank = 0
+                },
+                Elysian = {
+                    Bag = 0,
+                    ReagentBank = 0,
+                    Bank = 0
+                }
+            },
+            Cloth = {
+                ["**"] = {
+                    Bag = 0,
+                    ReagentBank = 0,
+                    Bank = 0
+                },
+                ShroudedCloth = {
+                    Bag = 0,
+                    ReagentBank = 0,
+                    Bank = 0
+                },
+                LightlessSilk = {
+                    Bag = 0,
+                    ReagentBank = 0,
+                    Bank = 0
+                }
+            },
+            Ore = {
+                ["**"] = {
+                    Bag = 0,
+                    ReagentBank = 0,
+                    Bank = 0
+                },
+                LaestriteOre = {
+                    Bag = 0,
+                    ReagentBank = 0,
+                    Bank = 0
+                },
+                ElethiumOre = {
+                    Bag = 0,
+                    ReagentBank = 0,
+                    Bank = 0
+                },
+                SoleniumOre = {
+                    Bag = 0,
+                    ReagentBank = 0,
+                    Bank = 0
+                },
+                OxxeinOre = {
+                    Bag = 0,
+                    ReagentBank = 0,
+                    Bank = 0
+                },
+                PhaedrumOre = {
+                    Bag = 0,
+                    ReagentBank = 0,
+                    Bank = 0
+                },
+                SinvyrOre = {
+                    Bag = 0,
+                    ReagentBank = 0,
+                    Bank = 0
+                }
+            },
+            Leather = {
+                ["**"] = {
+                    Bag = 0,
+                    ReagentBank = 0,
+                    Bank = 0
+                },
+                DesolateLeather = {
+                    Bag = 0,
+                    ReagentBank = 0,
+                    Bank = 0
+                },
+                PallidBone = {
+                    Bag = 0,
+                    ReagentBank = 0,
+                    Bank = 0
+                },
+                CallousHide = {
+                    Bag = 0,
+                    ReagentBank = 0,
+                    Bank = 0
+                }
+            },
+        }
     }
 }
 local itemsGroup;
-local DeathBlossomBagCount = 0;
-local DeathBlossomReagentCount = 0;
-local NightshadeBagCount = 0;
-local NightshadeReagentCount = 0;
-local RisingGloryBagCount = 0;
-local RisingGloryReagentCount = 0;
-local MarrowrootBagCount = 0;
-local MarrowrootReagentCount = 0;
-local WidowbloomBagCount = 0;
-local WidowbloomReagentCount = 0;
-local VigilsTorchBagCount = 0;
-local VigilsTorchReagentCount = 0;
---Fishing
-local LostSoleBagCount = 0
-local LostSoleReagentCount = 0
-local SilverPikeBagCount = 0
-local SilverPikeReagentCount = 0
-local PoketBoneFishBagCount = 0
-local PoketBoneFishReagentCount = 0
-local IridescentBagCount = 0
-local IridescentReagentCount = 0
-local SpinefinPiranhaBagCount = 0
-local SpinefinPiranhaReagentCount = 0
-local ElysianBagCount = 0
-local ElysianReagentCount = 0
---Cloth
-local ShroudedClothBagCount = 0;
-local ShroudedClothReagentCount = 0;
-local LightlessSilkBagCount = 0;
-local LightlessSilkReagentCount = 0;
---Ore
-local LaestriteOreBagCount = 0;
-local LaestriteOreReagentCount = 0;
-local ElethiumOreBagCount = 0;
-local ElethiumOreReagentCount = 0;
-local SoleniumOreBagCount = 0;
-local SoleniumOreReagentCount = 0;
-local OxxeinOreBagCount = 0;
-local OxxeinOreReagentCount = 0;
-local PhaedrumOreBagCount = 0;
-local PhaedrumOreReagentCount = 0;
-local SinvyrOreBagCount = 0;
-local SinvyrOreReagentCount = 0;
---leather
-local DesolateLeatherBagCount = 0;
-local DesolateLeatherReagentCount = 0;
-local PallidBoneBagCount = 0;
-local PallidBoneReagentCount = 0;
-local CallousHideBagCount = 0;
-local CallousHideReagentCount = 0;
 
 
 SLASH_GLOCKFARMER1 = "/Glockfarmer"
@@ -82,130 +187,137 @@ SlashCmdList["GLOCKFARMER"] = function(msg, ...)
         print("Proper argument not given!")
     end
 end
-
-function PrintHerbs()
+function Glockfarmer:PrintHerbs(playerHerbs, itemFrame)
     local herbsGroup = AceGUI:Create("InlineGroup");
     herbsGroup:SetTitle("Herbs");
     herbsGroup:SetLayout("Flow")
-    itemsGroup:AddChild(herbsGroup);
+    
 
     local deathBlossomLabel = AceGUI:Create("Label")
-    deathBlossomLabel:SetText("Death Blossom: Bag:" .. DeathBlossomBagCount .. " Reagent: " .. DeathBlossomReagentCount)
+    deathBlossomLabel:SetText("Death Blossom: Bag:" .. playerHerbs.DeathBlossom.Bag .. " Reagent: " .. playerHerbs.DeathBlossom.ReagentBank)
     herbsGroup:AddChild(deathBlossomLabel)
 
     local nightshadeLabel = AceGUI:Create("Label")
-    nightshadeLabel:SetText("Nightshade: Bag:" .. NightshadeBagCount .. " Reagent: " .. NightshadeReagentCount)
+    nightshadeLabel:SetText("Nightshade: Bag:" .. playerHerbs.NightShade.Bag .. " Reagent: " .. playerHerbs.NightShade.ReagentBank)
     herbsGroup:AddChild(nightshadeLabel)
 
     local risingGloryLabel = AceGUI:Create("Label")
-    risingGloryLabel:SetText("Rising Glory: Bag:" .. RisingGloryBagCount .. " Reagent: " .. PoketBoneFishReagentCount)
+    risingGloryLabel:SetText("Rising Glory: Bag:" .. playerHerbs.RisingGlory.Bag .. " Reagent: " .. playerHerbs.RisingGlory.ReagentBank)
     herbsGroup:AddChild(risingGloryLabel)
 
     local marrowrootLabel = AceGUI:Create("Label")
-    marrowrootLabel:SetText("Marrowroot: Bag: " .. MarrowrootBagCount .. " Reagent: " .. MarrowrootReagentCount)
+    marrowrootLabel:SetText("Marrowroot: Bag: " .. playerHerbs.Marrowroot.Bag .. " Reagent: " .. playerHerbs.Marrowroot.ReagentBank)
     herbsGroup:AddChild(marrowrootLabel)
 
     local widowbloomLabel = AceGUI:Create("Label")
-    widowbloomLabel:SetText("Widowbloom: Bag:" .. WidowbloomBagCount .. " Reagent: " .. WidowbloomReagentCount)
+    widowbloomLabel:SetText("Widowbloom: Bag:" .. playerHerbs.Widowbloom.Bag  .. " Reagent: " .. playerHerbs.Widowbloom.ReagentBank)
     herbsGroup:AddChild(widowbloomLabel)
 
     local vigilsTorchLabel = AceGUI:Create("Label")
-    vigilsTorchLabel:SetText("Vigils Torch: Bag:" .. VigilsTorchBagCount .. " Reagent: " .. VigilsTorchReagentCount)
+    vigilsTorchLabel:SetText("Vigils Torch: Bag:" .. playerHerbs.VigilsTorch.Bag .. " Reagent: " .. playerHerbs.VigilsTorch.ReagentBank)
     herbsGroup:AddChild(vigilsTorchLabel)
+
+    itemFrame:AddChild(herbsGroup);
 end
-function PrintFish()
+function Glockfarmer:PrintFish(playerFish, itemFrame)
     local fishGroup = AceGUI:Create("InlineGroup");
     fishGroup:SetTitle("Fish");
-    fishGroup:SetLayout("Flow")
-    itemsGroup:AddChild(fishGroup);
+    fishGroup:SetLayout("Flow")    
 
     local lostSoleLabel = AceGUI:Create("Label")
-    lostSoleLabel:SetText("Lost Sole: Bag:" .. LostSoleBagCount .. " Reagent: " .. DeathBlossomReagentCount)
+    lostSoleLabel:SetText("Lost Sole: Bag:" .. playerFish.LostSole.Bag .. " Reagent: " .. playerFish.LostSole.ReagentBank)
     fishGroup:AddChild(lostSoleLabel)
 
     local silvergillLabel = AceGUI:Create("Label")
-    silvergillLabel:SetText("Silvergill Pike: Bag:" .. SilverPikeBagCount .. " Reagent: " .. SilverPikeReagentCount)
+    silvergillLabel:SetText("Silvergill Pike: Bag:" .. playerFish.SilverPike.Bag .. " Reagent: " .. playerFish.SilverPike.ReagentBank)
     fishGroup:AddChild(silvergillLabel)
 
     local poketLabel = AceGUI:Create("Label")
-    poketLabel:SetText("Pocked Bonefish: Bag:" .. PoketBoneFishBagCount .. " Reagent: " .. PoketBoneFishReagentCount)
+    poketLabel:SetText("Pocked Bonefish: Bag:" .. playerFish.PoketBoneFish.Bag .. " Reagent: " .. playerFish.PoketBoneFish.ReagentBank)
     fishGroup:AddChild(poketLabel)
 
     local iridenscentLabel = AceGUI:Create("Label")
-    iridenscentLabel:SetText("Iridescent Amberjack: Bag: " .. IridescentBagCount .. " Reagent: " .. IridescentReagentCount)
+    iridenscentLabel:SetText("Iridescent Amberjack: Bag: " .. playerFish.Iridescent.Bag .. " Reagent: " .. playerFish.Iridescent.ReagentBank)
     fishGroup:AddChild(iridenscentLabel)
 
     local spinefishLabel = AceGUI:Create("Label")
-    spinefishLabel:SetText("Spinefin Piranha: Bag:" .. SpinefinPiranhaBagCount .. " Reagent: " .. SpinefinPiranhaReagentCount)
+    spinefishLabel:SetText("Spinefin Piranha: Bag:" .. playerFish.SpinefinPiranha.Bag .. " Reagent: " .. playerFish.SpinefinPiranha.ReagentBank)
     fishGroup:AddChild(spinefishLabel)
 
     local elysianLabel = AceGUI:Create("Label")
-    elysianLabel:SetText("Elysian Thade: Bag:" .. ElysianBagCount .. " Reagent: " .. ElysianReagentCount)
+    elysianLabel:SetText("Elysian Thade: Bag:" .. playerFish.Elysian.Bag .. " Reagent: " .. playerFish.Elysian.ReagentBank)
     fishGroup:AddChild(elysianLabel)
+
+    itemFrame:AddChild(fishGroup);
 end
-function PrintCloth()
+function Glockfarmer:PrintCloth(playerCloth, itemFrame)
     local clothGroup = AceGUI:Create("InlineGroup");
     clothGroup:SetTitle("Cloth");
     clothGroup:SetLayout("Flow")
-    itemsGroup:AddChild(clothGroup);
+    
 
     local ShroudedLabel = AceGUI:Create("Label")
-    ShroudedLabel:SetText("Shrouded Cloth: Bag:" .. LostSoleBagCount .. " Reagent: " .. DeathBlossomReagentCount)
+    ShroudedLabel:SetText("Shrouded Cloth: Bag:" .. playerCloth.ShroudedCloth.Bag .. " Reagent: " .. playerCloth.ShroudedCloth.ReagentBank)
     clothGroup:AddChild(ShroudedLabel)
 
     local LightlessLabel = AceGUI:Create("Label")
-    LightlessLabel:SetText("Lightless Silk: Bag:" .. LightlessSilkBagCount .. " Reagent: " .. LightlessSilkReagentCount)
+    LightlessLabel:SetText("Lightless Silk: Bag:" .. playerCloth.LightlessSilk.Bag .. " Reagent: " .. playerCloth.LightlessSilk.ReagentBank)
     clothGroup:AddChild(LightlessLabel)
+
+    itemFrame:AddChild(clothGroup);
 end
-function PrintOre()
+function Glockfarmer:PrintOre(playerOre, itemFrame)
     local oreGroup = AceGUI:Create("InlineGroup");
     oreGroup:SetTitle("Ore");
-    oreGroup:SetLayout("Flow")
-    itemsGroup:AddChild(oreGroup);
+    oreGroup:SetLayout("Flow");    
 
     local laestriteOreLabel = AceGUI:Create("Label")
-    laestriteOreLabel:SetText("Laestrite Ore: Bag:" .. LaestriteOreBagCount .. " Reagent: " .. LaestriteOreReagentCount)
+    laestriteOreLabel:SetText("Laestrite Ore: Bag:" .. playerOre.LaestriteOre.Bag .. " Reagent: " .. playerOre.LaestriteOre.ReagentBank)
     oreGroup:AddChild(laestriteOreLabel)
 
     local ElethiumLabel = AceGUI:Create("Label")
-    ElethiumLabel:SetText("Elethium Ore: Bag:" .. ElethiumOreBagCount .. " Reagent: " .. ElethiumOreReagentCount)
+    ElethiumLabel:SetText("Elethium Ore: Bag:" .. playerOre.ElethiumOre.Bag .. " Reagent: " .. playerOre.ElethiumOre.ReagentBank)
     oreGroup:AddChild(ElethiumLabel)
 
     local SoleniumLabel = AceGUI:Create("Label")
-    SoleniumLabel:SetText("Solenium Ore: Bag:" .. SoleniumOreBagCount .. " Reagent: " .. SoleniumOreReagentCount)
+    SoleniumLabel:SetText("Solenium Ore: Bag:" .. playerOre.SoleniumOre.Bag .. " Reagent: " .. playerOre.SoleniumOre.ReagentBank)
     oreGroup:AddChild(SoleniumLabel)
 
     local OxxeinOreLabel = AceGUI:Create("Label")
-    OxxeinOreLabel:SetText("Oxxein Ore: Bag:" .. OxxeinOreBagCount .. " Reagent: " .. OxxeinOreReagentCount)
+    OxxeinOreLabel:SetText("Oxxein Ore: Bag:" .. playerOre.OxxeinOre.Bag .. " Reagent: " .. playerOre.OxxeinOre.ReagentBank)
     oreGroup:AddChild(OxxeinOreLabel)
 
     local PhaedrumOreLabel = AceGUI:Create("Label")
-    PhaedrumOreLabel:SetText("Phaedrum Ore: Bag:" .. PhaedrumOreBagCount .. " Reagent: " .. PhaedrumOreReagentCount)
+    PhaedrumOreLabel:SetText("Phaedrum Ore: Bag:" .. playerOre.PhaedrumOre.Bag .. " Reagent: " .. playerOre.PhaedrumOre.ReagentBank)
     oreGroup:AddChild(PhaedrumOreLabel)
 
     local SinvyrOreLabel = AceGUI:Create("Label")
-    SinvyrOreLabel:SetText("Sinvyr Ore: Bag:" .. SinvyrOreBagCount .. " Reagent: " .. SinvyrOreReagentCount)
+    SinvyrOreLabel:SetText("Sinvyr Ore: Bag:" .. playerOre.SinvyrOre.Bag .. " Reagent: " .. playerOre.SinvyrOre.ReagentBank)
     oreGroup:AddChild(SinvyrOreLabel)
+
+    itemFrame:AddChild(oreGroup);
 end
-function PrintLeather()
+function Glockfarmer:PrintLeather(playerLeather, itemFrame)
     local leatherGroup = AceGUI:Create("InlineGroup");
     leatherGroup:SetTitle("Leather");
     leatherGroup:SetLayout("Flow")
-    itemsGroup:AddChild(leatherGroup);
+    
 
     local DesolateLeatherLabel = AceGUI:Create("Label")
-    DesolateLeatherLabel:SetText("Desolate Leather: Bag:" .. DesolateLeatherBagCount .. " Reagent: " .. DesolateLeatherReagentCount)
+    DesolateLeatherLabel:SetText("Desolate Leather: Bag:" .. playerLeather.DesolateLeather.Bag .. " Reagent: " .. playerLeather.DesolateLeather.ReagentBank)
     leatherGroup:AddChild(DesolateLeatherLabel)
 
     local PallidBoneLabel = AceGUI:Create("Label")
-    PallidBoneLabel:SetText("Pallid Bone: Bag:" .. PallidBoneBagCount .. " Reagent: " .. PallidBoneReagentCount)
+    PallidBoneLabel:SetText("Pallid Bone: Bag:" .. playerLeather.PallidBone.Bag .. " Reagent: " .. playerLeather.PallidBone.ReagentBank)
     leatherGroup:AddChild(PallidBoneLabel)
 
     local CallousHideLabel = AceGUI:Create("Label")
-    CallousHideLabel:SetText("Callous Hide: Bag:" .. CallousHideBagCount .. " Reagent: " .. CallousHideReagentCount)
+    CallousHideLabel:SetText("Callous Hide: Bag:" .. playerLeather.CallousHide.Bag .. " Reagent: " .. playerLeather.CallousHide.ReagentBank)
     leatherGroup:AddChild(CallousHideLabel)
+
+    itemFrame:AddChild(leatherGroup);
 end
-function GetPersonalBags()
+function Glockfarmer:GetPersonalBags()
     herbDBCount = 0;
     herbNSCount = 0;
     herbRGCount = 0;
@@ -312,35 +424,36 @@ function GetPersonalBags()
             end
         end
     end
-    DeathBlossomBagCount = herbDBCount;
-    NightshadeBagCount = herbNSCount;
-    RisingGloryBagCount = herbRGCount;
-    MarrowrootBagCount = herbMTCount;
-    WidowbloomBagCount = herbWTCount;
-    VigilsTorchBagCount = herbVTCount;
 
-    LostSoleBagCount = fishingLSCount;
-    SilverPikeBagCount = fishingSPCount;
-    PoketBoneFishBagCount = fishingPBCount;
-    IridescentBagCount = fishingIACount;
-    SpinefinPiranhaBagCount = fishingSpineCount;
-    ElysianBagCount = fishingETCount;
+    self.db.global[playerName].Herbs.DeathBlossom.Bag = herbDBCount;
+    self.db.global[playerName].Herbs.NightShade.Bag = herbNSCount;
+    self.db.global[playerName].Herbs.RisingGlory.Bag = herbRGCount;
+    self.db.global[playerName].Herbs.Marrowroot.Bag = herbMTCount;
+    self.db.global[playerName].Herbs.VigilsTorch.Bag = herbWTCount;
+    self.db.global[playerName].Herbs.VigilsTorch.Bag = herbVTCount;
 
-    LightlessSilkBagCount = clothLSCount;
-    ShroudedClothBagCount = clothSCCount;
+    self.db.global[playerName].Fish.LostSole.Bag = fishingLSCount;
+    self.db.global[playerName].Fish.SilverPike.Bag = fishingSPCount;
+    self.db.global[playerName].Fish.PoketBoneFish.Bag = fishingPBCount;
+    self.db.global[playerName].Fish.Iridescent.Bag = fishingIACount;
+    self.db.global[playerName].Fish.SpinefinPiranha.Bag = fishingSpineCount;
+    self.db.global[playerName].Fish.Elysian.Bag = fishingETCount;
 
-    LaestriteOreBagCount = laestriteOreCount;
-    ElethiumOreBagCount = elethiumOreCount;
-    SoleniumOreBagCount = soleniumOreCount;
-    OxxeinOreBagCount = oxxeinOreCount
-    PhaedrumOreBagCount = PhaedrumOreBagCount;
-    SinvyrOreBagCount = sinvyrOreCount;
+    self.db.global[playerName].Cloth.LightlessSilk.Bag = clothLSCount;
+    self.db.global[playerName].Cloth.ShroudedCloth.Bag = clothSCCount;
 
-    DesolateLeatherBagCount = desolateLeatherCount;
-    PallidBoneBagCount = pallidBoneCount;
-    CallousHideBagCount = callousHideCount;
+    self.db.global[playerName].Ore.LaestriteOre.Bag = laestriteOreCount;
+    self.db.global[playerName].Ore.ElethiumOre.Bag = elethiumOreCount;
+    self.db.global[playerName].Ore.SoleniumOre.Bag = soleniumOreCount;
+    self.db.global[playerName].Ore.OxxeinOre.Bag = oxxeinOreCount;
+    self.db.global[playerName].Ore.PhaedrumOre.Bag = phaedrumOreCount;
+    self.db.global[playerName].Ore.SinvyrOre.Bag = sinvyrOreCount;
+
+    self.db.global[playerName].Leather.DesolateLeather.Bag = desolateLeatherCount;
+    self.db.global[playerName].Leather.PallidBone.Bag = pallidBoneCount;
+    self.db.global[playerName].Leather.CallousHide.Bag = callousHideCount;
 end
-function GetReagentBank()
+function Glockfarmer:GetReagentBank()
     herbDBCount = 0;
     herbNSCount = 0;
     herbRGCount = 0;
@@ -444,72 +557,116 @@ function GetReagentBank()
         end
     end
 
-    DeathBlossomReagentCount = herbDBCount;
-    NightshadeReagentCount = herbNSCount;
-    RisingGloryReagentCount = herbRGCount;
-    MarrowrootReagentCount = herbMTCount;
-    WidowbloomReagentCount = herbWTCount;
-    VigilsTorchReagentCount = herbVTCount;
+    self.db.global[playerName].Herbs.DeathBlossom.ReagentBank = herbDBCount;
+    self.db.global[playerName].Herbs.NightShade.ReagentBank = herbNSCount;
+    self.db.global[playerName].Herbs.RisingGlory.ReagentBank = herbRGCount;
+    self.db.global[playerName].Herbs.Marrowroot.ReagentBank = herbMTCount;
+    self.db.global[playerName].Herbs.VigilsTorch.ReagentBank = herbWTCount;
+    self.db.global[playerName].Herbs.VigilsTorch.ReagentBank = herbVTCount;
 
-    LostSoleReagentCount = fishingLSCount;
-    SilverPikeReagentCount = fishingSPCount;
-    PoketBoneFishReagentCount = fishingPBCount;
-    IridescentReagentCount = fishingIACount;
-    SpinefinPiranhaReagentCount = fishingSpineCount;
-    ElysianReagentCount = fishingETCount;
+    self.db.global[playerName].Fish.LostSole.ReagentBank = fishingLSCount;
+    self.db.global[playerName].Fish.SilverPike.ReagentBank = fishingSPCount;
+    self.db.global[playerName].Fish.PoketBoneFish.ReagentBank = fishingPBCount;
+    self.db.global[playerName].Fish.Iridescent.ReagentBank = fishingIACount;
+    self.db.global[playerName].Fish.SpinefinPiranha.ReagentBank = fishingSpineCount;
+    self.db.global[playerName].Fish.Elysian.ReagentBank = fishingETCount;
 
-    LightlessSilkReagentCount = clothLSCount;
-    ShroudedClothReagentCount = clothSCCount;
+    self.db.global[playerName].Cloth.LightlessSilk.ReagentBank = clothLSCount;
+    self.db.global[playerName].Cloth.ShroudedCloth.ReagentBank = clothSCCount;
 
-    LaestriteOreReagentCount = laestriteOreCount;
-    ElethiumOreReagentCount = elethiumOreCount;
-    SoleniumOreReagentCount = soleniumOreCount;
-    OxxeinOreReagentCount = oxxeinOreCount
-    PhaedrumOreReagentCount = PhaedrumOreBagCount;
-    SinvyrOreReagentCount = sinvyrOreCount;
+    self.db.global[playerName].Ore.LaestriteOre.ReagentBank = laestriteOreCount;
+    self.db.global[playerName].Ore.ElethiumOre.ReagentBank = elethiumOreCount;
+    self.db.global[playerName].Ore.SoleniumOre.ReagentBank = soleniumOreCount;
+    self.db.global[playerName].Ore.OxxeinOre.ReagentBank = oxxeinOreCount;
+    self.db.global[playerName].Ore.PhaedrumOre.ReagentBank = phaedrumOreCount;
+    self.db.global[playerName].Ore.SinvyrOre.ReagentBank = sinvyrOreCount;
 
-    DesolateLeatherReagentCount = desolateLeatherCount;
-    PallidBoneReagentCount = pallidBoneCount;
-    CallousHideReagentCount = CallousHideReagentCount;
+    self.db.global[playerName].Leather.DesolateLeather.ReagentBank = desolateLeatherCount;
+    self.db.global[playerName].Leather.PallidBone.ReagentBank = pallidBoneCount;
+    self.db.global[playerName].Leather.CallousHide.ReagentBank = callousHideCount;
+
 end
 function Glockfarmer:ReloadLabel()
-    itemsGroup:ReleaseChildren()
+    itemsGroup:ReleaseChildren();
+    if(self.db.profile.ShowAllCharacters)
+    then
+        for i, playerTable in pairs(self.db.global) do
+            print(i)
+            local playerGroup = AceGUI:Create("InlineGroup");
+            playerGroup:SetTitle(i);
+            playerGroup:SetLayout("Flow")
+            
+
+            if(self.db.profile.ShowHerbalism)
+            then
+                Glockfarmer:PrintHerbs(self.db.global[i].Herbs,playerGroup);
+            end
+
+            if(self.db.profile.ShowFish)
+            then
+                Glockfarmer:PrintFish(self.db.global[i].Fish,playerGroup);
+            end
+
+            if(self.db.profile.ShowCloth)
+            then
+                Glockfarmer:PrintCloth(self.db.global[i].Cloth,playerGroup);
+            end
+
+            if(self.db.profile.ShowOre)
+            then
+                Glockfarmer:PrintOre(self.db.global[i].Ore,playerGroup);
+            end
+
+            if(self.db.profile.ShowLeather)
+            then
+                Glockfarmer:PrintLeather(self.db.global[i].Leather,playerGroup);
+            end
+
+            itemsGroup:AddChild(playerGroup);
+        end
+    else
+        local playerGroup = AceGUI:Create("InlineGroup");
+        playerGroup:SetTitle(playerName);
+        playerGroup:SetLayout("Flow")
+        
+
+        if(self.db.profile.ShowHerbalism)
+        then
+            Glockfarmer:PrintHerbs(self.db.global[playerName].Herbs,playerGroup);
+        end
+
+        if(self.db.profile.ShowFish)
+        then
+            Glockfarmer:PrintFish(self.db.global[playerName].Fish,playerGroup);
+        end
+
+        if(self.db.profile.ShowCloth)
+        then
+            Glockfarmer:PrintCloth(self.db.global[playerName].Cloth,playerGroup);
+        end
+
+        if(self.db.profile.ShowOre)
+        then
+            Glockfarmer:PrintOre(self.db.global[playerName].Ore,playerGroup);
+        end
     
-    if(self.db.profile.ShowHerbalism)
-    then
-        PrintHerbs();
-    end
+        if(self.db.profile.ShowLeather)
+        then
+            Glockfarmer:PrintLeather(self.db.global[playerName].Leather,playerGroup);
+        end
 
-    if(self.db.profile.ShowFish)
-    then
-        PrintFish();
-    end
-
-    if(self.db.profile.ShowCloth)
-    then
-        PrintCloth();
-    end
-
-    if(self.db.profile.ShowOre)
-    then
-        PrintOre();
-    end
-    
-    if(self.db.profile.ShowLeather)
-    then
-        PrintLeather();
+        itemsGroup:AddChild(playerGroup);
     end
 end
 function Glockfarmer:PrintBags()
-    GetPersonalBags();
+    Glockfarmer:GetPersonalBags();
 
     if(IsReagentBankUnlocked())
     then
-        GetReagentBank();
+        Glockfarmer:GetReagentBank();
     end
     Glockfarmer:ReloadLabel(self);
 end
-
 function Glockfarmer:OnInitialize()
     self.db = LibStub("AceDB-3.0"):New("GlockFarmerDB", Defaults, true)
     local scroll = AceGUI:Create("ScrollFrame")
@@ -572,14 +729,23 @@ function Glockfarmer:OnInitialize()
     end);
     optsGroup:AddChild(leatherCheckbox);
 
+    local allCharsCheckbox = AceGUI:Create("CheckBox");
+    allCharsCheckbox:SetType("checkbox");
+    allCharsCheckbox:SetLabel("Show All Characters");
+    allCharsCheckbox:SetValue(self.db.profile.ShowAllCharacters);
+    allCharsCheckbox:SetCallback("OnValueChanged", function(widget) 
+        self.db.profile.ShowAllCharacters = allCharsCheckbox:GetValue();
+        Glockfarmer:PrintBags();
+    end);
+    optsGroup:AddChild(allCharsCheckbox);
+
     itemsGroup = AceGUI:Create("InlineGroup");
     itemsGroup:SetTitle("Items");
     itemsGroup:SetFullWidth(true)
     scroll:AddChild(itemsGroup);
     frame:Show()
     Glockfarmer:PrintBags();
-end   
-
+end  
 function Glockfarmer:OnEnable()
     -- Called when the addon is enabled
     self:RegisterEvent("BAG_UPDATE")
