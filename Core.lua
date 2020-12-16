@@ -1,90 +1,20 @@
-SLASH_GLOCKFARMER1 = "/Glockfarmer"
-SlashCmdList["GLOCKFARMER"] = function(msg, ...)
-    if(msg == "show")
-    then
-        frame:Show();
-    elseif(msg == "hide")
-    then
-        frame:Hide();
-    elseif(msg == "scan")
-    then
-        PrintBags();        
-    else
-        print("Proper argument not given!")
-    end
-end
-
-Glockfarmer = LibStub("AceAddon-3.0"):NewAddon("Glockfarmer");
+Glockfarmer = LibStub("AceAddon-3.0"):NewAddon("Glockfarmer", "AceConsole-3.0", "AceEvent-3.0");
 local AceGUI = LibStub("AceGUI-3.0");
 
 local frame = AceGUI:Create("Frame")
 frame:SetLayout("Fill")
-frame:SetTitle("Glock Farmer")
+frame:SetTitle("Glock Farmer") 
 
-local scroll = AceGUI:Create("ScrollFrame")
-scroll:SetLayout("List")
-frame:AddChild(scroll)
-
-local optsGroup = AceGUI:Create("InlineGroup");
-optsGroup:SetTitle("Professions");
-optsGroup:SetLayout("Flow")
-optsGroup:SetFullWidth(true)
-scroll:AddChild(optsGroup);
-
-local herbCheckbox = AceGUI:Create("CheckBox");
-herbCheckbox:SetType("checkbox");
-herbCheckbox:SetLabel("Show Herbs");
-herbCheckbox:SetValue(1);
-herbCheckbox:SetCallback("OnValueChanged", function(widget) 
-    self.db.ShowHerbalism = herbCheckbox:GetValue();
-    PrintBags();
-end);
-optsGroup:AddChild(herbCheckbox);
-
-local fishingCheckbox = AceGUI:Create("CheckBox");
-fishingCheckbox:SetType("checkbox");
-fishingCheckbox:SetLabel("Show Fish");
-fishingCheckbox:SetValue(1);
-fishingCheckbox:SetCallback("OnValueChanged", function(widget) 
-    PrintBags();
-end);
-optsGroup:AddChild(fishingCheckbox);
-
-local clothCheckbox = AceGUI:Create("CheckBox");
-clothCheckbox:SetType("checkbox");
-clothCheckbox:SetLabel("Show Cloth");
-clothCheckbox:SetValue(1);
-clothCheckbox:SetCallback("OnValueChanged", function(widget) 
-    PrintBags();
-end);
-optsGroup:AddChild(clothCheckbox);
-
-local oreCheckbox = AceGUI:Create("CheckBox");
-oreCheckbox:SetType("checkbox");
-oreCheckbox:SetLabel("Show Ore");
-oreCheckbox:SetValue(1);
-oreCheckbox:SetCallback("OnValueChanged", function(widget) 
-    PrintBags();
-end);
-optsGroup:AddChild(oreCheckbox);
-
-local leatherCheckbox = AceGUI:Create("CheckBox");
-leatherCheckbox:SetType("checkbox");
-leatherCheckbox:SetLabel("Show Leather");
-leatherCheckbox:SetValue(1);
-leatherCheckbox:SetCallback("OnValueChanged", function(widget) 
-    PrintBags();
-end);
-optsGroup:AddChild(leatherCheckbox);
-
-local itemsGroup = AceGUI:Create("InlineGroup");
-itemsGroup:SetTitle("Items");
-itemsGroup:SetFullWidth(true)
-scroll:AddChild(itemsGroup);
-frame:Show()
-    
-
---Herbs
+local Defaults = {
+    profile = {
+        ShowHerbalism = true,
+        ShowFish = true,
+        ShowCloth = true,
+        ShowOre = true,
+        ShowLeather = true,
+    }
+}
+local itemsGroup;
 local DeathBlossomBagCount = 0;
 local DeathBlossomReagentCount = 0;
 local NightshadeBagCount = 0;
@@ -136,16 +66,146 @@ local PallidBoneReagentCount = 0;
 local CallousHideBagCount = 0;
 local CallousHideReagentCount = 0;
 
-function PrintBags()
-    GetPersonalBags();
 
-    if(IsReagentBankUnlocked())
+SLASH_GLOCKFARMER1 = "/Glockfarmer"
+SlashCmdList["GLOCKFARMER"] = function(msg, ...)
+    if(msg == "show")
     then
-        GetReagentBank();
+        frame:Show();
+    elseif(msg == "hide")
+    then
+        frame:Hide();
+    elseif(msg == "scan")
+    then
+        GlockFarmer:PrintBags();        
+    else
+        print("Proper argument not given!")
     end
-    ReloadLabel();
 end
-function GetPersonalBags(args)
+
+function PrintHerbs()
+    local herbsGroup = AceGUI:Create("InlineGroup");
+    herbsGroup:SetTitle("Herbs");
+    herbsGroup:SetLayout("Flow")
+    itemsGroup:AddChild(herbsGroup);
+
+    local deathBlossomLabel = AceGUI:Create("Label")
+    deathBlossomLabel:SetText("Death Blossom: Bag:" .. DeathBlossomBagCount .. " Reagent: " .. DeathBlossomReagentCount)
+    herbsGroup:AddChild(deathBlossomLabel)
+
+    local nightshadeLabel = AceGUI:Create("Label")
+    nightshadeLabel:SetText("Nightshade: Bag:" .. NightshadeBagCount .. " Reagent: " .. NightshadeReagentCount)
+    herbsGroup:AddChild(nightshadeLabel)
+
+    local risingGloryLabel = AceGUI:Create("Label")
+    risingGloryLabel:SetText("Rising Glory: Bag:" .. RisingGloryBagCount .. " Reagent: " .. PoketBoneFishReagentCount)
+    herbsGroup:AddChild(risingGloryLabel)
+
+    local marrowrootLabel = AceGUI:Create("Label")
+    marrowrootLabel:SetText("Marrowroot: Bag: " .. MarrowrootBagCount .. " Reagent: " .. MarrowrootReagentCount)
+    herbsGroup:AddChild(marrowrootLabel)
+
+    local widowbloomLabel = AceGUI:Create("Label")
+    widowbloomLabel:SetText("Widowbloom: Bag:" .. WidowbloomBagCount .. " Reagent: " .. WidowbloomReagentCount)
+    herbsGroup:AddChild(widowbloomLabel)
+
+    local vigilsTorchLabel = AceGUI:Create("Label")
+    vigilsTorchLabel:SetText("Vigils Torch: Bag:" .. VigilsTorchBagCount .. " Reagent: " .. VigilsTorchReagentCount)
+    herbsGroup:AddChild(vigilsTorchLabel)
+end
+function PrintFish()
+    local fishGroup = AceGUI:Create("InlineGroup");
+    fishGroup:SetTitle("Fish");
+    fishGroup:SetLayout("Flow")
+    itemsGroup:AddChild(fishGroup);
+
+    local lostSoleLabel = AceGUI:Create("Label")
+    lostSoleLabel:SetText("Lost Sole: Bag:" .. LostSoleBagCount .. " Reagent: " .. DeathBlossomReagentCount)
+    fishGroup:AddChild(lostSoleLabel)
+
+    local silvergillLabel = AceGUI:Create("Label")
+    silvergillLabel:SetText("Silvergill Pike: Bag:" .. SilverPikeBagCount .. " Reagent: " .. SilverPikeReagentCount)
+    fishGroup:AddChild(silvergillLabel)
+
+    local poketLabel = AceGUI:Create("Label")
+    poketLabel:SetText("Pocked Bonefish: Bag:" .. PoketBoneFishBagCount .. " Reagent: " .. PoketBoneFishReagentCount)
+    fishGroup:AddChild(poketLabel)
+
+    local iridenscentLabel = AceGUI:Create("Label")
+    iridenscentLabel:SetText("Iridescent Amberjack: Bag: " .. IridescentBagCount .. " Reagent: " .. IridescentReagentCount)
+    fishGroup:AddChild(iridenscentLabel)
+
+    local spinefishLabel = AceGUI:Create("Label")
+    spinefishLabel:SetText("Spinefin Piranha: Bag:" .. SpinefinPiranhaBagCount .. " Reagent: " .. SpinefinPiranhaReagentCount)
+    fishGroup:AddChild(spinefishLabel)
+
+    local elysianLabel = AceGUI:Create("Label")
+    elysianLabel:SetText("Elysian Thade: Bag:" .. ElysianBagCount .. " Reagent: " .. ElysianReagentCount)
+    fishGroup:AddChild(elysianLabel)
+end
+function PrintCloth()
+    local clothGroup = AceGUI:Create("InlineGroup");
+    clothGroup:SetTitle("Cloth");
+    clothGroup:SetLayout("Flow")
+    itemsGroup:AddChild(clothGroup);
+
+    local ShroudedLabel = AceGUI:Create("Label")
+    ShroudedLabel:SetText("Shrouded Cloth: Bag:" .. LostSoleBagCount .. " Reagent: " .. DeathBlossomReagentCount)
+    clothGroup:AddChild(ShroudedLabel)
+
+    local LightlessLabel = AceGUI:Create("Label")
+    LightlessLabel:SetText("Lightless Silk: Bag:" .. LightlessSilkBagCount .. " Reagent: " .. LightlessSilkReagentCount)
+    clothGroup:AddChild(LightlessLabel)
+end
+function PrintOre()
+    local oreGroup = AceGUI:Create("InlineGroup");
+    oreGroup:SetTitle("Ore");
+    oreGroup:SetLayout("Flow")
+    itemsGroup:AddChild(oreGroup);
+
+    local laestriteOreLabel = AceGUI:Create("Label")
+    laestriteOreLabel:SetText("Laestrite Ore: Bag:" .. LaestriteOreBagCount .. " Reagent: " .. LaestriteOreReagentCount)
+    oreGroup:AddChild(laestriteOreLabel)
+
+    local ElethiumLabel = AceGUI:Create("Label")
+    ElethiumLabel:SetText("Elethium Ore: Bag:" .. ElethiumOreBagCount .. " Reagent: " .. ElethiumOreReagentCount)
+    oreGroup:AddChild(ElethiumLabel)
+
+    local SoleniumLabel = AceGUI:Create("Label")
+    SoleniumLabel:SetText("Solenium Ore: Bag:" .. SoleniumOreBagCount .. " Reagent: " .. SoleniumOreReagentCount)
+    oreGroup:AddChild(SoleniumLabel)
+
+    local OxxeinOreLabel = AceGUI:Create("Label")
+    OxxeinOreLabel:SetText("Oxxein Ore: Bag:" .. OxxeinOreBagCount .. " Reagent: " .. OxxeinOreReagentCount)
+    oreGroup:AddChild(OxxeinOreLabel)
+
+    local PhaedrumOreLabel = AceGUI:Create("Label")
+    PhaedrumOreLabel:SetText("Phaedrum Ore: Bag:" .. PhaedrumOreBagCount .. " Reagent: " .. PhaedrumOreReagentCount)
+    oreGroup:AddChild(PhaedrumOreLabel)
+
+    local SinvyrOreLabel = AceGUI:Create("Label")
+    SinvyrOreLabel:SetText("Sinvyr Ore: Bag:" .. SinvyrOreBagCount .. " Reagent: " .. SinvyrOreReagentCount)
+    oreGroup:AddChild(SinvyrOreLabel)
+end
+function PrintLeather()
+    local leatherGroup = AceGUI:Create("InlineGroup");
+    leatherGroup:SetTitle("Leather");
+    leatherGroup:SetLayout("Flow")
+    itemsGroup:AddChild(leatherGroup);
+
+    local DesolateLeatherLabel = AceGUI:Create("Label")
+    DesolateLeatherLabel:SetText("Desolate Leather: Bag:" .. DesolateLeatherBagCount .. " Reagent: " .. DesolateLeatherReagentCount)
+    leatherGroup:AddChild(DesolateLeatherLabel)
+
+    local PallidBoneLabel = AceGUI:Create("Label")
+    PallidBoneLabel:SetText("Pallid Bone: Bag:" .. PallidBoneBagCount .. " Reagent: " .. PallidBoneReagentCount)
+    leatherGroup:AddChild(PallidBoneLabel)
+
+    local CallousHideLabel = AceGUI:Create("Label")
+    CallousHideLabel:SetText("Callous Hide: Bag:" .. CallousHideBagCount .. " Reagent: " .. CallousHideReagentCount)
+    leatherGroup:AddChild(CallousHideLabel)
+end
+function GetPersonalBags()
     herbDBCount = 0;
     herbNSCount = 0;
     herbRGCount = 0;
@@ -280,7 +340,7 @@ function GetPersonalBags(args)
     PallidBoneBagCount = pallidBoneCount;
     CallousHideBagCount = callousHideCount;
 end
-function GetReagentBank(args)
+function GetReagentBank()
     herbDBCount = 0;
     herbNSCount = 0;
     herbRGCount = 0;
@@ -412,163 +472,119 @@ function GetReagentBank(args)
     PallidBoneReagentCount = pallidBoneCount;
     CallousHideReagentCount = CallousHideReagentCount;
 end
-function ReloadLabel()
+function Glockfarmer:ReloadLabel()
     itemsGroup:ReleaseChildren()
     
-    if(herbCheckbox:GetValue())
+    if(self.db.profile.ShowHerbalism)
     then
         PrintHerbs();
     end
 
-    if(fishingCheckbox:GetValue())
+    if(self.db.profile.ShowFish)
     then
         PrintFish();
     end
 
-    if(clothCheckbox:GetValue())
+    if(self.db.profile.ShowCloth)
     then
         PrintCloth();
     end
 
-    if(oreCheckbox:GetValue())
+    if(self.db.profile.ShowOre)
     then
         PrintOre();
     end
     
-    if(leatherCheckbox:GetValue())
+    if(self.db.profile.ShowLeather)
     then
         PrintLeather();
     end
 end
-function PrintHerbs()
-    local herbsGroup = AceGUI:Create("InlineGroup");
-    herbsGroup:SetTitle("Herbs");
-    herbsGroup:SetLayout("Flow")
-    itemsGroup:AddChild(herbsGroup);
+function Glockfarmer:PrintBags()
+    GetPersonalBags();
 
-    local deathBlossomLabel = AceGUI:Create("Label")
-    deathBlossomLabel:SetText("Death Blossom: Bag:" .. DeathBlossomBagCount .. " Reagent: " .. DeathBlossomReagentCount)
-    herbsGroup:AddChild(deathBlossomLabel)
-
-    local nightshadeLabel = AceGUI:Create("Label")
-    nightshadeLabel:SetText("Nightshade: Bag:" .. NightshadeBagCount .. " Reagent: " .. NightshadeReagentCount)
-    herbsGroup:AddChild(nightshadeLabel)
-
-    local risingGloryLabel = AceGUI:Create("Label")
-    risingGloryLabel:SetText("Rising Glory: Bag:" .. RisingGloryBagCount .. " Reagent: " .. PoketBoneFishReagentCount)
-    herbsGroup:AddChild(risingGloryLabel)
-
-    local marrowrootLabel = AceGUI:Create("Label")
-    marrowrootLabel:SetText("Marrowroot: Bag: " .. MarrowrootBagCount .. " Reagent: " .. MarrowrootReagentCount)
-    herbsGroup:AddChild(marrowrootLabel)
-
-    local widowbloomLabel = AceGUI:Create("Label")
-    widowbloomLabel:SetText("Widowbloom: Bag:" .. WidowbloomBagCount .. " Reagent: " .. WidowbloomReagentCount)
-    herbsGroup:AddChild(widowbloomLabel)
-
-    local vigilsTorchLabel = AceGUI:Create("Label")
-    vigilsTorchLabel:SetText("Vigils Torch: Bag" .. VigilsTorchBagCount .. " Reagent: " .. VigilsTorchReagentCount)
-    herbsGroup:AddChild(vigilsTorchLabel)
-end
-function PrintFish()
-    local fishGroup = AceGUI:Create("InlineGroup");
-    fishGroup:SetTitle("Fish");
-    fishGroup:SetLayout("Flow")
-    itemsGroup:AddChild(fishGroup);
-
-    local lostSoleLabel = AceGUI:Create("Label")
-    lostSoleLabel:SetText("Lost Sole: Bag:" .. LostSoleBagCount .. " Reagent: " .. DeathBlossomReagentCount)
-    fishGroup:AddChild(lostSoleLabel)
-
-    local silvergillLabel = AceGUI:Create("Label")
-    silvergillLabel:SetText("Silvergill Pike: Bag:" .. SilverPikeBagCount .. " Reagent: " .. SilverPikeReagentCount)
-    fishGroup:AddChild(silvergillLabel)
-
-    local poketLabel = AceGUI:Create("Label")
-    poketLabel:SetText("Pocked Bonefish: Bag:" .. PoketBoneFishBagCount .. " Reagent: " .. PoketBoneFishReagentCount)
-    fishGroup:AddChild(poketLabel)
-
-    local iridenscentLabel = AceGUI:Create("Label")
-    iridenscentLabel:SetText("Iridescent Amberjack: Bag: " .. IridescentBagCount .. " Reagent: " .. IridescentReagentCount)
-    fishGroup:AddChild(iridenscentLabel)
-
-    local spinefishLabel = AceGUI:Create("Label")
-    spinefishLabel:SetText("Spinefin Piranha: Bag:" .. SpinefinPiranhaBagCount .. " Reagent: " .. SpinefinPiranhaReagentCount)
-    fishGroup:AddChild(spinefishLabel)
-
-    local elysianLabel = AceGUI:Create("Label")
-    elysianLabel:SetText("Elysian Thade: Bag" .. ElysianBagCount .. " Reagent: " .. ElysianReagentCount)
-    fishGroup:AddChild(elysianLabel)
-end
-function PrintCloth()
-    local clothGroup = AceGUI:Create("InlineGroup");
-    clothGroup:SetTitle("Cloth");
-    clothGroup:SetLayout("Flow")
-    itemsGroup:AddChild(clothGroup);
-
-    local ShroudedLabel = AceGUI:Create("Label")
-    ShroudedLabel:SetText("Shrouded Cloth: Bag:" .. LostSoleBagCount .. " Reagent: " .. DeathBlossomReagentCount)
-    clothGroup:AddChild(ShroudedLabel)
-
-    local LightlessLabel = AceGUI:Create("Label")
-    LightlessLabel:SetText("Lightless Silk: Bag:" .. LightlessSilkBagCount .. " Reagent: " .. LightlessSilkReagentCount)
-    clothGroup:AddChild(LightlessLabel)
-end
-function PrintOre()
-    local oreGroup = AceGUI:Create("InlineGroup");
-    oreGroup:SetTitle("Ore");
-    oreGroup:SetLayout("Flow")
-    itemsGroup:AddChild(oreGroup);
-
-    local laestriteOreLabel = AceGUI:Create("Label")
-    laestriteOreLabel:SetText("Laestrite Ore: Bag:" .. LaestriteOreBagCount .. " Reagent: " .. LaestriteOreReagentCount)
-    oreGroup:AddChild(laestriteOreLabel)
-
-    local ElethiumLabel = AceGUI:Create("Label")
-    ElethiumLabel:SetText("Elethium Ore: Bag:" .. ElethiumOreBagCount .. " Reagent: " .. ElethiumOreReagentCount)
-    oreGroup:AddChild(ElethiumLabel)
-
-    local SoleniumLabel = AceGUI:Create("Label")
-    SoleniumLabel:SetText("Solenium Ore: Bag:" .. SoleniumOreBagCount .. " Reagent: " .. SoleniumOreReagentCount)
-    oreGroup:AddChild(SoleniumLabel)
-
-    local OxxeinOreLabel = AceGUI:Create("Label")
-    OxxeinOreLabel:SetText("Oxxein Ore: Bag:" .. OxxeinOreBagCount .. " Reagent: " .. OxxeinOreReagentCount)
-    oreGroup:AddChild(OxxeinOreLabel)
-
-    local PhaedrumOreLabel = AceGUI:Create("Label")
-    PhaedrumOreLabel:SetText("Phaedrum Ore: Bag:" .. PhaedrumOreBagCount .. " Reagent: " .. PhaedrumOreReagentCount)
-    oreGroup:AddChild(PhaedrumOreLabel)
-
-    local SinvyrOreLabel = AceGUI:Create("Label")
-    SinvyrOreLabel:SetText("Sinvyr Ore: Bag:" .. SinvyrOreBagCount .. " Reagent: " .. SinvyrOreReagentCount)
-    oreGroup:AddChild(SinvyrOreLabel)
-end
-function PrintLeather()
-    local leatherGroup = AceGUI:Create("InlineGroup");
-    leatherGroup:SetTitle("Leather");
-    leatherGroup:SetLayout("Flow")
-    itemsGroup:AddChild(leatherGroup);
-
-    local DesolateLeatherLabel = AceGUI:Create("Label")
-    DesolateLeatherLabel:SetText("Desolate Leather: Bag:" .. DesolateLeatherBagCount .. " Reagent: " .. DesolateLeatherReagentCount)
-    leatherGroup:AddChild(DesolateLeatherLabel)
-
-    local PallidBoneLabel = AceGUI:Create("Label")
-    PallidBoneLabel:SetText("Pallid Bone: Bag:" .. PallidBoneBagCount .. " Reagent: " .. PallidBoneReagentCount)
-    leatherGroup:AddChild(PallidBoneLabel)
-
-    local CallousHideLabel = AceGUI:Create("Label")
-    CallousHideLabel:SetText("Callous Hide: Bag:" .. CallousHideBagCount .. " Reagent: " .. CallousHideReagentCount)
-    leatherGroup:AddChild(CallousHideLabel)
-end
-local eventFrame= CreateFrame("Frame")
-eventFrame:RegisterEvent("BAG_UPDATE");
-
-eventFrame:SetScript("OnEvent", function(self,event, ...)
-    if event == "BAG_UPDATE" then
-        PrintBags();
+    if(IsReagentBankUnlocked())
+    then
+        GetReagentBank();
     end
-end)
+    Glockfarmer:ReloadLabel(self);
+end
 
-PrintBags();
+function Glockfarmer:OnInitialize()
+    self.db = LibStub("AceDB-3.0"):New("GlockFarmerDB", Defaults, true)
+    local scroll = AceGUI:Create("ScrollFrame")
+    scroll:SetLayout("List")
+    frame:AddChild(scroll)
+
+    local optsGroup = AceGUI:Create("InlineGroup");
+    optsGroup:SetTitle("Professions");
+    optsGroup:SetLayout("Flow")
+    optsGroup:SetFullWidth(true)
+    scroll:AddChild(optsGroup);
+
+    local herbCheckbox = AceGUI:Create("CheckBox");
+    herbCheckbox:SetType("checkbox");
+    herbCheckbox:SetLabel("Show Herbs");
+    herbCheckbox:SetValue(self.db.profile.ShowHerbalism);
+    herbCheckbox:SetCallback("OnValueChanged", function(widget) 
+        self.db.profile.ShowHerbalism = herbCheckbox:GetValue();
+        Glockfarmer:PrintBags();
+    end);
+    optsGroup:AddChild(herbCheckbox);
+
+    local fishingCheckbox = AceGUI:Create("CheckBox");
+    fishingCheckbox:SetType("checkbox");
+    fishingCheckbox:SetLabel("Show Fish");
+    fishingCheckbox:SetValue(self.db.profile.ShowFish);
+    fishingCheckbox:SetCallback("OnValueChanged", function(widget) 
+        self.db.profile.ShowFish = fishingCheckbox:GetValue();
+        Glockfarmer:PrintBags();
+    end);
+    optsGroup:AddChild(fishingCheckbox);
+
+    local clothCheckbox = AceGUI:Create("CheckBox");
+    clothCheckbox:SetType("checkbox");
+    clothCheckbox:SetLabel("Show Cloth");
+    clothCheckbox:SetValue(self.db.profile.ShowCloth);
+    clothCheckbox:SetCallback("OnValueChanged", function(widget) 
+        self.db.profile.ShowCloth = clothCheckbox:GetValue();
+        Glockfarmer:PrintBags();
+    end);
+    optsGroup:AddChild(clothCheckbox);
+
+    local oreCheckbox = AceGUI:Create("CheckBox");
+    oreCheckbox:SetType("checkbox");
+    oreCheckbox:SetLabel("Show Ore");
+    oreCheckbox:SetValue(self.db.profile.ShowOre);
+    oreCheckbox:SetCallback("OnValueChanged", function(widget) 
+        self.db.profile.ShowOre = oreCheckbox:GetValue();
+        Glockfarmer:PrintBags();
+    end);
+    optsGroup:AddChild(oreCheckbox);
+
+    local leatherCheckbox = AceGUI:Create("CheckBox");
+    leatherCheckbox:SetType("checkbox");
+    leatherCheckbox:SetLabel("Show Leather");
+    leatherCheckbox:SetValue(self.db.profile.ShowLeather);
+    leatherCheckbox:SetCallback("OnValueChanged", function(widget) 
+        self.db.profile.ShowLeather = leatherCheckbox:GetValue();
+        Glockfarmer:PrintBags();
+    end);
+    optsGroup:AddChild(leatherCheckbox);
+
+    itemsGroup = AceGUI:Create("InlineGroup");
+    itemsGroup:SetTitle("Items");
+    itemsGroup:SetFullWidth(true)
+    scroll:AddChild(itemsGroup);
+    frame:Show()
+    Glockfarmer:PrintBags();
+end   
+
+function Glockfarmer:OnEnable()
+    -- Called when the addon is enabled
+    self:RegisterEvent("BAG_UPDATE")
+end
+function Glockfarmer:BAG_UPDATE()
+    print("bag update has happened!")
+    Glockfarmer:PrintBags();
+end
