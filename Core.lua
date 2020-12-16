@@ -1,5 +1,5 @@
 SLASH_GLOCKFARMER1 = "/Glockfarmer"
-SlashCmdList["GLOCKFARMER"] = function(Cmd, ...)
+SlashCmdList["GLOCKFARMER"] = function(msg, ...)
     if(msg == "show")
     then
         frame:Show();
@@ -146,7 +146,6 @@ function PrintBags()
     ReloadLabel();
 end
 function GetPersonalBags(args)
-    print("starting bag scan")
     herbDBCount = 0;
     herbNSCount = 0;
     herbRGCount = 0;
