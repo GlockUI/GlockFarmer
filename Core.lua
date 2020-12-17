@@ -361,7 +361,44 @@ local myOptionsTable = {
                 disabled = function(info) return not Glockfarmer:CanShowCloth(info) end
             }
         }
-      }      
+      },
+      LeatherOptions={
+        name = "Leather",
+        type = "group",
+        args={
+            Fish = {
+                name = "Shows All Leather",
+                desc = "",
+                type = "toggle",
+                set = "ToggleShowLeather",
+                get = "CanShowLeather"
+            },            
+            ShowDesolate = {
+                name = "Show Desolate",
+                desc = "",
+                type = "toggle",
+                set = "ToggleShowDesolate",
+                get = "CanShowDesolate",
+                disabled = function(info) return not Glockfarmer:CanShowLeather(info) end
+            },
+            ShowPallidBone = {
+                name = "Show Pallid Bone",
+                desc = "",
+                type = "toggle",
+                set = "ToggleShowPallidBone",
+                get = "CanShowPallidBone",
+                disabled = function(info) return not Glockfarmer:CanShowLeather(info) end
+            },
+            ShowCallous = {
+                name = "Show Callous Hide",
+                desc = "",
+                type = "toggle",
+                set = "ToggleShowCallous",
+                get = "CanShowCallous",
+                disabled = function(info) return not Glockfarmer:CanShowLeather(info) end
+            }
+        }
+      }         
     }
   }
 
@@ -559,14 +596,23 @@ function Glockfarmer:PrintLeather(playerLeather, itemFrame)
     leatherGroup:SetLayout("Flow");
 
 
-    local desolateGroup = Glockfarmer:CreateRow("Desolate Leather", playerLeather.DesolateLeather.Bag, playerLeather.DesolateLeather.ReagentBank, playerLeather.DesolateLeather.Bank);
-    leatherGroup:AddChild(desolateGroup);
+    if(Glockfarmer:CanShowDesolate())
+    then
+        local desolateGroup = Glockfarmer:CreateRow("Desolate Leather", playerLeather.DesolateLeather.Bag, playerLeather.DesolateLeather.ReagentBank, playerLeather.DesolateLeather.Bank);
+        leatherGroup:AddChild(desolateGroup);
+    end
 
-    local pallidBoneGroup = Glockfarmer:CreateRow("Pallid Bone", playerLeather.PallidBone.Bag, playerLeather.PallidBone.ReagentBank, playerLeather.PallidBone.Bank);
-    leatherGroup:AddChild(pallidBoneGroup);
+    if(Glockfarmer:CanShowPallidBone())
+    then
+        local pallidBoneGroup = Glockfarmer:CreateRow("Pallid Bone", playerLeather.PallidBone.Bag, playerLeather.PallidBone.ReagentBank, playerLeather.PallidBone.Bank);
+        leatherGroup:AddChild(pallidBoneGroup);
+    end
 
-    local callousHideGroup = Glockfarmer:CreateRow("Callous Hide", playerLeather.CallousHide.Bag, playerLeather.CallousHide.ReagentBank, playerLeather.CallousHide.Bank);
-    leatherGroup:AddChild(callousHideGroup);
+    if(Glockfarmer:CanShowCallous())
+    then
+        local callousHideGroup = Glockfarmer:CreateRow("Callous Hide", playerLeather.CallousHide.Bag, playerLeather.CallousHide.ReagentBank, playerLeather.CallousHide.Bank);
+        leatherGroup:AddChild(callousHideGroup);
+    end
 
     itemFrame:AddChild(leatherGroup);
 end
@@ -1274,7 +1320,7 @@ end
 
 function Glockfarmer:ToggleShowCloth(info,val)
     self.db.profile.ShowCloth = val;
-    fishingCheckbox:SetValue(self.db.profile.ShowCloth);
+    clothCheckbox:SetValue(self.db.profile.ShowCloth);
     Glockfarmer:ReloadLabel();
 end
 function Glockfarmer:CanShowCloth(info)
@@ -1293,4 +1339,34 @@ function Glockfarmer:ToggleShowShroudedCloth(info,val)
 end
 function Glockfarmer:CanShowShroudedCloth(info)
     return self.db.profile.Cloth.ShowShroudedCloth;
+end
+
+function Glockfarmer:ToggleShowLeather(info,val)
+    self.db.profile.ShowLeather = val;
+    leatherCheckbox:SetValue(self.db.profile.ShowLeather);
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:CanShowLeather(info)
+    return self.db.profile.ShowLeather;
+end
+function Glockfarmer:ToggleShowDesolate(info,val)
+    self.db.profile.Leather.ShowDesolate = val;
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:CanShowDesolate(info)
+    return self.db.profile.Leather.ShowDesolate;
+end
+function Glockfarmer:ToggleShowPallidBone(info,val)
+    self.db.profile.Leather.ShowPallidBone = val;
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:CanShowPallidBone(info)
+    return self.db.profile.Leather.ShowPallidBone;
+end
+function Glockfarmer:ToggleShowCallous(info,val)
+    self.db.profile.Leather.ShowCallous = val;
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:CanShowCallous(info)
+    return self.db.profile.Leather.ShowCallous;
 end
