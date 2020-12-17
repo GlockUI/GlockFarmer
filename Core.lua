@@ -337,7 +337,7 @@ local myOptionsTable = {
         name = "Cloth",
         type = "group",
         args={
-            Fish = {
+            Cloth = {
                 name = "Shows All Cloth",
                 desc = "",
                 type = "toggle",
@@ -366,7 +366,7 @@ local myOptionsTable = {
         name = "Leather",
         type = "group",
         args={
-            Fish = {
+            Leather = {
                 name = "Shows All Leather",
                 desc = "",
                 type = "toggle",
@@ -398,7 +398,68 @@ local myOptionsTable = {
                 disabled = function(info) return not Glockfarmer:CanShowLeather(info) end
             }
         }
-      }         
+      },
+      OreOptions={
+        name = "Ore",
+        type = "group",
+        args={
+            Ore = {
+                name = "Shows All Ore",
+                desc = "",
+                type = "toggle",
+                set = "ToggleShowOre",
+                get = "CanShowOre"
+            },            
+            ShowLaestrite = {
+                name = "Show Laestrite",
+                desc = "",
+                type = "toggle",
+                set = "ToggleShowLaestrite",
+                get = "CanShowLaestrite",
+                disabled = function(info) return not Glockfarmer:CanShowOre(info) end
+            },
+            ShowElethium = {
+                name = "Show Elethium",
+                desc = "",
+                type = "toggle",
+                set = "ToggleShowElethium",
+                get = "CanShowElethium",
+                disabled = function(info) return not Glockfarmer:CanShowOre(info) end
+            },
+            ShowSolenium = {
+                name = "Show Solenium",
+                desc = "",
+                type = "toggle",
+                set = "ToggleShowSolenium",
+                get = "CanShowSolenium",
+                disabled = function(info) return not Glockfarmer:CanShowOre(info) end
+            },
+            ShowOxxein = {
+                name = "Show Oxxein",
+                desc = "",
+                type = "toggle",
+                set = "ToggleShowOxxein",
+                get = "CanShowOxxein",
+                disabled = function(info) return not Glockfarmer:CanShowOre(info) end
+            },
+            ShowPhaedrum = {
+                name = "Show Phaedrum",
+                desc = "",
+                type = "toggle",
+                set = "ToggleShowPhaedrum",
+                get = "CanShowPhaedrum",
+                disabled = function(info) return not Glockfarmer:CanShowOre(info) end
+            },
+            ShowSinvyr = {
+                name = "Show Sinvyr",
+                desc = "",
+                type = "toggle",
+                set = "ToggleShowSinvyr",
+                get = "CanShowSinvyr",
+                disabled = function(info) return not Glockfarmer:CanShowOre(info) end
+            },
+        }
+      }, 
     }
   }
 
@@ -569,24 +630,41 @@ function Glockfarmer:PrintOre(playerOre, itemFrame)
     oreGroup:SetWidth(340);
     oreGroup:SetLayout("Flow");    
 
-    local laestriteGroup = Glockfarmer:CreateRow("Laestrite Ore", playerOre.LaestriteOre.Bag, playerOre.LaestriteOre.ReagentBank, playerOre.LaestriteOre.Bank);
-    oreGroup:AddChild(laestriteGroup);
+    if(Glockfarmer:CanShowLaestrite())
+    then
+        local laestriteGroup = Glockfarmer:CreateRow("Laestrite Ore", playerOre.LaestriteOre.Bag, playerOre.LaestriteOre.ReagentBank, playerOre.LaestriteOre.Bank);
+        oreGroup:AddChild(laestriteGroup);
+    end
 
-    local elethiumGroup = Glockfarmer:CreateRow("Elethium Ore", playerOre.ElethiumOre.Bag, playerOre.ElethiumOre.ReagentBank, playerOre.ElethiumOre.Bank);
-    oreGroup:AddChild(elethiumGroup);
+    if(Glockfarmer:CanShowElethium())
+    then
+        local elethiumGroup = Glockfarmer:CreateRow("Elethium Ore", playerOre.ElethiumOre.Bag, playerOre.ElethiumOre.ReagentBank, playerOre.ElethiumOre.Bank);
+        oreGroup:AddChild(elethiumGroup);
+    end
 
-    local soleniumGroup = Glockfarmer:CreateRow("Solenium Ore", playerOre.SoleniumOre.Bag, playerOre.SoleniumOre.ReagentBank, playerOre.SoleniumOre.Bank);
-    oreGroup:AddChild(soleniumGroup);
+    if(Glockfarmer:CanShowSolenium())
+    then
+        local soleniumGroup = Glockfarmer:CreateRow("Solenium Ore", playerOre.SoleniumOre.Bag, playerOre.SoleniumOre.ReagentBank, playerOre.SoleniumOre.Bank);
+        oreGroup:AddChild(soleniumGroup);
+    end
 
-    local oxxeinGroup = Glockfarmer:CreateRow("Oxxein Ore", playerOre.OxxeinOre.Bag, playerOre.OxxeinOre.ReagentBank, playerOre.OxxeinOre.Bank);
-    oreGroup:AddChild(oxxeinGroup);
+    if(Glockfarmer:CanShowOxxein())
+    then
+        local oxxeinGroup = Glockfarmer:CreateRow("Oxxein Ore", playerOre.OxxeinOre.Bag, playerOre.OxxeinOre.ReagentBank, playerOre.OxxeinOre.Bank);
+        oreGroup:AddChild(oxxeinGroup);
+    end
 
-    local phaedrumGroup = Glockfarmer:CreateRow("Phaedrum Ore", playerOre.PhaedrumOre.Bag, playerOre.PhaedrumOre.ReagentBank, playerOre.PhaedrumOre.Bank);
-    oreGroup:AddChild(phaedrumGroup);
+    if(Glockfarmer:CanShowPhaedrum())
+    then
+        local phaedrumGroup = Glockfarmer:CreateRow("Phaedrum Ore", playerOre.PhaedrumOre.Bag, playerOre.PhaedrumOre.ReagentBank, playerOre.PhaedrumOre.Bank);
+        oreGroup:AddChild(phaedrumGroup);
+    end
 
-    local sinvyrGroup = Glockfarmer:CreateRow("Sinvyr Ore", playerOre.SinvyrOre.Bag, playerOre.SinvyrOre.ReagentBank, playerOre.SinvyrOre.Bank);
-    oreGroup:AddChild(sinvyrGroup);
-
+    if(Glockfarmer:CanShowSinvyr())
+    then
+        local sinvyrGroup = Glockfarmer:CreateRow("Sinvyr Ore", playerOre.SinvyrOre.Bag, playerOre.SinvyrOre.ReagentBank, playerOre.SinvyrOre.Bank);
+        oreGroup:AddChild(sinvyrGroup);
+    end
     itemFrame:AddChild(oreGroup);
 end
 function Glockfarmer:PrintLeather(playerLeather, itemFrame)
@@ -1369,4 +1447,55 @@ function Glockfarmer:ToggleShowCallous(info,val)
 end
 function Glockfarmer:CanShowCallous(info)
     return self.db.profile.Leather.ShowCallous;
+end
+
+function Glockfarmer:ToggleShowOre(info,val)
+    self.db.profile.ShowOre = val;
+    oreCheckbox:SetValue(self.db.profile.ShowOre);
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:CanShowOre(info)
+    return self.db.profile.ShowOre;
+end
+function Glockfarmer:ToggleShowLaestrite(info,val)
+    self.db.profile.Ore.ShowLaestrite = val;
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:CanShowLaestrite(info)
+    return self.db.profile.Ore.ShowLaestrite;
+end
+function Glockfarmer:ToggleShowElethium(info,val)
+    self.db.profile.Ore.ShowElethium = val;
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:CanShowElethium(info)
+    return self.db.profile.Ore.ShowElethium;
+end
+function Glockfarmer:ToggleShowSolenium(info,val)
+    self.db.profile.Ore.ShowSolenium  = val;
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:CanShowSolenium(info)
+    return self.db.profile.Ore.ShowSolenium;
+end
+function Glockfarmer:ToggleShowOxxein(info,val)
+    self.db.profile.Ore.ShowOxxein = val;
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:CanShowOxxein(info)
+    return self.db.profile.Ore.ShowOxxein;
+end
+function Glockfarmer:ToggleShowPhaedrum(info,val)
+    self.db.profile.Ore.ShowPhaedrum = val;
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:CanShowPhaedrum(info)
+    return self.db.profile.Ore.ShowPhaedrum;
+end
+function Glockfarmer:ToggleShowSinvyr(info,val)
+    self.db.profile.Ore.ShowSinvyr = val;
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:CanShowSinvyr(info)
+    return self.db.profile.Ore.ShowSinvyr;
 end
