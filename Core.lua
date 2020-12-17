@@ -184,7 +184,7 @@ SlashCmdList["GLOCKFARMER"] = function(msg, ...)
     then
         GlockFarmer:PrintBags();        
     else
-        print("Proper argument not given!")
+        print("Proper argument not given! please provide show, hide, or scan")
     end
 end
 function Glockfarmer:PrintHerbs(playerHerbs, itemFrame)
@@ -591,7 +591,6 @@ function Glockfarmer:ReloadLabel()
     if(self.db.profile.ShowAllCharacters)
     then
         for i, playerTable in pairs(self.db.global) do
-            print(i)
             local playerGroup = AceGUI:Create("InlineGroup");
             playerGroup:SetTitle(i);
             playerGroup:SetLayout("Flow")
@@ -751,6 +750,5 @@ function Glockfarmer:OnEnable()
     self:RegisterEvent("BAG_UPDATE")
 end
 function Glockfarmer:BAG_UPDATE()
-    print("bag update has happened!")
     Glockfarmer:PrintBags();
 end
