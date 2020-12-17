@@ -171,6 +171,8 @@ local Defaults = {
 }
 local itemsGroup;
 
+local IsBankOpen = false;
+
 
 SLASH_GLOCKFARMER1 = "/Glockfarmer"
 SlashCmdList["GLOCKFARMER"] = function(msg, ...)
@@ -182,138 +184,143 @@ SlashCmdList["GLOCKFARMER"] = function(msg, ...)
         frame:Hide();
     elseif(msg == "scan")
     then
-        GlockFarmer:PrintBags();        
+        Glockfarmer:PrintBags();        
     else
         print("Proper argument not given! please provide show, hide, or scan")
     end
 end
+function Glockfarmer:CreateRow(labelName, bag, reagent, bank)
+    local group = AceGUI:Create("SimpleGroup");
+    group:SetLayout("Flow");
+    group:SetFullWidth(true);
+    local label = AceGUI:Create("Label");
+    label:SetText(labelName .. ": ");
+    label:SetWidth(110);
+    group:AddChild(label);
+
+    local bagLabel = AceGUI:Create("Label");
+    bagLabel:SetText("Bag:" .. bag);
+    bagLabel:SetWidth(60);
+    group:AddChild(bagLabel);
+
+    local reagentLabel = AceGUI:Create("Label");
+    reagentLabel:SetText("Reagent:" .. reagent);
+    reagentLabel:SetWidth(80);
+    group:AddChild(reagentLabel);
+
+    local bankLabel = AceGUI:Create("Label");
+    bankLabel:SetText("Bank:" .. bank);
+    bankLabel:SetWidth(60);
+    group:AddChild(bankLabel);    
+    return group;
+end
 function Glockfarmer:PrintHerbs(playerHerbs, itemFrame)
     local herbsGroup = AceGUI:Create("InlineGroup");
     herbsGroup:SetTitle("Herbs");
+    herbsGroup:SetWidth(340);
     herbsGroup:SetLayout("Flow")
     
+    local deathBlossomGroup = Glockfarmer:CreateRow("Death Blossom", playerHerbs.DeathBlossom.Bag, playerHerbs.DeathBlossom.ReagentBank, playerHerbs.DeathBlossom.Bank);
+    herbsGroup:AddChild(deathBlossomGroup);
 
-    local deathBlossomLabel = AceGUI:Create("Label")
-    deathBlossomLabel:SetText("Death Blossom: Bag:" .. playerHerbs.DeathBlossom.Bag .. " Reagent: " .. playerHerbs.DeathBlossom.ReagentBank)
-    herbsGroup:AddChild(deathBlossomLabel)
+    local nightshadeGroup = Glockfarmer:CreateRow("Nightshade", playerHerbs.NightShade.Bag, playerHerbs.NightShade.ReagentBank, playerHerbs.NightShade.Bank);
+    herbsGroup:AddChild(nightshadeGroup);
 
-    local nightshadeLabel = AceGUI:Create("Label")
-    nightshadeLabel:SetText("Nightshade: Bag:" .. playerHerbs.NightShade.Bag .. " Reagent: " .. playerHerbs.NightShade.ReagentBank)
-    herbsGroup:AddChild(nightshadeLabel)
+    local risingGloryGroup = Glockfarmer:CreateRow("Rising Glory", playerHerbs.RisingGlory.Bag, playerHerbs.RisingGlory.ReagentBank, playerHerbs.RisingGlory.Bank);
+    herbsGroup:AddChild(risingGloryGroup);
 
-    local risingGloryLabel = AceGUI:Create("Label")
-    risingGloryLabel:SetText("Rising Glory: Bag:" .. playerHerbs.RisingGlory.Bag .. " Reagent: " .. playerHerbs.RisingGlory.ReagentBank)
-    herbsGroup:AddChild(risingGloryLabel)
+    local marrowrootGroup = Glockfarmer:CreateRow("Marrowroot", playerHerbs.Marrowroot.Bag, playerHerbs.Marrowroot.ReagentBank, playerHerbs.Marrowroot.Bank);
+    herbsGroup:AddChild(marrowrootGroup);
 
-    local marrowrootLabel = AceGUI:Create("Label")
-    marrowrootLabel:SetText("Marrowroot: Bag: " .. playerHerbs.Marrowroot.Bag .. " Reagent: " .. playerHerbs.Marrowroot.ReagentBank)
-    herbsGroup:AddChild(marrowrootLabel)
+    local widowbloomGroup = Glockfarmer:CreateRow("Widowbloom", playerHerbs.Widowbloom.Bag, playerHerbs.Widowbloom.ReagentBank, playerHerbs.Widowbloom.Bank);
+    herbsGroup:AddChild(widowbloomGroup);
 
-    local widowbloomLabel = AceGUI:Create("Label")
-    widowbloomLabel:SetText("Widowbloom: Bag:" .. playerHerbs.Widowbloom.Bag  .. " Reagent: " .. playerHerbs.Widowbloom.ReagentBank)
-    herbsGroup:AddChild(widowbloomLabel)
-
-    local vigilsTorchLabel = AceGUI:Create("Label")
-    vigilsTorchLabel:SetText("Vigils Torch: Bag:" .. playerHerbs.VigilsTorch.Bag .. " Reagent: " .. playerHerbs.VigilsTorch.ReagentBank)
-    herbsGroup:AddChild(vigilsTorchLabel)
+    local vigilsTorchGroup = Glockfarmer:CreateRow("Vigils Torch", playerHerbs.VigilsTorch.Bag, playerHerbs.VigilsTorch.ReagentBank, playerHerbs.VigilsTorch.Bank);
+    herbsGroup:AddChild(vigilsTorchGroup);
 
     itemFrame:AddChild(herbsGroup);
 end
 function Glockfarmer:PrintFish(playerFish, itemFrame)
     local fishGroup = AceGUI:Create("InlineGroup");
     fishGroup:SetTitle("Fish");
-    fishGroup:SetLayout("Flow")    
+    fishGroup:SetWidth(340);
+    fishGroup:SetLayout("Flow");   
+    
+    local lostSoleGroup = Glockfarmer:CreateRow("Lost Sole", playerFish.LostSole.Bag, playerFish.LostSole.ReagentBank, playerFish.LostSole.Bank);
+    fishGroup:AddChild(lostSoleGroup);
 
-    local lostSoleLabel = AceGUI:Create("Label")
-    lostSoleLabel:SetText("Lost Sole: Bag:" .. playerFish.LostSole.Bag .. " Reagent: " .. playerFish.LostSole.ReagentBank)
-    fishGroup:AddChild(lostSoleLabel)
+    local silvergillGroup = Glockfarmer:CreateRow("Silvergill Pike", playerFish.SilverPike.Bag, playerFish.SilverPike.ReagentBank, playerFish.SilverPike.Bank);
+    fishGroup:AddChild(silvergillGroup);
 
-    local silvergillLabel = AceGUI:Create("Label")
-    silvergillLabel:SetText("Silvergill Pike: Bag:" .. playerFish.SilverPike.Bag .. " Reagent: " .. playerFish.SilverPike.ReagentBank)
-    fishGroup:AddChild(silvergillLabel)
+    local poketGroup = Glockfarmer:CreateRow("Pocked Bonefish", playerFish.PoketBoneFish.Bag, playerFish.PoketBoneFish.ReagentBank, playerFish.PoketBoneFish.Bank);
+    fishGroup:AddChild(poketGroup);
 
-    local poketLabel = AceGUI:Create("Label")
-    poketLabel:SetText("Pocked Bonefish: Bag:" .. playerFish.PoketBoneFish.Bag .. " Reagent: " .. playerFish.PoketBoneFish.ReagentBank)
-    fishGroup:AddChild(poketLabel)
+    local iridenscentGroup = Glockfarmer:CreateRow("Iridescent Amberjack", playerFish.Iridescent.Bag, playerFish.Iridescent.ReagentBank, playerFish.Iridescent.Bank);
+    fishGroup:AddChild(iridenscentGroup);
 
-    local iridenscentLabel = AceGUI:Create("Label")
-    iridenscentLabel:SetText("Iridescent Amberjack: Bag: " .. playerFish.Iridescent.Bag .. " Reagent: " .. playerFish.Iridescent.ReagentBank)
-    fishGroup:AddChild(iridenscentLabel)
+    local spinefishroup = Glockfarmer:CreateRow("Spinefin Piranha", playerFish.SpinefinPiranha.Bag, playerFish.SpinefinPiranha.ReagentBank, playerFish.SpinefinPiranha.Bank);
+    fishGroup:AddChild(spinefishroup);
 
-    local spinefishLabel = AceGUI:Create("Label")
-    spinefishLabel:SetText("Spinefin Piranha: Bag:" .. playerFish.SpinefinPiranha.Bag .. " Reagent: " .. playerFish.SpinefinPiranha.ReagentBank)
-    fishGroup:AddChild(spinefishLabel)
-
-    local elysianLabel = AceGUI:Create("Label")
-    elysianLabel:SetText("Elysian Thade: Bag:" .. playerFish.Elysian.Bag .. " Reagent: " .. playerFish.Elysian.ReagentBank)
-    fishGroup:AddChild(elysianLabel)
+    local elysianGroup = Glockfarmer:CreateRow("Elysian Thade", playerFish.Elysian.Bag, playerFish.Elysian.ReagentBank, playerFish.Elysian.Bank);
+    fishGroup:AddChild(elysianGroup);
 
     itemFrame:AddChild(fishGroup);
 end
-function Glockfarmer:PrintCloth(playerCloth, itemFrame)
+function Glockfarmer:PrintCloth(playerCloth, itemFrame)    
     local clothGroup = AceGUI:Create("InlineGroup");
     clothGroup:SetTitle("Cloth");
-    clothGroup:SetLayout("Flow")
-    
+    clothGroup:SetWidth(340);
+    clothGroup:SetLayout("Flow");
 
-    local ShroudedLabel = AceGUI:Create("Label")
-    ShroudedLabel:SetText("Shrouded Cloth: Bag:" .. playerCloth.ShroudedCloth.Bag .. " Reagent: " .. playerCloth.ShroudedCloth.ReagentBank)
-    clothGroup:AddChild(ShroudedLabel)
+    local shroudedClothGroup = Glockfarmer:CreateRow("Shrouded Cloth", playerCloth.ShroudedCloth.Bag, playerCloth.ShroudedCloth.ReagentBank, playerCloth.ShroudedCloth.Bank);
+    clothGroup:AddChild(shroudedClothGroup);
 
-    local LightlessLabel = AceGUI:Create("Label")
-    LightlessLabel:SetText("Lightless Silk: Bag:" .. playerCloth.LightlessSilk.Bag .. " Reagent: " .. playerCloth.LightlessSilk.ReagentBank)
-    clothGroup:AddChild(LightlessLabel)
+    local lightlessClothGroup = Glockfarmer:CreateRow("Lightless Silk", playerCloth.LightlessSilk.Bag, playerCloth.LightlessSilk.ReagentBank, playerCloth.LightlessSilk.Bank);
+    clothGroup:AddChild(lightlessClothGroup);
 
     itemFrame:AddChild(clothGroup);
 end
 function Glockfarmer:PrintOre(playerOre, itemFrame)
     local oreGroup = AceGUI:Create("InlineGroup");
     oreGroup:SetTitle("Ore");
+    oreGroup:SetWidth(340);
     oreGroup:SetLayout("Flow");    
 
-    local laestriteOreLabel = AceGUI:Create("Label")
-    laestriteOreLabel:SetText("Laestrite Ore: Bag:" .. playerOre.LaestriteOre.Bag .. " Reagent: " .. playerOre.LaestriteOre.ReagentBank)
-    oreGroup:AddChild(laestriteOreLabel)
+    local laestriteGroup = Glockfarmer:CreateRow("Laestrite Ore", playerOre.LaestriteOre.Bag, playerOre.LaestriteOre.ReagentBank, playerOre.LaestriteOre.Bank);
+    oreGroup:AddChild(laestriteGroup);
 
-    local ElethiumLabel = AceGUI:Create("Label")
-    ElethiumLabel:SetText("Elethium Ore: Bag:" .. playerOre.ElethiumOre.Bag .. " Reagent: " .. playerOre.ElethiumOre.ReagentBank)
-    oreGroup:AddChild(ElethiumLabel)
+    local elethiumGroup = Glockfarmer:CreateRow("Elethium Ore", playerOre.ElethiumOre.Bag, playerOre.ElethiumOre.ReagentBank, playerOre.ElethiumOre.Bank);
+    oreGroup:AddChild(elethiumGroup);
 
-    local SoleniumLabel = AceGUI:Create("Label")
-    SoleniumLabel:SetText("Solenium Ore: Bag:" .. playerOre.SoleniumOre.Bag .. " Reagent: " .. playerOre.SoleniumOre.ReagentBank)
-    oreGroup:AddChild(SoleniumLabel)
+    local soleniumGroup = Glockfarmer:CreateRow("Solenium Ore", playerOre.SoleniumOre.Bag, playerOre.SoleniumOre.ReagentBank, playerOre.SoleniumOre.Bank);
+    oreGroup:AddChild(soleniumGroup);
 
-    local OxxeinOreLabel = AceGUI:Create("Label")
-    OxxeinOreLabel:SetText("Oxxein Ore: Bag:" .. playerOre.OxxeinOre.Bag .. " Reagent: " .. playerOre.OxxeinOre.ReagentBank)
-    oreGroup:AddChild(OxxeinOreLabel)
+    local oxxeinGroup = Glockfarmer:CreateRow("Oxxein Ore", playerOre.OxxeinOre.Bag, playerOre.OxxeinOre.ReagentBank, playerOre.OxxeinOre.Bank);
+    oreGroup:AddChild(oxxeinGroup);
 
-    local PhaedrumOreLabel = AceGUI:Create("Label")
-    PhaedrumOreLabel:SetText("Phaedrum Ore: Bag:" .. playerOre.PhaedrumOre.Bag .. " Reagent: " .. playerOre.PhaedrumOre.ReagentBank)
-    oreGroup:AddChild(PhaedrumOreLabel)
+    local phaedrumGroup = Glockfarmer:CreateRow("Phaedrum Ore", playerOre.PhaedrumOre.Bag, playerOre.PhaedrumOre.ReagentBank, playerOre.PhaedrumOre.Bank);
+    oreGroup:AddChild(phaedrumGroup);
 
-    local SinvyrOreLabel = AceGUI:Create("Label")
-    SinvyrOreLabel:SetText("Sinvyr Ore: Bag:" .. playerOre.SinvyrOre.Bag .. " Reagent: " .. playerOre.SinvyrOre.ReagentBank)
-    oreGroup:AddChild(SinvyrOreLabel)
+    local sinvyrGroup = Glockfarmer:CreateRow("Sinvyr Ore", playerOre.SinvyrOre.Bag, playerOre.SinvyrOre.ReagentBank, playerOre.SinvyrOre.Bank);
+    oreGroup:AddChild(sinvyrGroup);
 
     itemFrame:AddChild(oreGroup);
 end
 function Glockfarmer:PrintLeather(playerLeather, itemFrame)
     local leatherGroup = AceGUI:Create("InlineGroup");
     leatherGroup:SetTitle("Leather");
-    leatherGroup:SetLayout("Flow")
-    
+    leatherGroup:SetWidth(340);
+    leatherGroup:SetLayout("Flow");
 
-    local DesolateLeatherLabel = AceGUI:Create("Label")
-    DesolateLeatherLabel:SetText("Desolate Leather: Bag:" .. playerLeather.DesolateLeather.Bag .. " Reagent: " .. playerLeather.DesolateLeather.ReagentBank)
-    leatherGroup:AddChild(DesolateLeatherLabel)
 
-    local PallidBoneLabel = AceGUI:Create("Label")
-    PallidBoneLabel:SetText("Pallid Bone: Bag:" .. playerLeather.PallidBone.Bag .. " Reagent: " .. playerLeather.PallidBone.ReagentBank)
-    leatherGroup:AddChild(PallidBoneLabel)
+    local desolateGroup = Glockfarmer:CreateRow("Desolate Leather", playerLeather.DesolateLeather.Bag, playerLeather.DesolateLeather.ReagentBank, playerLeather.DesolateLeather.Bank);
+    leatherGroup:AddChild(desolateGroup);
 
-    local CallousHideLabel = AceGUI:Create("Label")
-    CallousHideLabel:SetText("Callous Hide: Bag:" .. playerLeather.CallousHide.Bag .. " Reagent: " .. playerLeather.CallousHide.ReagentBank)
-    leatherGroup:AddChild(CallousHideLabel)
+    local pallidBoneGroup = Glockfarmer:CreateRow("Pallid Bone", playerLeather.PallidBone.Bag, playerLeather.PallidBone.ReagentBank, playerLeather.PallidBone.Bank);
+    leatherGroup:AddChild(pallidBoneGroup);
+
+    local callousHideGroup = Glockfarmer:CreateRow("Callous Hide", playerLeather.CallousHide.Bag, playerLeather.CallousHide.ReagentBank, playerLeather.CallousHide.Bank);
+    leatherGroup:AddChild(callousHideGroup);
 
     itemFrame:AddChild(leatherGroup);
 end
@@ -343,7 +350,7 @@ function Glockfarmer:GetPersonalBags()
     callousHideCount = 0;
 
 
-    for i=0,5 do
+    for i=0,4 do
         local slots = GetContainerNumSlots(i);
         for s=0,slots do
             icon, itemCount, locked, quality, readable, lootable, itemLink, isFiltered, noValue, itemID = GetContainerItemInfo(i, s)  
@@ -586,6 +593,143 @@ function Glockfarmer:GetReagentBank()
     self.db.global[playerName].Leather.CallousHide.ReagentBank = callousHideCount;
 
 end
+function Glockfarmer:GetBank()
+    herbDBCount = 0;
+    herbNSCount = 0;
+    herbRGCount = 0;
+    herbMTCount = 0;
+    herbWTCount = 0;
+    herbVTCount = 0;
+    fishingLSCount = 0;
+    fishingSPCount = 0;
+    fishingPBCount = 0;
+    fishingIACount = 0;
+    fishingSpineCount = 0;
+    fishingETCount = 0;
+    clothSCCount = 0;
+    clothLSCount = 0;
+    laestriteOreCount = 0;
+    elethiumOreCount = 0;
+    soleniumOreCount = 0;
+    oxxeinOreCount = 0;
+    phaedrumOreCount = 0;
+    sinvyrOreCount = 0;
+    desolateLeatherCount = 0;
+    pallidBoneCount = 0;
+    callousHideCount = 0;
+
+
+    for i=5,11 do
+        local slots = GetContainerNumSlots(i);
+        for s=0,slots do
+            icon, itemCount, locked, quality, readable, lootable, itemLink, isFiltered, noValue, itemID = GetContainerItemInfo(i, s)  
+            --Herbs     
+            if(itemID == 171315)
+            then
+                herbNSCount = herbNSCount + itemCount;
+            elseif(itemID == 169701)
+            then
+                herbDBCount = herbDBCount + itemCount;
+            elseif(itemID == 168586)
+            then
+                herbRGCount = herbRGCount + itemCount;
+            elseif(itemID == 168589)
+            then
+                herbMTCount = herbMTCount + itemCount;
+            elseif(itemID == 168583)
+            then
+                herbWTCount = herbWTCount + itemCount;
+            elseif(itemID == 170554)
+            then
+                herbVTCount = herbVTCount + itemCount;
+            --Fishing
+            elseif(itemID == 173032)
+            then
+                fishingLSCount = fishingLSCount + itemCount;
+            elseif(itemID == 173034)
+            then
+                fishingSPCount = fishingSPCount + itemCount;
+            elseif(itemID == 173035)
+            then
+                fishingPBCount = fishingPBCount + itemCount;
+            elseif(itemID == 173033)
+            then
+                fishingIACount = fishingIACount + itemCount;
+            elseif(itemID == 173036)
+            then
+                fishingSpineCount = fishingSpineCount + itemCount;
+            elseif(itemID == 173037)
+            then
+                fishingETCount = fishingETCount + itemCount;
+            --Cloth
+            elseif(itemID == 173202)
+            then
+                clothSCCount = clothSCCount + itemCount;
+            elseif(itemID == 173204)
+            then
+                clothLSCount = clothLSCount + itemCount;
+            --Ore
+            elseif(itemID == 171828)
+            then
+                laestriteOreCount = laestriteOreCount + itemCount;
+            elseif(itemID == 171833)
+            then
+                elethiumOreCount = elethiumOreCount + itemCount;
+            elseif(itemID == 171829)
+            then
+                soleniumOreCount = soleniumOreCount + itemCount;
+            elseif(itemID == 171830)
+            then
+                oxxeinOreCount = oxxeinOreCount + itemCount;
+            elseif(itemID == 171831)
+            then
+                phaedrumOreCount = phaedrumOreCount + itemCount;
+            elseif(itemID == 171832)
+            then
+                sinvyrOreCount = sinvyrOreCount + itemCount;
+            --leather
+            elseif(itemID == 172089)
+            then
+                desolateLeatherCount = desolateLeatherCount + itemCount;
+            elseif(itemID == 172092)
+            then
+                pallidBoneCount = pallidBoneCount + itemCount;
+            elseif(itemID == 172094)
+            then
+                callousHideCount = callousHideCount + itemCount;
+            end
+        end
+    end
+
+    self.db.global[playerName].Herbs.DeathBlossom.Bank = herbDBCount;
+    self.db.global[playerName].Herbs.NightShade.Bank = herbNSCount;
+    self.db.global[playerName].Herbs.RisingGlory.Bank = herbRGCount;
+    self.db.global[playerName].Herbs.Marrowroot.Bank = herbMTCount;
+    self.db.global[playerName].Herbs.VigilsTorch.Bank = herbWTCount;
+    self.db.global[playerName].Herbs.VigilsTorch.Bank = herbVTCount;
+
+    self.db.global[playerName].Fish.LostSole.Bank = fishingLSCount;
+    self.db.global[playerName].Fish.SilverPike.Bank = fishingSPCount;
+    self.db.global[playerName].Fish.PoketBoneFish.Bank = fishingPBCount;
+    self.db.global[playerName].Fish.Iridescent.Bank = fishingIACount;
+    self.db.global[playerName].Fish.SpinefinPiranha.Bank = fishingSpineCount;
+    self.db.global[playerName].Fish.Elysian.Bank = fishingETCount;
+
+    self.db.global[playerName].Cloth.LightlessSilk.Bank = clothLSCount;
+    self.db.global[playerName].Cloth.ShroudedCloth.Bank = clothSCCount;
+
+    self.db.global[playerName].Ore.LaestriteOre.Bank = laestriteOreCount;
+    self.db.global[playerName].Ore.ElethiumOre.Bank = elethiumOreCount;
+    self.db.global[playerName].Ore.SoleniumOre.Bank = soleniumOreCount;
+    self.db.global[playerName].Ore.OxxeinOre.Bank = oxxeinOreCount;
+    self.db.global[playerName].Ore.PhaedrumOre.Bank = phaedrumOreCount;
+    self.db.global[playerName].Ore.SinvyrOre.Bank = sinvyrOreCount;
+
+    self.db.global[playerName].Leather.DesolateLeather.Bank = desolateLeatherCount;
+    self.db.global[playerName].Leather.PallidBone.Bank = pallidBoneCount;
+    self.db.global[playerName].Leather.CallousHide.Bank = callousHideCount;
+
+end
 function Glockfarmer:ReloadLabel()
     itemsGroup:ReleaseChildren();
     if(self.db.profile.ShowAllCharacters)
@@ -593,7 +737,8 @@ function Glockfarmer:ReloadLabel()
         for i, playerTable in pairs(self.db.global) do
             local playerGroup = AceGUI:Create("InlineGroup");
             playerGroup:SetTitle(i);
-            playerGroup:SetLayout("Flow")
+            playerGroup:SetWidth(360);
+            playerGroup:SetLayout("Flow");
             
 
             if(self.db.profile.ShowHerbalism)
@@ -626,7 +771,8 @@ function Glockfarmer:ReloadLabel()
     else
         local playerGroup = AceGUI:Create("InlineGroup");
         playerGroup:SetTitle(playerName);
-        playerGroup:SetLayout("Flow")
+        playerGroup:SetFullWidth(true);
+        playerGroup:SetLayout("Flow");
         
 
         if(self.db.profile.ShowHerbalism)
@@ -664,7 +810,11 @@ function Glockfarmer:PrintBags()
     then
         Glockfarmer:GetReagentBank();
     end
-    Glockfarmer:ReloadLabel(self);
+    if(IsBankOpen)
+    then
+        Glockfarmer:GetBank();
+    end
+    Glockfarmer:ReloadLabel();
 end
 function Glockfarmer:OnInitialize()
     self.db = LibStub("AceDB-3.0"):New("GlockFarmerDB", Defaults, true)
@@ -741,6 +891,7 @@ function Glockfarmer:OnInitialize()
     itemsGroup = AceGUI:Create("InlineGroup");
     itemsGroup:SetTitle("Items");
     itemsGroup:SetFullWidth(true)
+    itemsGroup:SetLayout("Flow")
     scroll:AddChild(itemsGroup);
     frame:Show()
     Glockfarmer:PrintBags();
@@ -748,7 +899,17 @@ end
 function Glockfarmer:OnEnable()
     -- Called when the addon is enabled
     self:RegisterEvent("BAG_UPDATE")
+    self:RegisterEvent("BANKFRAME_OPENED");
+    self:RegisterEvent("BANKFRAME_CLOSED");
 end
 function Glockfarmer:BAG_UPDATE()
     Glockfarmer:PrintBags();
+end
+function Glockfarmer:BANKFRAME_OPENED()
+    IsBankOpen = true;
+    Glockfarmer:GetBank();
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:BANKFRAME_CLOSED(args)
+    IsBankOpen = false;
 end
