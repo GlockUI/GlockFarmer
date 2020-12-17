@@ -211,7 +211,7 @@ local myOptionsTable = {
     handler = Glockfarmer,
     type = "group",
     args = {
-      moreoptions={
+      HerbOptions={
         name = "Herbs",
         type = "group",
         args={
@@ -271,7 +271,68 @@ local myOptionsTable = {
                 disabled = function(info) return not Glockfarmer:CanShowHerbs(info) end
             },
         }
-      }
+      },
+      FishOptions={
+        name = "Fish",
+        type = "group",
+        args={
+            Fish = {
+                name = "Shows All Fish",
+                desc = "",
+                type = "toggle",
+                set = "ToggleShowFish",
+                get = "CanShowFish"
+            },            
+            ShowLostSole = {
+                name = "Show Lost Sole",
+                desc = "",
+                type = "toggle",
+                set = "ToggleShowLostSole",
+                get = "CanShowLostSole",
+                disabled = function(info) return not Glockfarmer:CanShowFish(info) end
+            },
+            ShowSilverPike = {
+                name = "Show Silver Pike",
+                desc = "",
+                type = "toggle",
+                set = "ToggleShowSilverPike",
+                get = "CanShowSilverPike",
+                disabled = function(info) return not Glockfarmer:CanShowFish(info) end
+            },
+            ShowPocketBonefish = {
+                name = "Show Pocket Bonefish",
+                desc = "",
+                type = "toggle",
+                set = "ToggleShowPocketBonefish",
+                get = "CanShowPocketBonefish",
+                disabled = function(info) return not Glockfarmer:CanShowFish(info) end
+            },
+            ShowIridescent = {
+                name = "Show Iridescent Amberjack",
+                desc = "",
+                type = "toggle",
+                set = "ToggleShowIridescent",
+                get = "CanShowIridescent",
+                disabled = function(info) return not Glockfarmer:CanShowFish(info) end
+            },
+            ShowSpinefinPiranha = {
+                name = "Show Spinefin Piranha",
+                desc = "",
+                type = "toggle",
+                set = "ToggleShowSpinefinPiranha",
+                get = "CanShowSpinefinPiranha",
+                disabled = function(info) return not Glockfarmer:CanShowFish(info) end
+            },
+            ShowElysian = {
+                name = "Show Elysian Thade",
+                desc = "",
+                type = "toggle",
+                set = "ToggleShowElysian",
+                get = "CanShowElysian",
+                disabled = function(info) return not Glockfarmer:CanShowFish(info) end
+            },
+        }
+      }      
     }
   }
 
@@ -378,23 +439,41 @@ function Glockfarmer:PrintFish(playerFish, itemFrame)
     fishGroup:SetWidth(340);
     fishGroup:SetLayout("Flow");   
     
-    local lostSoleGroup = Glockfarmer:CreateRow("Lost Sole", playerFish.LostSole.Bag, playerFish.LostSole.ReagentBank, playerFish.LostSole.Bank);
-    fishGroup:AddChild(lostSoleGroup);
+    if(Glockfarmer:CanShowLostSole())
+    then
+        local lostSoleGroup = Glockfarmer:CreateRow("Lost Sole", playerFish.LostSole.Bag, playerFish.LostSole.ReagentBank, playerFish.LostSole.Bank);
+        fishGroup:AddChild(lostSoleGroup);
+    end
 
-    local silvergillGroup = Glockfarmer:CreateRow("Silvergill Pike", playerFish.SilverPike.Bag, playerFish.SilverPike.ReagentBank, playerFish.SilverPike.Bank);
-    fishGroup:AddChild(silvergillGroup);
+    if(Glockfarmer:CanShowSilverPike())
+    then
+        local silvergillGroup = Glockfarmer:CreateRow("Silvergill Pike", playerFish.SilverPike.Bag, playerFish.SilverPike.ReagentBank, playerFish.SilverPike.Bank);
+        fishGroup:AddChild(silvergillGroup);
+    end
 
-    local poketGroup = Glockfarmer:CreateRow("Pocked Bonefish", playerFish.PoketBoneFish.Bag, playerFish.PoketBoneFish.ReagentBank, playerFish.PoketBoneFish.Bank);
-    fishGroup:AddChild(poketGroup);
+    if(Glockfarmer:CanShowPocketBonefish())
+    then
+        local poketGroup = Glockfarmer:CreateRow("Pocked Bonefish", playerFish.PoketBoneFish.Bag, playerFish.PoketBoneFish.ReagentBank, playerFish.PoketBoneFish.Bank);
+        fishGroup:AddChild(poketGroup);
+    end
 
-    local iridenscentGroup = Glockfarmer:CreateRow("Iridescent Amberjack", playerFish.Iridescent.Bag, playerFish.Iridescent.ReagentBank, playerFish.Iridescent.Bank);
-    fishGroup:AddChild(iridenscentGroup);
+    if(Glockfarmer:CanShowIridescent())
+    then
+        local iridenscentGroup = Glockfarmer:CreateRow("Iridescent Amberjack", playerFish.Iridescent.Bag, playerFish.Iridescent.ReagentBank, playerFish.Iridescent.Bank);
+        fishGroup:AddChild(iridenscentGroup);
+    end
 
-    local spinefishroup = Glockfarmer:CreateRow("Spinefin Piranha", playerFish.SpinefinPiranha.Bag, playerFish.SpinefinPiranha.ReagentBank, playerFish.SpinefinPiranha.Bank);
-    fishGroup:AddChild(spinefishroup);
+    if(Glockfarmer:CanShowSpinefinPiranha())
+    then
+        local spinefishroup = Glockfarmer:CreateRow("Spinefin Piranha", playerFish.SpinefinPiranha.Bag, playerFish.SpinefinPiranha.ReagentBank, playerFish.SpinefinPiranha.Bank);
+        fishGroup:AddChild(spinefishroup);
+    end
 
-    local elysianGroup = Glockfarmer:CreateRow("Elysian Thade", playerFish.Elysian.Bag, playerFish.Elysian.ReagentBank, playerFish.Elysian.Bank);
-    fishGroup:AddChild(elysianGroup);
+    if(Glockfarmer:CanShowElysian())
+    then
+        local elysianGroup = Glockfarmer:CreateRow("Elysian Thade", playerFish.Elysian.Bag, playerFish.Elysian.ReagentBank, playerFish.Elysian.Bank);
+        fishGroup:AddChild(elysianGroup);
+    end
 
     itemFrame:AddChild(fishGroup);
 end
@@ -1105,4 +1184,56 @@ function Glockfarmer:ToggleShowVigilsTorch(info,val)
 end
 function Glockfarmer:CanShowVigilsTorch(info)
     return self.db.profile.Herbs.ShowVigilsTorch;
+end
+
+function Glockfarmer:ToggleShowFish(info,val)
+    print("button pressed!");
+    self.db.profile.ShowFish = val;
+    fishingCheckbox:SetValue(self.db.profile.ShowFish);
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:CanShowFish(info)
+    return self.db.profile.ShowFish;
+end
+function Glockfarmer:ToggleShowLostSole(info,val)
+    self.db.profile.Fish.ShowLostSole = val;
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:CanShowLostSole(info)
+    return self.db.profile.Fish.ShowLostSole;
+end
+function Glockfarmer:ToggleShowSilverPike(info,val)
+    self.db.profile.Fish.ShowSilverPike = val;
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:CanShowSilverPike(info)
+    return self.db.profile.Fish.ShowSilverPike;
+end
+function Glockfarmer:ToggleShowPocketBonefish(info,val)
+    self.db.profile.Fish.ShowPocketBonefish = val;
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:CanShowPocketBonefish(info)
+    return self.db.profile.Fish.ShowPocketBonefish;
+end
+function Glockfarmer:ToggleShowIridescent(info,val)
+    self.db.profile.Fish.ShowIridescent = val;
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:CanShowIridescent(info)
+    return self.db.profile.Fish.ShowIridescent;
+end
+function Glockfarmer:ToggleShowSpinefinPiranha(info,val)
+    self.db.profile.Fish.ShowSpinefinPiranha = val;
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:CanShowSpinefinPiranha(info)
+    return self.db.profile.Fish.ShowSpinefinPiranha;
+end
+function Glockfarmer:ToggleShowElysian(info,val)
+    self.db.profile.Fish.ShowElysian = val;
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:CanShowElysian(info)
+    return self.db.profile.Fish.ShowElysian;
 end
