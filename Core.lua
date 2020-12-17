@@ -332,6 +332,35 @@ local myOptionsTable = {
                 disabled = function(info) return not Glockfarmer:CanShowFish(info) end
             },
         }
+      },
+      ClothOptions={
+        name = "Cloth",
+        type = "group",
+        args={
+            Fish = {
+                name = "Shows All Cloth",
+                desc = "",
+                type = "toggle",
+                set = "ToggleShowCloth",
+                get = "CanShowCloth"
+            },            
+            ShowShroudedCloth = {
+                name = "Show Shrouded Cloth",
+                desc = "",
+                type = "toggle",
+                set = "ToggleShowShroudedCloth",
+                get = "CanShowShroudedCloth",
+                disabled = function(info) return not Glockfarmer:CanShowCloth(info) end
+            },
+            ShowLightlessSilk = {
+                name = "Show Lightless Silk",
+                desc = "",
+                type = "toggle",
+                set = "ToggleShowLightlessSilk",
+                get = "CanShowLightlessSilk",
+                disabled = function(info) return not Glockfarmer:CanShowCloth(info) end
+            }
+        }
       }      
     }
   }
@@ -483,11 +512,17 @@ function Glockfarmer:PrintCloth(playerCloth, itemFrame)
     clothGroup:SetWidth(340);
     clothGroup:SetLayout("Flow");
 
-    local shroudedClothGroup = Glockfarmer:CreateRow("Shrouded Cloth", playerCloth.ShroudedCloth.Bag, playerCloth.ShroudedCloth.ReagentBank, playerCloth.ShroudedCloth.Bank);
-    clothGroup:AddChild(shroudedClothGroup);
+    if(Glockfarmer:CanShowShroudedCloth())
+    then
+        local shroudedClothGroup = Glockfarmer:CreateRow("Shrouded Cloth", playerCloth.ShroudedCloth.Bag, playerCloth.ShroudedCloth.ReagentBank, playerCloth.ShroudedCloth.Bank);
+        clothGroup:AddChild(shroudedClothGroup);
+    end
 
-    local lightlessClothGroup = Glockfarmer:CreateRow("Lightless Silk", playerCloth.LightlessSilk.Bag, playerCloth.LightlessSilk.ReagentBank, playerCloth.LightlessSilk.Bank);
-    clothGroup:AddChild(lightlessClothGroup);
+    if(Glockfarmer:CanShowLightlessSilk())
+    then
+        local lightlessClothGroup = Glockfarmer:CreateRow("Lightless Silk", playerCloth.LightlessSilk.Bag, playerCloth.LightlessSilk.ReagentBank, playerCloth.LightlessSilk.Bank);
+        clothGroup:AddChild(lightlessClothGroup);
+    end   
 
     itemFrame:AddChild(clothGroup);
 end
@@ -1187,7 +1222,6 @@ function Glockfarmer:CanShowVigilsTorch(info)
 end
 
 function Glockfarmer:ToggleShowFish(info,val)
-    print("button pressed!");
     self.db.profile.ShowFish = val;
     fishingCheckbox:SetValue(self.db.profile.ShowFish);
     Glockfarmer:ReloadLabel();
@@ -1236,4 +1270,27 @@ function Glockfarmer:ToggleShowElysian(info,val)
 end
 function Glockfarmer:CanShowElysian(info)
     return self.db.profile.Fish.ShowElysian;
+end
+
+function Glockfarmer:ToggleShowCloth(info,val)
+    self.db.profile.ShowCloth = val;
+    fishingCheckbox:SetValue(self.db.profile.ShowCloth);
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:CanShowCloth(info)
+    return self.db.profile.ShowCloth;
+end
+function Glockfarmer:ToggleShowLightlessSilk(info,val)
+    self.db.profile.Cloth.ShowLightlessSilk = val;
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:CanShowLightlessSilk(info)
+    return self.db.profile.Cloth.ShowLightlessSilk;
+end
+function Glockfarmer:ToggleShowShroudedCloth(info,val)
+    self.db.profile.Cloth.ShowShroudedCloth = val;
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:CanShowShroudedCloth(info)
+    return self.db.profile.Cloth.ShowShroudedCloth;
 end
