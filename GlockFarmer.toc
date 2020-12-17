@@ -4,6 +4,6 @@
 ## Author: Glockness
 ## Version: 0.1.0
 ## Notes: Allows for Tracking all of our Farmed Items
-## SavedVariables: GlockFarmerDB
+## SavedVariables: FarmDB
 
 Core.lua

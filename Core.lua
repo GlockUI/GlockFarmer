@@ -1,17 +1,53 @@
 Glockfarmer = LibStub("AceAddon-3.0"):NewAddon("Glockfarmer", "AceConsole-3.0", "AceEvent-3.0");
 local AceGUI = LibStub("AceGUI-3.0");
-local playerName = UnitName("player");
-local frame = AceGUI:Create("Frame")
-frame:SetLayout("Fill")
-frame:SetTitle("Glock Farmer") 
+local playerN = UnitName("player");
+local realm = GetRealmName();
+local playerName = playerN .. "-" .. realm;
+local frame = AceGUI:Create("Frame");
+frame:SetLayout("Fill");
+frame:SetTitle("Glock Farmer");
 
 local Defaults = {
     profile = {
+        SchemaVersion = 0.2,
         ShowHerbalism = true,
+        Herbs = {
+            ShowDeathBlossom = true,
+            ShowNightShade = true,
+            ShowRisingGlory = true,
+            ShowMarrowRoot = true,
+            ShowWidowbloom = true,
+            ShowVigilsTorch = true,
+        },
         ShowFish = true,
+        Fish = {
+            ShowLostSole = true,
+            ShowSilverPike = true,
+            ShowPocketBonefish = true,
+            ShowIridescent = true,
+            ShowSpinefinPiranha = true,
+            ShowElysian = true
+        },
         ShowCloth = true,
+        Cloth = {
+            ShowShroudedCloth = true,
+            ShowLightlessSilk = true
+        },
         ShowOre = true,
+        Ore = {
+            ShowLaestrite = true,
+            ShowElethium = true,
+            ShowSolenium = true,
+            ShowOxxein = true,
+            ShowPhaedrum = true,
+            ShowSinvyr = true
+        },
         ShowLeather = true,
+        Leather = {
+            ShowDesolate = true,
+            ShowPallidBone = true,
+            ShowCallous = true,
+        },
         ShowAllCharacters = false,
     },
     global = {
@@ -169,7 +205,85 @@ local Defaults = {
         }
     }
 }
+
+local myOptionsTable = {
+    name = "Glock Farmer",
+    handler = Glockfarmer,
+    type = "group",
+    args = {
+      moreoptions={
+        name = "Herbs",
+        type = "group",
+        args={
+            Herbalism = {
+                name = "Shows All Herbs",
+                desc = "",
+                type = "toggle",
+                set = "ToggleShowHerbs",
+                get = "CanShowHerbs"
+            },            
+            ShowDeathBlossom = {
+                name = "Show Death Blossom",
+                desc = "",
+                type = "toggle",
+                set = "ToggleShowDeathblossom",
+                get = "CanShowDeathblossom",
+                disabled = function(info) return not Glockfarmer:CanShowHerbs(info) end
+            },
+            ShowNightShade = {
+                name = "Show Night Shade",
+                desc = "",
+                type = "toggle",
+                set = "ToggleShowNightShade",
+                get = "CanShowNightShade",
+                disabled = function(info) return not Glockfarmer:CanShowHerbs(info) end
+            },
+            ShowRisingGlory = {
+                name = "Show Rising Glory",
+                desc = "",
+                type = "toggle",
+                set = "ToggleShowRisingGlory",
+                get = "CanShowRisingGlory",
+                disabled = function(info) return not Glockfarmer:CanShowHerbs(info) end
+            },
+            ShowMarrowRoot = {
+                name = "Show Marrowroot",
+                desc = "",
+                type = "toggle",
+                set = "ToggleShowMarrowRoot",
+                get = "CanShowMarrowRoot",
+                disabled = function(info) return not Glockfarmer:CanShowHerbs(info) end
+            },
+            ShowWidowbloom = {
+                name = "Show Widowbloom",
+                desc = "",
+                type = "toggle",
+                set = "ToggleShowWidowbloom",
+                get = "CanShowWidowbloom",
+                disabled = function(info) return not Glockfarmer:CanShowHerbs(info) end
+            },
+            ShowVigilsTorch = {
+                name = "Show Vigils Torch",
+                desc = "",
+                type = "toggle",
+                set = "ToggleShowVigilsTorch",
+                get = "CanShowVigilsTorch",
+                disabled = function(info) return not Glockfarmer:CanShowHerbs(info) end
+            },
+        }
+      }
+    }
+  }
+
 local itemsGroup;
+local herbCheckbox;
+local fishingCheckbox;
+local clothCheckbox;
+local oreCheckbox;
+local leatherCheckbox;
+local allCharsCheckbox;
+
+local optionDialog;
 
 local IsBankOpen = false;
 
@@ -220,23 +334,41 @@ function Glockfarmer:PrintHerbs(playerHerbs, itemFrame)
     herbsGroup:SetWidth(340);
     herbsGroup:SetLayout("Flow")
     
-    local deathBlossomGroup = Glockfarmer:CreateRow("Death Blossom", playerHerbs.DeathBlossom.Bag, playerHerbs.DeathBlossom.ReagentBank, playerHerbs.DeathBlossom.Bank);
-    herbsGroup:AddChild(deathBlossomGroup);
+    if(Glockfarmer:CanShowDeathblossom())
+    then
+        local deathBlossomGroup = Glockfarmer:CreateRow("Death Blossom", playerHerbs.DeathBlossom.Bag, playerHerbs.DeathBlossom.ReagentBank, playerHerbs.DeathBlossom.Bank);
+        herbsGroup:AddChild(deathBlossomGroup);
+    end
 
-    local nightshadeGroup = Glockfarmer:CreateRow("Nightshade", playerHerbs.NightShade.Bag, playerHerbs.NightShade.ReagentBank, playerHerbs.NightShade.Bank);
-    herbsGroup:AddChild(nightshadeGroup);
+    if(Glockfarmer:CanShowNightShade())
+    then
+        local nightshadeGroup = Glockfarmer:CreateRow("Nightshade", playerHerbs.NightShade.Bag, playerHerbs.NightShade.ReagentBank, playerHerbs.NightShade.Bank);
+        herbsGroup:AddChild(nightshadeGroup);
+    end
 
-    local risingGloryGroup = Glockfarmer:CreateRow("Rising Glory", playerHerbs.RisingGlory.Bag, playerHerbs.RisingGlory.ReagentBank, playerHerbs.RisingGlory.Bank);
-    herbsGroup:AddChild(risingGloryGroup);
+    if(Glockfarmer:CanShowRisingGlory())
+    then
+        local risingGloryGroup = Glockfarmer:CreateRow("Rising Glory", playerHerbs.RisingGlory.Bag, playerHerbs.RisingGlory.ReagentBank, playerHerbs.RisingGlory.Bank);
+        herbsGroup:AddChild(risingGloryGroup);
+    end
 
-    local marrowrootGroup = Glockfarmer:CreateRow("Marrowroot", playerHerbs.Marrowroot.Bag, playerHerbs.Marrowroot.ReagentBank, playerHerbs.Marrowroot.Bank);
-    herbsGroup:AddChild(marrowrootGroup);
+    if(Glockfarmer:CanShowMarrowRoot())
+    then
+        local marrowrootGroup = Glockfarmer:CreateRow("Marrowroot", playerHerbs.Marrowroot.Bag, playerHerbs.Marrowroot.ReagentBank, playerHerbs.Marrowroot.Bank);
+        herbsGroup:AddChild(marrowrootGroup);
+    end
 
-    local widowbloomGroup = Glockfarmer:CreateRow("Widowbloom", playerHerbs.Widowbloom.Bag, playerHerbs.Widowbloom.ReagentBank, playerHerbs.Widowbloom.Bank);
-    herbsGroup:AddChild(widowbloomGroup);
+    if(Glockfarmer:CanShowWidowbloom())
+    then
+        local widowbloomGroup = Glockfarmer:CreateRow("Widowbloom", playerHerbs.Widowbloom.Bag, playerHerbs.Widowbloom.ReagentBank, playerHerbs.Widowbloom.Bank);
+        herbsGroup:AddChild(widowbloomGroup);
+    end
 
-    local vigilsTorchGroup = Glockfarmer:CreateRow("Vigils Torch", playerHerbs.VigilsTorch.Bag, playerHerbs.VigilsTorch.ReagentBank, playerHerbs.VigilsTorch.Bank);
-    herbsGroup:AddChild(vigilsTorchGroup);
+    if(Glockfarmer:CanShowVigilsTorch())
+    then
+        local vigilsTorchGroup = Glockfarmer:CreateRow("Vigils Torch", playerHerbs.VigilsTorch.Bag, playerHerbs.VigilsTorch.ReagentBank, playerHerbs.VigilsTorch.Bank);
+        herbsGroup:AddChild(vigilsTorchGroup);
+    end
 
     itemFrame:AddChild(herbsGroup);
 end
@@ -817,7 +949,10 @@ function Glockfarmer:PrintBags()
     Glockfarmer:ReloadLabel();
 end
 function Glockfarmer:OnInitialize()
-    self.db = LibStub("AceDB-3.0"):New("GlockFarmerDB", Defaults, true)
+    self.db = LibStub("AceDB-3.0"):New("FarmDB", Defaults, true)
+    LibStub("AceConfig-3.0"):RegisterOptionsTable("GlockFarmer", myOptionsTable, {"gfopts"})
+    self.optionsFrame = LibStub("AceConfigDialog-3.0"):AddToBlizOptions("GlockFarmer", "GlockFarmer")
+
     local scroll = AceGUI:Create("ScrollFrame")
     scroll:SetLayout("List")
     frame:AddChild(scroll)
@@ -828,7 +963,7 @@ function Glockfarmer:OnInitialize()
     optsGroup:SetFullWidth(true)
     scroll:AddChild(optsGroup);
 
-    local herbCheckbox = AceGUI:Create("CheckBox");
+    herbCheckbox = AceGUI:Create("CheckBox");
     herbCheckbox:SetType("checkbox");
     herbCheckbox:SetLabel("Show Herbs");
     herbCheckbox:SetValue(self.db.profile.ShowHerbalism);
@@ -838,7 +973,7 @@ function Glockfarmer:OnInitialize()
     end);
     optsGroup:AddChild(herbCheckbox);
 
-    local fishingCheckbox = AceGUI:Create("CheckBox");
+    fishingCheckbox = AceGUI:Create("CheckBox");
     fishingCheckbox:SetType("checkbox");
     fishingCheckbox:SetLabel("Show Fish");
     fishingCheckbox:SetValue(self.db.profile.ShowFish);
@@ -848,7 +983,7 @@ function Glockfarmer:OnInitialize()
     end);
     optsGroup:AddChild(fishingCheckbox);
 
-    local clothCheckbox = AceGUI:Create("CheckBox");
+    clothCheckbox = AceGUI:Create("CheckBox");
     clothCheckbox:SetType("checkbox");
     clothCheckbox:SetLabel("Show Cloth");
     clothCheckbox:SetValue(self.db.profile.ShowCloth);
@@ -858,7 +993,7 @@ function Glockfarmer:OnInitialize()
     end);
     optsGroup:AddChild(clothCheckbox);
 
-    local oreCheckbox = AceGUI:Create("CheckBox");
+    oreCheckbox = AceGUI:Create("CheckBox");
     oreCheckbox:SetType("checkbox");
     oreCheckbox:SetLabel("Show Ore");
     oreCheckbox:SetValue(self.db.profile.ShowOre);
@@ -868,7 +1003,7 @@ function Glockfarmer:OnInitialize()
     end);
     optsGroup:AddChild(oreCheckbox);
 
-    local leatherCheckbox = AceGUI:Create("CheckBox");
+    leatherCheckbox = AceGUI:Create("CheckBox");
     leatherCheckbox:SetType("checkbox");
     leatherCheckbox:SetLabel("Show Leather");
     leatherCheckbox:SetValue(self.db.profile.ShowLeather);
@@ -878,7 +1013,7 @@ function Glockfarmer:OnInitialize()
     end);
     optsGroup:AddChild(leatherCheckbox);
 
-    local allCharsCheckbox = AceGUI:Create("CheckBox");
+    allCharsCheckbox = AceGUI:Create("CheckBox");
     allCharsCheckbox:SetType("checkbox");
     allCharsCheckbox:SetLabel("Show All Characters");
     allCharsCheckbox:SetValue(self.db.profile.ShowAllCharacters);
@@ -887,6 +1022,14 @@ function Glockfarmer:OnInitialize()
         Glockfarmer:PrintBags();
     end);
     optsGroup:AddChild(allCharsCheckbox);
+
+    local button = AceGUI:Create("Button")
+    button:SetText("More Options")
+    button:SetWidth(100)
+    button:SetCallback("OnClick", function() 
+        InterfaceOptionsFrame_OpenToCategory(self.optionsFrame)
+    end)
+    optsGroup:AddChild(button)
 
     itemsGroup = AceGUI:Create("InlineGroup");
     itemsGroup:SetTitle("Items");
@@ -910,6 +1053,56 @@ function Glockfarmer:BANKFRAME_OPENED()
     Glockfarmer:GetBank();
     Glockfarmer:ReloadLabel();
 end
-function Glockfarmer:BANKFRAME_CLOSED(args)
+function Glockfarmer:BANKFRAME_CLOSED()
     IsBankOpen = false;
+end
+function Glockfarmer:ToggleShowHerbs(info,val)
+    self.db.profile.ShowHerbalism = val;
+    herbCheckbox:SetValue(self.db.profile.ShowHerbalism);
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:CanShowHerbs(info)
+    return self.db.profile.ShowHerbalism;
+end
+function Glockfarmer:ToggleShowDeathblossom(info,val)
+    self.db.profile.Herbs.ShowDeathBlossom = val;
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:CanShowDeathblossom(info)
+    return self.db.profile.Herbs.ShowDeathBlossom;
+end
+function Glockfarmer:ToggleShowNightShade(info,val)
+    self.db.profile.Herbs.ShowNightShade = val;
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:CanShowNightShade(info)
+    return self.db.profile.Herbs.ShowNightShade;
+end
+function Glockfarmer:ToggleShowRisingGlory(info,val)
+    self.db.profile.Herbs.ShowRisingGlory = val;
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:CanShowRisingGlory(info)
+    return self.db.profile.Herbs.ShowRisingGlory;
+end
+function Glockfarmer:ToggleShowMarrowRoot(info,val)
+    self.db.profile.Herbs.ShowMarrowRoot = val;
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:CanShowMarrowRoot(info)
+    return self.db.profile.Herbs.ShowMarrowRoot;
+end
+function Glockfarmer:ToggleShowWidowbloom(info,val)
+    self.db.profile.Herbs.ShowWidowbloom = val;
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:CanShowWidowbloom(info)
+    return self.db.profile.Herbs.ShowWidowbloom;
+end
+function Glockfarmer:ToggleShowVigilsTorch(info,val)
+    self.db.profile.Herbs.ShowVigilsTorch = val;
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:CanShowVigilsTorch(info)
+    return self.db.profile.Herbs.ShowVigilsTorch;
 end
