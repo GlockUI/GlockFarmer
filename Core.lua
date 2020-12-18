@@ -12,41 +12,114 @@ local Defaults = {
         SchemaVersion = 0.2,
         ShowHerbalism = true,
         Herbs = {
-            ShowDeathBlossom = true,
-            ShowNightShade = true,
-            ShowRisingGlory = true,
-            ShowMarrowRoot = true,
-            ShowWidowbloom = true,
-            ShowVigilsTorch = true,
+            DeathBlossom = {
+                Show = true,
+                Need = 0,
+            },
+            Nightshade = {
+                Show = true,
+                Need = 0,
+            },
+            RisingGlory = {
+                Show = true,
+                Need = 0,
+            },
+            Marrowroot = {
+                Show = true,
+                Need = 0,
+            },
+            Widowbloom = {
+                Show = true,
+                Need = 0,
+            },
+            VigilsTorch = {
+                Show = true,
+                Need = 0,
+            },
         },
         ShowFish = true,
         Fish = {
-            ShowLostSole = true,
-            ShowSilverPike = true,
-            ShowPocketBonefish = true,
-            ShowIridescent = true,
-            ShowSpinefinPiranha = true,
-            ShowElysian = true
+            LostSole = {
+                Show = true,
+                Need = 0,
+            },
+            SilverPike = {
+                Show = true,
+                Need = 0,
+            },
+            PoketFish = {
+                Show = true,
+                Need = 0,
+            },
+            PocketBonefish = {
+                Show = true,
+                Need = 0,
+            },
+            Iridescent = {
+                Show = true,
+                Need = 0,
+            },
+            SpinefinPiranha = {
+                Show = true,
+                Need = 0,
+            },
+            Elysian = {
+                Show = true,
+                Need = 0,
+            }
         },
         ShowCloth = true,
         Cloth = {
-            ShowShroudedCloth = true,
-            ShowLightlessSilk = true
+            ShroudedCloth = {
+                Show = true,
+                Need = 0,
+            },
+            LightlessSilk = {
+                Show = true,
+                Need = 0
+            }
         },
         ShowOre = true,
         Ore = {
-            ShowLaestrite = true,
-            ShowElethium = true,
-            ShowSolenium = true,
-            ShowOxxein = true,
-            ShowPhaedrum = true,
-            ShowSinvyr = true
+            Laestrite = {
+                Show = true,
+                Need = 0
+            },
+            Elethium = {
+                Show = true,
+                Need = 0
+            },
+            Solenium = {
+                Show = true,
+                Need = 0
+            },
+            Oxxein = {
+                Show = true,
+                Need = 0
+            },
+            Phaedrum = {
+                Show = true,
+                Need = 0
+            },
+            Sinvyr = {
+                Show = true,
+                Need = 0
+            }
         },
         ShowLeather = true,
         Leather = {
-            ShowDesolate = true,
-            ShowPallidBone = true,
-            ShowCallous = true,
+            Desolate = {
+                Show = true,
+                Need = 0
+            },
+            PallidBone = {
+                Show = true,
+                Need = 0
+            },
+            Callous = {
+                Show = true,
+                Need = 0
+            }
         },
         ShowAllCharacters = false,
     },
@@ -220,15 +293,29 @@ local myOptionsTable = {
                 desc = "",
                 type = "toggle",
                 set = "ToggleShowHerbs",
-                get = "CanShowHerbs"
-            },            
+                get = "CanShowHerbs",
+                order = 0,
+                width = "full"
+            },      
             ShowDeathBlossom = {
                 name = "Show Death Blossom",
                 desc = "",
                 type = "toggle",
                 set = "ToggleShowDeathblossom",
                 get = "CanShowDeathblossom",
-                disabled = function(info) return not Glockfarmer:CanShowHerbs(info) end
+                disabled = function(info) return not Glockfarmer:CanShowHerbs(info) end,
+                order = 1,
+            },
+            DeathBlossomNeeded = {
+                name = "Death Blossom Needed",
+                desc = "",
+                type = "input",
+                set = "SetDeathblossomNeeded",
+                get = "GetDeathblossomNeeded",
+                disabled = function(info) return not Glockfarmer:CanShowHerbs(info) or not Glockfarmer:CanShowDeathblossom(info) end,
+                order = 2,
+                validate = "CheckNumber",
+                confirm = false
             },
             ShowNightShade = {
                 name = "Show Night Shade",
@@ -236,7 +323,19 @@ local myOptionsTable = {
                 type = "toggle",
                 set = "ToggleShowNightShade",
                 get = "CanShowNightShade",
-                disabled = function(info) return not Glockfarmer:CanShowHerbs(info) end
+                disabled = function(info) return not Glockfarmer:CanShowHerbs(info) end,
+                order = 3,
+            },
+            NightShadeNeeded = {
+                name = "Night Shade Needed",
+                desc = "",
+                type = "input",
+                set = "SetNightShadeNeeded",
+                get = "GetNightShadeNeeded",
+                disabled = function(info) return not Glockfarmer:CanShowHerbs(info) or not Glockfarmer:CanShowNightShade(info) end,
+                order = 4,
+                validate = "CheckNumber",
+                confirm = false
             },
             ShowRisingGlory = {
                 name = "Show Rising Glory",
@@ -244,15 +343,39 @@ local myOptionsTable = {
                 type = "toggle",
                 set = "ToggleShowRisingGlory",
                 get = "CanShowRisingGlory",
-                disabled = function(info) return not Glockfarmer:CanShowHerbs(info) end
+                disabled = function(info) return not Glockfarmer:CanShowHerbs(info) end,
+                order = 5,
+            },
+            RisingGloryNeeded = {
+                name = "Rising Glory Needed",
+                desc = "",
+                type = "input",
+                set = "SetRisingGloryNeeded",
+                get = "GetRisingGloryNeeded",
+                disabled = function(info) return not Glockfarmer:CanShowHerbs(info) or not Glockfarmer:CanShowRisingGlory(info) end,
+                order = 6,
+                validate = "CheckNumber",
+                confirm = false
             },
             ShowMarrowRoot = {
-                name = "Show Marrowroot",
+                name = "Show MarrowRoot",
                 desc = "",
                 type = "toggle",
                 set = "ToggleShowMarrowRoot",
                 get = "CanShowMarrowRoot",
-                disabled = function(info) return not Glockfarmer:CanShowHerbs(info) end
+                disabled = function(info) return not Glockfarmer:CanShowHerbs(info) end,
+                order = 7,
+            },
+            MarrowRootNeeded = {
+                name = "MarrowRoot Needed",
+                desc = "",
+                type = "input",
+                set = "SetMarrowRootNeeded",
+                get = "GetMarrowRootNeeded",
+                disabled = function(info) return not Glockfarmer:CanShowHerbs(info) or not Glockfarmer:CanShowMarrowRoot(info) end,
+                order = 8,
+                validate = "CheckNumber",
+                confirm = false
             },
             ShowWidowbloom = {
                 name = "Show Widowbloom",
@@ -260,7 +383,19 @@ local myOptionsTable = {
                 type = "toggle",
                 set = "ToggleShowWidowbloom",
                 get = "CanShowWidowbloom",
-                disabled = function(info) return not Glockfarmer:CanShowHerbs(info) end
+                disabled = function(info) return not Glockfarmer:CanShowHerbs(info) end,
+                order = 9,
+            },
+            WidowbloomNeeded = {
+                name = "Widowbloom Needed",
+                desc = "",
+                type = "input",
+                set = "SetWidowbloomNeeded",
+                get = "GetWidowbloomNeeded",
+                disabled = function(info) return not Glockfarmer:CanShowHerbs(info) or not Glockfarmer:CanShowWidowbloom(info) end,
+                order = 10,
+                validate = "CheckNumber",
+                confirm = false
             },
             ShowVigilsTorch = {
                 name = "Show Vigils Torch",
@@ -268,7 +403,19 @@ local myOptionsTable = {
                 type = "toggle",
                 set = "ToggleShowVigilsTorch",
                 get = "CanShowVigilsTorch",
-                disabled = function(info) return not Glockfarmer:CanShowHerbs(info) end
+                disabled = function(info) return not Glockfarmer:CanShowHerbs(info) end,
+                order = 11,
+            },
+            VigilsTorchNeeded = {
+                name = "Vigils Torch Needed",
+                desc = "",
+                type = "input",
+                set = "SetVigilsTorchNeeded",
+                get = "GetVigilsTorchNeeded",
+                disabled = function(info) return not Glockfarmer:CanShowHerbs(info) or not Glockfarmer:CanShowVigilsTorch(info) end,
+                order = 12,
+                validate = "CheckNumber",
+                confirm = false
             },
         }
       },
@@ -281,7 +428,9 @@ local myOptionsTable = {
                 desc = "",
                 type = "toggle",
                 set = "ToggleShowFish",
-                get = "CanShowFish"
+                get = "CanShowFish",
+                order = 0,
+                width = "full"
             },            
             ShowLostSole = {
                 name = "Show Lost Sole",
@@ -289,7 +438,19 @@ local myOptionsTable = {
                 type = "toggle",
                 set = "ToggleShowLostSole",
                 get = "CanShowLostSole",
-                disabled = function(info) return not Glockfarmer:CanShowFish(info) end
+                disabled = function(info) return not Glockfarmer:CanShowFish(info) end,
+                order = 1,
+            },
+            LostSoleNeeded = {
+                name = "Lost Sole Needed",
+                desc = "",
+                type = "input",
+                set = "SetLostSoleNeeded",
+                get = "GetLostSoleNeeded",
+                disabled = function(info) return not Glockfarmer:CanShowFish(info) or not Glockfarmer:CanShowLostSole(info) end,
+                order = 2,
+                validate = "CheckNumber",
+                confirm = false
             },
             ShowSilverPike = {
                 name = "Show Silver Pike",
@@ -297,7 +458,19 @@ local myOptionsTable = {
                 type = "toggle",
                 set = "ToggleShowSilverPike",
                 get = "CanShowSilverPike",
-                disabled = function(info) return not Glockfarmer:CanShowFish(info) end
+                disabled = function(info) return not Glockfarmer:CanShowFish(info) end,
+                order = 3,
+            },
+            SilverPikeNeeded = {
+                name = "Silver Pike Needed",
+                desc = "",
+                type = "input",
+                set = "SetSilverPikeNeeded",
+                get = "GetSilverPikeNeeded",
+                disabled = function(info) return not Glockfarmer:CanShowFish(info) or not Glockfarmer:CanShowSilverPike(info) end,
+                order = 4,
+                validate = "CheckNumber",
+                confirm = false
             },
             ShowPocketBonefish = {
                 name = "Show Pocket Bonefish",
@@ -305,7 +478,19 @@ local myOptionsTable = {
                 type = "toggle",
                 set = "ToggleShowPocketBonefish",
                 get = "CanShowPocketBonefish",
-                disabled = function(info) return not Glockfarmer:CanShowFish(info) end
+                disabled = function(info) return not Glockfarmer:CanShowFish(info) end,
+                order = 5,
+            },
+            PocketBonefishNeeded = {
+                name = "Pocket Bonefish Needed",
+                desc = "",
+                type = "input",
+                set = "SetPocketBonefishNeeded",
+                get = "GetPocketBonefishNeeded",
+                disabled = function(info) return not Glockfarmer:CanShowFish(info) or not Glockfarmer:CanShowPocketBonefish(info) end,
+                order = 6,
+                validate = "CheckNumber",
+                confirm = false
             },
             ShowIridescent = {
                 name = "Show Iridescent Amberjack",
@@ -313,7 +498,19 @@ local myOptionsTable = {
                 type = "toggle",
                 set = "ToggleShowIridescent",
                 get = "CanShowIridescent",
-                disabled = function(info) return not Glockfarmer:CanShowFish(info) end
+                disabled = function(info) return not Glockfarmer:CanShowFish(info) end,
+                order = 7,
+            },
+            IridescentNeeded = {
+                name = "Iridescent Amberjack Needed",
+                desc = "",
+                type = "input",
+                set = "SetIridescentNeeded",
+                get = "GetIridescentNeeded",
+                disabled = function(info) return not Glockfarmer:CanShowFish(info) or not Glockfarmer:CanShowIridescent(info) end,
+                order = 8,
+                validate = "CheckNumber",
+                confirm = false
             },
             ShowSpinefinPiranha = {
                 name = "Show Spinefin Piranha",
@@ -321,7 +518,19 @@ local myOptionsTable = {
                 type = "toggle",
                 set = "ToggleShowSpinefinPiranha",
                 get = "CanShowSpinefinPiranha",
-                disabled = function(info) return not Glockfarmer:CanShowFish(info) end
+                disabled = function(info) return not Glockfarmer:CanShowFish(info) end,
+                order = 9,
+            },
+            SpinefinPiranhaNeeded = {
+                name = "Spinefin Piranha Needed",
+                desc = "",
+                type = "input",
+                set = "SetSpinefinPiranhaNeeded",
+                get = "GetSpinefinPiranhaNeeded",
+                disabled = function(info) return not Glockfarmer:CanShowFish(info) or not Glockfarmer:CanShowSpinefinPiranha(info) end,
+                order = 10,
+                validate = "CheckNumber",
+                confirm = false
             },
             ShowElysian = {
                 name = "Show Elysian Thade",
@@ -329,7 +538,19 @@ local myOptionsTable = {
                 type = "toggle",
                 set = "ToggleShowElysian",
                 get = "CanShowElysian",
-                disabled = function(info) return not Glockfarmer:CanShowFish(info) end
+                disabled = function(info) return not Glockfarmer:CanShowFish(info) end,
+                order = 11,
+            },
+            ElysianNeeded = {
+                name = "Elysian Thade Needed",
+                desc = "",
+                type = "input",
+                set = "SetElysianNeeded",
+                get = "GetElysianNeeded",
+                disabled = function(info) return not Glockfarmer:CanShowFish(info) or not Glockfarmer:CanShowElysian(info) end,
+                order = 12,
+                validate = "CheckNumber",
+                confirm = false
             },
         }
       },
@@ -342,7 +563,9 @@ local myOptionsTable = {
                 desc = "",
                 type = "toggle",
                 set = "ToggleShowCloth",
-                get = "CanShowCloth"
+                get = "CanShowCloth",
+                order = 0,
+                width = "full"
             },            
             ShowShroudedCloth = {
                 name = "Show Shrouded Cloth",
@@ -350,7 +573,19 @@ local myOptionsTable = {
                 type = "toggle",
                 set = "ToggleShowShroudedCloth",
                 get = "CanShowShroudedCloth",
-                disabled = function(info) return not Glockfarmer:CanShowCloth(info) end
+                disabled = function(info) return not Glockfarmer:CanShowCloth(info) end,
+                order = 1,
+            },
+            ShroudedClothNeeded = {
+                name = "Shrouded Cloth Needed",
+                desc = "",
+                type = "input",
+                set = "SetShroudedClothNeeded",
+                get = "GetShroudedClothNeeded",
+                disabled = function(info) return not Glockfarmer:CanShowCloth(info) or not Glockfarmer:CanShowShroudedCloth(info) end,
+                order = 2,
+                validate = "CheckNumber",
+                confirm = false
             },
             ShowLightlessSilk = {
                 name = "Show Lightless Silk",
@@ -358,8 +593,20 @@ local myOptionsTable = {
                 type = "toggle",
                 set = "ToggleShowLightlessSilk",
                 get = "CanShowLightlessSilk",
-                disabled = function(info) return not Glockfarmer:CanShowCloth(info) end
-            }
+                disabled = function(info) return not Glockfarmer:CanShowCloth(info) end,
+                order = 3,
+            },
+            LightlessSilkNeeded = {
+                name = "Lightless Silk Needed",
+                desc = "",
+                type = "input",
+                set = "SetLightlessSilkNeeded",
+                get = "GetLightlessSilkNeeded",
+                disabled = function(info) return not Glockfarmer:CanShowCloth(info) or not Glockfarmer:CanShowLightlessSilk(info) end,
+                order = 4,
+                validate = "CheckNumber",
+                confirm = false
+            },
         }
       },
       LeatherOptions={
@@ -371,7 +618,9 @@ local myOptionsTable = {
                 desc = "",
                 type = "toggle",
                 set = "ToggleShowLeather",
-                get = "CanShowLeather"
+                get = "CanShowLeather",
+                order = 0,
+                width = "full"
             },            
             ShowDesolate = {
                 name = "Show Desolate",
@@ -379,7 +628,19 @@ local myOptionsTable = {
                 type = "toggle",
                 set = "ToggleShowDesolate",
                 get = "CanShowDesolate",
-                disabled = function(info) return not Glockfarmer:CanShowLeather(info) end
+                disabled = function(info) return not Glockfarmer:CanShowLeather(info) end,
+                order = 1,
+            },
+            DesolateNeeded = {
+                name = "Desolate Needed",
+                desc = "",
+                type = "input",
+                set = "SetDesolateNeeded",
+                get = "GetDesolateNeeded",
+                disabled = function(info) return not Glockfarmer:CanShowLeather(info) or not Glockfarmer:CanShowDesolate(info) end,
+                order = 2,
+                validate = "CheckNumber",
+                confirm = false
             },
             ShowPallidBone = {
                 name = "Show Pallid Bone",
@@ -387,7 +648,19 @@ local myOptionsTable = {
                 type = "toggle",
                 set = "ToggleShowPallidBone",
                 get = "CanShowPallidBone",
-                disabled = function(info) return not Glockfarmer:CanShowLeather(info) end
+                disabled = function(info) return not Glockfarmer:CanShowLeather(info) end,
+                order = 3,
+            },
+            PallidBoneNeeded = {
+                name = "Pallid Bone Needed",
+                desc = "",
+                type = "input",
+                set = "SetPallidBoneNeeded",
+                get = "GetPallidBoneNeeded",
+                disabled = function(info) return not Glockfarmer:CanShowLeather(info) or not Glockfarmer:CanShowPallidBone(info) end,
+                order = 4,
+                validate = "CheckNumber",
+                confirm = false
             },
             ShowCallous = {
                 name = "Show Callous Hide",
@@ -395,8 +668,20 @@ local myOptionsTable = {
                 type = "toggle",
                 set = "ToggleShowCallous",
                 get = "CanShowCallous",
-                disabled = function(info) return not Glockfarmer:CanShowLeather(info) end
-            }
+                disabled = function(info) return not Glockfarmer:CanShowLeather(info) end,
+                order = 5,
+            },
+            CallousNeeded = {
+                name = "Callous Hide Needed",
+                desc = "",
+                type = "input",
+                set = "SetCallousNeeded",
+                get = "GetCallousNeeded",
+                disabled = function(info) return not Glockfarmer:CanShowLeather(info) or not Glockfarmer:CanShowCallous(info) end,
+                order = 6,
+                validate = "CheckNumber",
+                confirm = false
+            },
         }
       },
       OreOptions={
@@ -408,7 +693,9 @@ local myOptionsTable = {
                 desc = "",
                 type = "toggle",
                 set = "ToggleShowOre",
-                get = "CanShowOre"
+                get = "CanShowOre",
+                order = 0,
+                width = "full"
             },            
             ShowLaestrite = {
                 name = "Show Laestrite",
@@ -416,7 +703,19 @@ local myOptionsTable = {
                 type = "toggle",
                 set = "ToggleShowLaestrite",
                 get = "CanShowLaestrite",
-                disabled = function(info) return not Glockfarmer:CanShowOre(info) end
+                disabled = function(info) return not Glockfarmer:CanShowOre(info) end,
+                order = 1,
+            },
+            LaestriteNeeded = {
+                name = "Laestrite Needed",
+                desc = "",
+                type = "input",
+                set = "SetLaestriteNeeded",
+                get = "GetLaestriteNeeded",
+                disabled = function(info) return not Glockfarmer:CanShowOre(info) or not Glockfarmer:CanShowLaestrite(info) end,
+                order = 2,
+                validate = "CheckNumber",
+                confirm = false
             },
             ShowElethium = {
                 name = "Show Elethium",
@@ -424,7 +723,19 @@ local myOptionsTable = {
                 type = "toggle",
                 set = "ToggleShowElethium",
                 get = "CanShowElethium",
-                disabled = function(info) return not Glockfarmer:CanShowOre(info) end
+                disabled = function(info) return not Glockfarmer:CanShowOre(info) end,
+                order = 3,
+            },
+            ElethiumNeeded = {
+                name = "Elethium Needed",
+                desc = "",
+                type = "input",
+                set = "SetElethiumNeeded",
+                get = "GetElethiumNeeded",
+                disabled = function(info) return not Glockfarmer:CanShowOre(info) or not Glockfarmer:CanShowElethium(info) end,
+                order = 4,
+                validate = "CheckNumber",
+                confirm = false
             },
             ShowSolenium = {
                 name = "Show Solenium",
@@ -432,7 +743,19 @@ local myOptionsTable = {
                 type = "toggle",
                 set = "ToggleShowSolenium",
                 get = "CanShowSolenium",
-                disabled = function(info) return not Glockfarmer:CanShowOre(info) end
+                disabled = function(info) return not Glockfarmer:CanShowOre(info) end,
+                order = 5,
+            },
+            SoleniumNeeded = {
+                name = "Solenium Needed",
+                desc = "",
+                type = "input",
+                set = "SetSoleniumNeeded",
+                get = "GetSoleniumNeeded",
+                disabled = function(info) return not Glockfarmer:CanShowOre(info) or not Glockfarmer:CanShowSolenium(info) end,
+                order = 6,
+                validate = "CheckNumber",
+                confirm = false
             },
             ShowOxxein = {
                 name = "Show Oxxein",
@@ -440,7 +763,19 @@ local myOptionsTable = {
                 type = "toggle",
                 set = "ToggleShowOxxein",
                 get = "CanShowOxxein",
-                disabled = function(info) return not Glockfarmer:CanShowOre(info) end
+                disabled = function(info) return not Glockfarmer:CanShowOre(info) end,
+                order = 7,
+            },
+            OxxeinNeeded = {
+                name = "Oxxein Needed",
+                desc = "",
+                type = "input",
+                set = "SetOxxeinNeeded",
+                get = "GetOxxeinNeeded",
+                disabled = function(info) return not Glockfarmer:CanShowOre(info) or not Glockfarmer:CanShowOxxein(info) end,
+                order = 8,
+                validate = "CheckNumber",
+                confirm = false
             },
             ShowPhaedrum = {
                 name = "Show Phaedrum",
@@ -448,7 +783,19 @@ local myOptionsTable = {
                 type = "toggle",
                 set = "ToggleShowPhaedrum",
                 get = "CanShowPhaedrum",
-                disabled = function(info) return not Glockfarmer:CanShowOre(info) end
+                disabled = function(info) return not Glockfarmer:CanShowOre(info) end,
+                order = 9,
+            },
+            PhaedrumNeeded = {
+                name = "Phaedrum Needed",
+                desc = "",
+                type = "input",
+                set = "SetPhaedrumNeeded",
+                get = "GetPhaedrumNeeded",
+                disabled = function(info) return not Glockfarmer:CanShowOre(info) or not Glockfarmer:CanShowPhaedrum(info) end,
+                order = 10,
+                validate = "CheckNumber",
+                confirm = false
             },
             ShowSinvyr = {
                 name = "Show Sinvyr",
@@ -456,7 +803,19 @@ local myOptionsTable = {
                 type = "toggle",
                 set = "ToggleShowSinvyr",
                 get = "CanShowSinvyr",
-                disabled = function(info) return not Glockfarmer:CanShowOre(info) end
+                disabled = function(info) return not Glockfarmer:CanShowOre(info) end,
+                order = 11,
+            },
+            SinvyrNeeded = {
+                name = "Sinvyr Needed",
+                desc = "",
+                type = "input",
+                set = "SetSinvyrNeeded",
+                get = "GetSinvyrNeeded",
+                disabled = function(info) return not Glockfarmer:CanShowOre(info) or not Glockfarmer:CanShowSinvyr(info) end,
+                order = 12,
+                validate = "CheckNumber",
+                confirm = false
             },
         }
       }, 
@@ -491,7 +850,7 @@ SlashCmdList["GLOCKFARMER"] = function(msg, ...)
         print("Proper argument not given! please provide show, hide, or scan")
     end
 end
-function Glockfarmer:CreateRow(labelName, bag, reagent, bank)
+function Glockfarmer:CreateRow(labelName, bag, reagent, bank, need)
     local group = AceGUI:Create("SimpleGroup");
     group:SetLayout("Flow");
     group:SetFullWidth(true);
@@ -499,6 +858,19 @@ function Glockfarmer:CreateRow(labelName, bag, reagent, bank)
     label:SetText(labelName .. ": ");
     label:SetWidth(110);
     group:AddChild(label);
+
+    if(need > 0)
+    then
+        local needLabel = AceGUI:Create("Label");
+        needLabel:SetText("Need:" .. need);
+        needLabel:SetWidth(60);
+        group:AddChild(needLabel);
+    else
+        local needLabel = AceGUI:Create("Label");
+        needLabel:SetText("Need: 0");
+        needLabel:SetWidth(60);
+        group:AddChild(needLabel);
+    end
 
     local bagLabel = AceGUI:Create("Label");
     bagLabel:SetText("Bag:" .. bag);
@@ -519,42 +891,48 @@ end
 function Glockfarmer:PrintHerbs(playerHerbs, itemFrame)
     local herbsGroup = AceGUI:Create("InlineGroup");
     herbsGroup:SetTitle("Herbs");
-    herbsGroup:SetWidth(340);
+    herbsGroup:SetWidth(400);
     herbsGroup:SetLayout("Flow")
     
     if(Glockfarmer:CanShowDeathblossom())
     then
-        local deathBlossomGroup = Glockfarmer:CreateRow("Death Blossom", playerHerbs.DeathBlossom.Bag, playerHerbs.DeathBlossom.ReagentBank, playerHerbs.DeathBlossom.Bank);
+        local need = Glockfarmer:GetDeathblossomNeeded() - (playerHerbs.DeathBlossom.Bag + playerHerbs.DeathBlossom.ReagentBank + playerHerbs.DeathBlossom.Bank);
+        local deathBlossomGroup = Glockfarmer:CreateRow("Death Blossom", playerHerbs.DeathBlossom.Bag, playerHerbs.DeathBlossom.ReagentBank, playerHerbs.DeathBlossom.Bank, need);
         herbsGroup:AddChild(deathBlossomGroup);
     end
 
     if(Glockfarmer:CanShowNightShade())
     then
-        local nightshadeGroup = Glockfarmer:CreateRow("Nightshade", playerHerbs.NightShade.Bag, playerHerbs.NightShade.ReagentBank, playerHerbs.NightShade.Bank);
+        local need = Glockfarmer:GetNightShadeNeeded() - (playerHerbs.NightShade.Bag + playerHerbs.NightShade.ReagentBank + playerHerbs.NightShade.Bank);
+        local nightshadeGroup = Glockfarmer:CreateRow("Nightshade", playerHerbs.NightShade.Bag, playerHerbs.NightShade.ReagentBank, playerHerbs.NightShade.Bank, need);
         herbsGroup:AddChild(nightshadeGroup);
     end
 
     if(Glockfarmer:CanShowRisingGlory())
     then
-        local risingGloryGroup = Glockfarmer:CreateRow("Rising Glory", playerHerbs.RisingGlory.Bag, playerHerbs.RisingGlory.ReagentBank, playerHerbs.RisingGlory.Bank);
+        local need = Glockfarmer:GetRisingGloryNeeded() - (playerHerbs.RisingGlory.Bag + playerHerbs.RisingGlory.ReagentBank + playerHerbs.RisingGlory.Bank);
+        local risingGloryGroup = Glockfarmer:CreateRow("Rising Glory", playerHerbs.RisingGlory.Bag, playerHerbs.RisingGlory.ReagentBank, playerHerbs.RisingGlory.Bank, need);
         herbsGroup:AddChild(risingGloryGroup);
     end
 
     if(Glockfarmer:CanShowMarrowRoot())
     then
-        local marrowrootGroup = Glockfarmer:CreateRow("Marrowroot", playerHerbs.Marrowroot.Bag, playerHerbs.Marrowroot.ReagentBank, playerHerbs.Marrowroot.Bank);
+        local need = Glockfarmer:GetMarrowRootNeeded() - (playerHerbs.Marrowroot.Bag + playerHerbs.Marrowroot.ReagentBank + playerHerbs.Marrowroot.Bank);
+        local marrowrootGroup = Glockfarmer:CreateRow("Marrowroot", playerHerbs.Marrowroot.Bag, playerHerbs.Marrowroot.ReagentBank, playerHerbs.Marrowroot.Bank, need);
         herbsGroup:AddChild(marrowrootGroup);
     end
 
     if(Glockfarmer:CanShowWidowbloom())
     then
-        local widowbloomGroup = Glockfarmer:CreateRow("Widowbloom", playerHerbs.Widowbloom.Bag, playerHerbs.Widowbloom.ReagentBank, playerHerbs.Widowbloom.Bank);
+        local need = Glockfarmer:GetWidowbloomNeeded() - (playerHerbs.Widowbloom.Bag + playerHerbs.Widowbloom.ReagentBank + playerHerbs.Widowbloom.Bank);
+        local widowbloomGroup = Glockfarmer:CreateRow("Widowbloom", playerHerbs.Widowbloom.Bag, playerHerbs.Widowbloom.ReagentBank, playerHerbs.Widowbloom.Bank, need);
         herbsGroup:AddChild(widowbloomGroup);
     end
 
     if(Glockfarmer:CanShowVigilsTorch())
     then
-        local vigilsTorchGroup = Glockfarmer:CreateRow("Vigils Torch", playerHerbs.VigilsTorch.Bag, playerHerbs.VigilsTorch.ReagentBank, playerHerbs.VigilsTorch.Bank);
+        local need = Glockfarmer:GetWidowbloomNeeded() - (playerHerbs.VigilsTorch.Bag + playerHerbs.VigilsTorch.ReagentBank + playerHerbs.VigilsTorch.Bank);
+        local vigilsTorchGroup = Glockfarmer:CreateRow("Vigils Torch", playerHerbs.VigilsTorch.Bag, playerHerbs.VigilsTorch.ReagentBank, playerHerbs.VigilsTorch.Bank, need);
         herbsGroup:AddChild(vigilsTorchGroup);
     end
 
@@ -563,42 +941,48 @@ end
 function Glockfarmer:PrintFish(playerFish, itemFrame)
     local fishGroup = AceGUI:Create("InlineGroup");
     fishGroup:SetTitle("Fish");
-    fishGroup:SetWidth(340);
+    fishGroup:SetWidth(400);
     fishGroup:SetLayout("Flow");   
     
     if(Glockfarmer:CanShowLostSole())
     then
-        local lostSoleGroup = Glockfarmer:CreateRow("Lost Sole", playerFish.LostSole.Bag, playerFish.LostSole.ReagentBank, playerFish.LostSole.Bank);
+        local need = Glockfarmer:GetLostSoleNeeded() - (playerFish.LostSole.Bag + playerFish.LostSole.ReagentBank + playerFish.LostSole.Bank);
+        local lostSoleGroup = Glockfarmer:CreateRow("Lost Sole", playerFish.LostSole.Bag, playerFish.LostSole.ReagentBank, playerFish.LostSole.Bank, need);
         fishGroup:AddChild(lostSoleGroup);
     end
 
     if(Glockfarmer:CanShowSilverPike())
     then
-        local silvergillGroup = Glockfarmer:CreateRow("Silvergill Pike", playerFish.SilverPike.Bag, playerFish.SilverPike.ReagentBank, playerFish.SilverPike.Bank);
+        local need = Glockfarmer:GetSilverPikeNeeded() - (playerFish.SilverPike.Bag + playerFish.SilverPike.ReagentBank + playerFish.SilverPike.Bank);
+        local silvergillGroup = Glockfarmer:CreateRow("Silvergill Pike", playerFish.SilverPike.Bag, playerFish.SilverPike.ReagentBank, playerFish.SilverPike.Bank, need);
         fishGroup:AddChild(silvergillGroup);
     end
 
     if(Glockfarmer:CanShowPocketBonefish())
     then
-        local poketGroup = Glockfarmer:CreateRow("Pocked Bonefish", playerFish.PoketBoneFish.Bag, playerFish.PoketBoneFish.ReagentBank, playerFish.PoketBoneFish.Bank);
+        local need = Glockfarmer:GetPocketBonefishNeeded() - (playerFish.PoketBoneFish.Bag + playerFish.PoketBoneFish.ReagentBank + playerFish.PoketBoneFish.Bank);
+        local poketGroup = Glockfarmer:CreateRow("Pocked Bonefish", playerFish.PoketBoneFish.Bag, playerFish.PoketBoneFish.ReagentBank, playerFish.PoketBoneFish.Bank, need);
         fishGroup:AddChild(poketGroup);
     end
 
     if(Glockfarmer:CanShowIridescent())
     then
-        local iridenscentGroup = Glockfarmer:CreateRow("Iridescent Amberjack", playerFish.Iridescent.Bag, playerFish.Iridescent.ReagentBank, playerFish.Iridescent.Bank);
+        local need = Glockfarmer:GetIridescentNeeded() - (playerFish.Iridescent.Bag + playerFish.Iridescent.ReagentBank + playerFish.Iridescent.Bank);
+        local iridenscentGroup = Glockfarmer:CreateRow("Iridescent Amberjack", playerFish.Iridescent.Bag, playerFish.Iridescent.ReagentBank, playerFish.Iridescent.Bank, need);
         fishGroup:AddChild(iridenscentGroup);
     end
 
     if(Glockfarmer:CanShowSpinefinPiranha())
     then
-        local spinefishroup = Glockfarmer:CreateRow("Spinefin Piranha", playerFish.SpinefinPiranha.Bag, playerFish.SpinefinPiranha.ReagentBank, playerFish.SpinefinPiranha.Bank);
+        local need = Glockfarmer:GetSpinefinPiranhaNeeded() - (playerFish.SpinefinPiranha.Bag + playerFish.SpinefinPiranha.ReagentBank + playerFish.SpinefinPiranha.Bank);
+        local spinefishroup = Glockfarmer:CreateRow("Spinefin Piranha", playerFish.SpinefinPiranha.Bag, playerFish.SpinefinPiranha.ReagentBank, playerFish.SpinefinPiranha.Bank, need);
         fishGroup:AddChild(spinefishroup);
     end
 
     if(Glockfarmer:CanShowElysian())
     then
-        local elysianGroup = Glockfarmer:CreateRow("Elysian Thade", playerFish.Elysian.Bag, playerFish.Elysian.ReagentBank, playerFish.Elysian.Bank);
+        local need = Glockfarmer:GetElysianNeeded() - (playerFish.Elysian.Bag + playerFish.Elysian.ReagentBank + playerFish.Elysian.Bank);
+        local elysianGroup = Glockfarmer:CreateRow("Elysian Thade", playerFish.Elysian.Bag, playerFish.Elysian.ReagentBank, playerFish.Elysian.Bank, need);
         fishGroup:AddChild(elysianGroup);
     end
 
@@ -607,18 +991,20 @@ end
 function Glockfarmer:PrintCloth(playerCloth, itemFrame)    
     local clothGroup = AceGUI:Create("InlineGroup");
     clothGroup:SetTitle("Cloth");
-    clothGroup:SetWidth(340);
+    clothGroup:SetWidth(400);
     clothGroup:SetLayout("Flow");
 
     if(Glockfarmer:CanShowShroudedCloth())
     then
-        local shroudedClothGroup = Glockfarmer:CreateRow("Shrouded Cloth", playerCloth.ShroudedCloth.Bag, playerCloth.ShroudedCloth.ReagentBank, playerCloth.ShroudedCloth.Bank);
+        local need = Glockfarmer:GetShroudedClothNeeded() - (playerCloth.ShroudedCloth.Bag + playerCloth.ShroudedCloth.ReagentBank + playerCloth.ShroudedCloth.Bank);
+        local shroudedClothGroup = Glockfarmer:CreateRow("Shrouded Cloth", playerCloth.ShroudedCloth.Bag, playerCloth.ShroudedCloth.ReagentBank, playerCloth.ShroudedCloth.Bank, need);
         clothGroup:AddChild(shroudedClothGroup);
     end
 
     if(Glockfarmer:CanShowLightlessSilk())
     then
-        local lightlessClothGroup = Glockfarmer:CreateRow("Lightless Silk", playerCloth.LightlessSilk.Bag, playerCloth.LightlessSilk.ReagentBank, playerCloth.LightlessSilk.Bank);
+        local need = Glockfarmer:GetLightlessSilkNeeded() - (playerCloth.LightlessSilk.Bag + playerCloth.LightlessSilk.ReagentBank + playerCloth.LightlessSilk.Bank);
+        local lightlessClothGroup = Glockfarmer:CreateRow("Lightless Silk", playerCloth.LightlessSilk.Bag, playerCloth.LightlessSilk.ReagentBank, playerCloth.LightlessSilk.Bank, need);
         clothGroup:AddChild(lightlessClothGroup);
     end   
 
@@ -627,42 +1013,48 @@ end
 function Glockfarmer:PrintOre(playerOre, itemFrame)
     local oreGroup = AceGUI:Create("InlineGroup");
     oreGroup:SetTitle("Ore");
-    oreGroup:SetWidth(340);
+    oreGroup:SetWidth(400);
     oreGroup:SetLayout("Flow");    
 
     if(Glockfarmer:CanShowLaestrite())
     then
-        local laestriteGroup = Glockfarmer:CreateRow("Laestrite Ore", playerOre.LaestriteOre.Bag, playerOre.LaestriteOre.ReagentBank, playerOre.LaestriteOre.Bank);
+        local need = Glockfarmer:GetLaestriteNeeded() - (playerOre.LaestriteOre.Bag + playerOre.LaestriteOre.ReagentBank + playerOre.LaestriteOre.Bank);
+        local laestriteGroup = Glockfarmer:CreateRow("Laestrite Ore", playerOre.LaestriteOre.Bag, playerOre.LaestriteOre.ReagentBank, playerOre.LaestriteOre.Bank, need);
         oreGroup:AddChild(laestriteGroup);
     end
 
     if(Glockfarmer:CanShowElethium())
     then
-        local elethiumGroup = Glockfarmer:CreateRow("Elethium Ore", playerOre.ElethiumOre.Bag, playerOre.ElethiumOre.ReagentBank, playerOre.ElethiumOre.Bank);
+        local need = Glockfarmer:GetElethiumNeeded() - (playerOre.ElethiumOre.Bag + playerOre.ElethiumOre.ReagentBank + playerOre.ElethiumOre.Bank);
+        local elethiumGroup = Glockfarmer:CreateRow("Elethium Ore", playerOre.ElethiumOre.Bag, playerOre.ElethiumOre.ReagentBank, playerOre.ElethiumOre.Bank, need);
         oreGroup:AddChild(elethiumGroup);
     end
 
     if(Glockfarmer:CanShowSolenium())
     then
-        local soleniumGroup = Glockfarmer:CreateRow("Solenium Ore", playerOre.SoleniumOre.Bag, playerOre.SoleniumOre.ReagentBank, playerOre.SoleniumOre.Bank);
+        local need = Glockfarmer:GetSoleniumNeeded() - (playerOre.ElethiumOre.Bag + playerOre.ElethiumOre.ReagentBank + playerOre.ElethiumOre.Bank);
+        local soleniumGroup = Glockfarmer:CreateRow("Solenium Ore", playerOre.SoleniumOre.Bag, playerOre.SoleniumOre.ReagentBank, playerOre.ElethiumOre.Bank, need);
         oreGroup:AddChild(soleniumGroup);
     end
 
     if(Glockfarmer:CanShowOxxein())
     then
-        local oxxeinGroup = Glockfarmer:CreateRow("Oxxein Ore", playerOre.OxxeinOre.Bag, playerOre.OxxeinOre.ReagentBank, playerOre.OxxeinOre.Bank);
+        local need = Glockfarmer:GetOxxeinNeeded() - (playerOre.OxxeinOre.Bag + playerOre.OxxeinOre.ReagentBank + playerOre.OxxeinOre.Bank);
+        local oxxeinGroup = Glockfarmer:CreateRow("Oxxein Ore", playerOre.OxxeinOre.Bag, playerOre.OxxeinOre.ReagentBank, playerOre.OxxeinOre.Bank, need);
         oreGroup:AddChild(oxxeinGroup);
     end
 
     if(Glockfarmer:CanShowPhaedrum())
     then
-        local phaedrumGroup = Glockfarmer:CreateRow("Phaedrum Ore", playerOre.PhaedrumOre.Bag, playerOre.PhaedrumOre.ReagentBank, playerOre.PhaedrumOre.Bank);
+        local need = Glockfarmer:GetPhaedrumNeeded() - (playerOre.PhaedrumOre.Bag + playerOre.PhaedrumOre.ReagentBank + playerOre.PhaedrumOre.Bank);
+        local phaedrumGroup = Glockfarmer:CreateRow("Phaedrum Ore", playerOre.PhaedrumOre.Bag, playerOre.PhaedrumOre.ReagentBank, playerOre.PhaedrumOre.Bank, need);
         oreGroup:AddChild(phaedrumGroup);
     end
 
     if(Glockfarmer:CanShowSinvyr())
     then
-        local sinvyrGroup = Glockfarmer:CreateRow("Sinvyr Ore", playerOre.SinvyrOre.Bag, playerOre.SinvyrOre.ReagentBank, playerOre.SinvyrOre.Bank);
+        local need = Glockfarmer:GetSinvyrNeeded() - (playerOre.SinvyrOre.Bag + playerOre.SinvyrOre.ReagentBank + playerOre.SinvyrOre.Bank);
+        local sinvyrGroup = Glockfarmer:CreateRow("Sinvyr Ore", playerOre.SinvyrOre.Bag, playerOre.SinvyrOre.ReagentBank, playerOre.SinvyrOre.Bank, need);
         oreGroup:AddChild(sinvyrGroup);
     end
     itemFrame:AddChild(oreGroup);
@@ -670,25 +1062,28 @@ end
 function Glockfarmer:PrintLeather(playerLeather, itemFrame)
     local leatherGroup = AceGUI:Create("InlineGroup");
     leatherGroup:SetTitle("Leather");
-    leatherGroup:SetWidth(340);
+    leatherGroup:SetWidth(400);
     leatherGroup:SetLayout("Flow");
 
 
     if(Glockfarmer:CanShowDesolate())
     then
-        local desolateGroup = Glockfarmer:CreateRow("Desolate Leather", playerLeather.DesolateLeather.Bag, playerLeather.DesolateLeather.ReagentBank, playerLeather.DesolateLeather.Bank);
+        local need = Glockfarmer:GetDesolateNeeded() - (playerLeather.DesolateLeather.Bag + playerLeather.DesolateLeather.ReagentBank + playerLeather.DesolateLeather.Bank);
+        local desolateGroup = Glockfarmer:CreateRow("Desolate Leather", playerLeather.DesolateLeather.Bag, playerLeather.DesolateLeather.ReagentBank, playerLeather.DesolateLeather.Bank, need);
         leatherGroup:AddChild(desolateGroup);
     end
 
     if(Glockfarmer:CanShowPallidBone())
     then
-        local pallidBoneGroup = Glockfarmer:CreateRow("Pallid Bone", playerLeather.PallidBone.Bag, playerLeather.PallidBone.ReagentBank, playerLeather.PallidBone.Bank);
+        local need = Glockfarmer:GetPallidBoneNeeded() - (playerLeather.PallidBone.Bag + playerLeather.PallidBone.ReagentBank + playerLeather.PallidBone.Bank);
+        local pallidBoneGroup = Glockfarmer:CreateRow("Pallid Bone", playerLeather.PallidBone.Bag, playerLeather.PallidBone.ReagentBank, playerLeather.PallidBone.Bank, need);
         leatherGroup:AddChild(pallidBoneGroup);
     end
 
     if(Glockfarmer:CanShowCallous())
     then
-        local callousHideGroup = Glockfarmer:CreateRow("Callous Hide", playerLeather.CallousHide.Bag, playerLeather.CallousHide.ReagentBank, playerLeather.CallousHide.Bank);
+        local need = Glockfarmer:GetCallousNeeded() - (playerLeather.CallousHide.Bag + playerLeather.CallousHide.ReagentBank + playerLeather.CallousHide.Bank);
+        local callousHideGroup = Glockfarmer:CreateRow("Callous Hide", playerLeather.CallousHide.Bag, playerLeather.CallousHide.ReagentBank, playerLeather.CallousHide.Bank, need);
         leatherGroup:AddChild(callousHideGroup);
     end
 
@@ -1107,7 +1502,7 @@ function Glockfarmer:ReloadLabel()
         for i, playerTable in pairs(self.db.global) do
             local playerGroup = AceGUI:Create("InlineGroup");
             playerGroup:SetTitle(i);
-            playerGroup:SetWidth(360);
+            playerGroup:SetWidth(420);
             playerGroup:SetLayout("Flow");
             
 
@@ -1266,6 +1661,7 @@ function Glockfarmer:OnInitialize()
     button:SetWidth(100)
     button:SetCallback("OnClick", function() 
         InterfaceOptionsFrame_OpenToCategory(self.optionsFrame)
+        InterfaceOptionsFrame_OpenToCategory(self.optionsFrame)
     end)
     optsGroup:AddChild(button)
 
@@ -1299,50 +1695,93 @@ function Glockfarmer:ToggleShowHerbs(info,val)
     herbCheckbox:SetValue(self.db.profile.ShowHerbalism);
     Glockfarmer:ReloadLabel();
 end
+
 function Glockfarmer:CanShowHerbs(info)
     return self.db.profile.ShowHerbalism;
 end
 function Glockfarmer:ToggleShowDeathblossom(info,val)
-    self.db.profile.Herbs.ShowDeathBlossom = val;
+    self.db.profile.Herbs.DeathBlossom.Show = val;
     Glockfarmer:ReloadLabel();
 end
 function Glockfarmer:CanShowDeathblossom(info)
-    return self.db.profile.Herbs.ShowDeathBlossom;
+    return self.db.profile.Herbs.DeathBlossom.Show;
+end
+function Glockfarmer:SetDeathblossomNeeded(info,val)
+    self.db.profile.Herbs.DeathBlossom.Need = val;
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:GetDeathblossomNeeded(info)
+    return self.db.profile.Herbs.DeathBlossom.Need;
 end
 function Glockfarmer:ToggleShowNightShade(info,val)
-    self.db.profile.Herbs.ShowNightShade = val;
+    self.db.profile.Herbs.Nightshade.Show = val;
     Glockfarmer:ReloadLabel();
 end
 function Glockfarmer:CanShowNightShade(info)
-    return self.db.profile.Herbs.ShowNightShade;
+    return self.db.profile.Herbs.Nightshade.Show;
+end
+function Glockfarmer:SetNightShadeNeeded(info,val)
+    self.db.profile.Herbs.Nightshade.Need = val;
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:GetNightShadeNeeded(info)
+    return self.db.profile.Herbs.Nightshade.Need;
 end
 function Glockfarmer:ToggleShowRisingGlory(info,val)
-    self.db.profile.Herbs.ShowRisingGlory = val;
+    self.db.profile.Herbs.RisingGlory.Show = val;
     Glockfarmer:ReloadLabel();
 end
 function Glockfarmer:CanShowRisingGlory(info)
-    return self.db.profile.Herbs.ShowRisingGlory;
+    return self.db.profile.Herbs.RisingGlory.Show;
+end
+function Glockfarmer:SetRisingGloryNeeded(info,val)
+    self.db.profile.Herbs.RisingGlory.Need = val;
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:GetRisingGloryNeeded(info)
+    return self.db.profile.Herbs.RisingGlory.Need;
 end
 function Glockfarmer:ToggleShowMarrowRoot(info,val)
-    self.db.profile.Herbs.ShowMarrowRoot = val;
+    self.db.profile.Herbs.Marrowroot.Show = val;
     Glockfarmer:ReloadLabel();
 end
 function Glockfarmer:CanShowMarrowRoot(info)
-    return self.db.profile.Herbs.ShowMarrowRoot;
+    return self.db.profile.Herbs.Marrowroot.Show;
+end
+function Glockfarmer:SetMarrowRootNeeded(info,val)
+    self.db.profile.Herbs.Marrowroot.Need = val;
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:GetMarrowRootNeeded(info)
+    return self.db.profile.Herbs.Marrowroot.Need;
 end
 function Glockfarmer:ToggleShowWidowbloom(info,val)
-    self.db.profile.Herbs.ShowWidowbloom = val;
+    self.db.profile.Herbs.Widowbloom.Show = val;
     Glockfarmer:ReloadLabel();
 end
 function Glockfarmer:CanShowWidowbloom(info)
-    return self.db.profile.Herbs.ShowWidowbloom;
+    return self.db.profile.Herbs.Widowbloom.Show;
+end
+function Glockfarmer:SetWidowbloomNeeded(info,val)
+    self.db.profile.Herbs.Widowbloom.Need = val;
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:GetWidowbloomNeeded(info)
+    return self.db.profile.Herbs.Widowbloom.Need;
 end
 function Glockfarmer:ToggleShowVigilsTorch(info,val)
-    self.db.profile.Herbs.ShowVigilsTorch = val;
+    self.db.profile.Herbs.VigilsTorch.Show = val;
     Glockfarmer:ReloadLabel();
 end
 function Glockfarmer:CanShowVigilsTorch(info)
-    return self.db.profile.Herbs.ShowVigilsTorch;
+    return self.db.profile.Herbs.VigilsTorch.Show;
+end
+function Glockfarmer:SetVigilsTorchNeeded(info,val)
+    self.db.profile.Herbs.VigilsTorch.Need = val;
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:GetVigilsTorchNeeded(info)
+    return self.db.profile.Herbs.VigilsTorch.Need;
 end
 
 function Glockfarmer:ToggleShowFish(info,val)
@@ -1354,46 +1793,88 @@ function Glockfarmer:CanShowFish(info)
     return self.db.profile.ShowFish;
 end
 function Glockfarmer:ToggleShowLostSole(info,val)
-    self.db.profile.Fish.ShowLostSole = val;
+    self.db.profile.Fish.LostSole.Show = val;
     Glockfarmer:ReloadLabel();
 end
 function Glockfarmer:CanShowLostSole(info)
-    return self.db.profile.Fish.ShowLostSole;
+    return self.db.profile.Fish.LostSole.Show;
+end
+function Glockfarmer:SetLostSoleNeeded(info,val)
+    self.db.profile.Fish.LostSole.Need = val;
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:GetLostSoleNeeded(info)
+    return self.db.profile.Fish.LostSole.Need;
 end
 function Glockfarmer:ToggleShowSilverPike(info,val)
-    self.db.profile.Fish.ShowSilverPike = val;
+    self.db.profile.Fish.SilverPike.Show = val;
     Glockfarmer:ReloadLabel();
 end
 function Glockfarmer:CanShowSilverPike(info)
-    return self.db.profile.Fish.ShowSilverPike;
+    return self.db.profile.Fish.SilverPike.Show;
+end
+function Glockfarmer:SetSilverPikeNeeded(info,val)
+    self.db.profile.Fish.SilverPike.Need = val;
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:GetSilverPikeNeeded(info)
+    return self.db.profile.Fish.SilverPike.Need;
 end
 function Glockfarmer:ToggleShowPocketBonefish(info,val)
-    self.db.profile.Fish.ShowPocketBonefish = val;
+    self.db.profile.Fish.PocketBonefish.Show = val;
     Glockfarmer:ReloadLabel();
 end
 function Glockfarmer:CanShowPocketBonefish(info)
-    return self.db.profile.Fish.ShowPocketBonefish;
+    return self.db.profile.Fish.PocketBonefish.Show;
+end
+function Glockfarmer:SetPocketBonefishNeeded(info,val)
+    self.db.profile.Fish.PocketBonefish.Need = val;
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:GetPocketBonefishNeeded(info)
+    return self.db.profile.Fish.PocketBonefish.Need;
 end
 function Glockfarmer:ToggleShowIridescent(info,val)
-    self.db.profile.Fish.ShowIridescent = val;
+    self.db.profile.Fish.Iridescent.Show = val;
     Glockfarmer:ReloadLabel();
 end
 function Glockfarmer:CanShowIridescent(info)
-    return self.db.profile.Fish.ShowIridescent;
+    return self.db.profile.Fish.Iridescent.Show;
+end
+function Glockfarmer:SetIridescentNeeded(info,val)
+    self.db.profile.Fish.Iridescent.Need = val;
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:GetIridescentNeeded(info)
+    return self.db.profile.Fish.Iridescent.Need;
 end
 function Glockfarmer:ToggleShowSpinefinPiranha(info,val)
-    self.db.profile.Fish.ShowSpinefinPiranha = val;
+    self.db.profile.Fish.SpinefinPiranha.Show = val;
     Glockfarmer:ReloadLabel();
 end
 function Glockfarmer:CanShowSpinefinPiranha(info)
-    return self.db.profile.Fish.ShowSpinefinPiranha;
+    return self.db.profile.Fish.SpinefinPiranha.Show;
+end
+function Glockfarmer:SetSpinefinPiranhaNeeded(info,val)
+    self.db.profile.Fish.SpinefinPiranha.Need = val;
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:GetSpinefinPiranhaNeeded(info)
+    return self.db.profile.Fish.SpinefinPiranha.Need;
 end
 function Glockfarmer:ToggleShowElysian(info,val)
-    self.db.profile.Fish.ShowElysian = val;
+    self.db.profile.Fish.Elysian.Show = val;
     Glockfarmer:ReloadLabel();
 end
 function Glockfarmer:CanShowElysian(info)
-    return self.db.profile.Fish.ShowElysian;
+    return self.db.profile.Fish.Elysian.Show;
+end
+function Glockfarmer:SetElysianNeeded(info,val)
+    self.db.profile.Fish.Elysian.Need = val;
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:GetElysianNeeded(info)
+    return self.db.profile.Fish.Elysian.Need;
 end
 
 function Glockfarmer:ToggleShowCloth(info,val)
@@ -1405,18 +1886,32 @@ function Glockfarmer:CanShowCloth(info)
     return self.db.profile.ShowCloth;
 end
 function Glockfarmer:ToggleShowLightlessSilk(info,val)
-    self.db.profile.Cloth.ShowLightlessSilk = val;
+    self.db.profile.Cloth.LightlessSilk.Show = val;
     Glockfarmer:ReloadLabel();
 end
 function Glockfarmer:CanShowLightlessSilk(info)
-    return self.db.profile.Cloth.ShowLightlessSilk;
+    return self.db.profile.Cloth.LightlessSilk.Show;
+end
+function Glockfarmer:SetLightlessSilkNeeded(info,val)
+    self.db.profile.Cloth.LightlessSilk.Need = val;
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:GetLightlessSilkNeeded(info)
+    return self.db.profile.Cloth.LightlessSilk.Need;
 end
 function Glockfarmer:ToggleShowShroudedCloth(info,val)
-    self.db.profile.Cloth.ShowShroudedCloth = val;
+    self.db.profile.Cloth.ShroudedCloth.Show = val;
     Glockfarmer:ReloadLabel();
 end
 function Glockfarmer:CanShowShroudedCloth(info)
-    return self.db.profile.Cloth.ShowShroudedCloth;
+    return self.db.profile.Cloth.ShroudedCloth.Show;
+end
+function Glockfarmer:SetShroudedClothNeeded(info,val)
+    self.db.profile.Cloth.ShroudedCloth.Need = val;
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:GetShroudedClothNeeded(info)
+    return self.db.profile.Cloth.ShroudedCloth.Need;
 end
 
 function Glockfarmer:ToggleShowLeather(info,val)
@@ -1428,25 +1923,46 @@ function Glockfarmer:CanShowLeather(info)
     return self.db.profile.ShowLeather;
 end
 function Glockfarmer:ToggleShowDesolate(info,val)
-    self.db.profile.Leather.ShowDesolate = val;
+    self.db.profile.Leather.Desolate.Show = val;
     Glockfarmer:ReloadLabel();
 end
 function Glockfarmer:CanShowDesolate(info)
-    return self.db.profile.Leather.ShowDesolate;
+    return self.db.profile.Leather.Desolate.Show;
+end
+function Glockfarmer:SetDesolateNeeded(info,val)
+    self.db.profile.Leather.Desolate.Need = val;
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:GetDesolateNeeded(info)
+    return self.db.profile.Leather.Desolate.Need;
 end
 function Glockfarmer:ToggleShowPallidBone(info,val)
-    self.db.profile.Leather.ShowPallidBone = val;
+    self.db.profile.Leather.PallidBone.Show = val;
     Glockfarmer:ReloadLabel();
 end
 function Glockfarmer:CanShowPallidBone(info)
-    return self.db.profile.Leather.ShowPallidBone;
+    return self.db.profile.Leather.PallidBone.Show;
+end
+function Glockfarmer:SetPallidBoneNeeded(info,val)
+    self.db.profile.Leather.PallidBone.Need = val;
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:GetPallidBoneNeeded(info)
+    return self.db.profile.Leather.PallidBone.Need;
 end
 function Glockfarmer:ToggleShowCallous(info,val)
-    self.db.profile.Leather.ShowCallous = val;
+    self.db.profile.Leather.Callous.Show = val;
     Glockfarmer:ReloadLabel();
 end
 function Glockfarmer:CanShowCallous(info)
-    return self.db.profile.Leather.ShowCallous;
+    return self.db.profile.Leather.Callous.Show;
+end
+function Glockfarmer:SetCallousNeeded(info,val)
+    self.db.profile.Leather.Callous.Need = val;
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:GetCallousNeeded(info)
+    return self.db.profile.Leather.Callous.Need;
 end
 
 function Glockfarmer:ToggleShowOre(info,val)
@@ -1458,44 +1974,96 @@ function Glockfarmer:CanShowOre(info)
     return self.db.profile.ShowOre;
 end
 function Glockfarmer:ToggleShowLaestrite(info,val)
-    self.db.profile.Ore.ShowLaestrite = val;
+    self.db.profile.Ore.Laestrite.Show = val;
     Glockfarmer:ReloadLabel();
 end
 function Glockfarmer:CanShowLaestrite(info)
-    return self.db.profile.Ore.ShowLaestrite;
+    return self.db.profile.Ore.Laestrite.Show;
+end
+function Glockfarmer:SetLaestriteNeeded(info,val)
+    self.db.profile.Ore.Laestrite.Need = val;
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:GetLaestriteNeeded(info)
+    return self.db.profile.Ore.Laestrite.Need;
 end
 function Glockfarmer:ToggleShowElethium(info,val)
-    self.db.profile.Ore.ShowElethium = val;
+    self.db.profile.Ore.Elethium.Show = val;
     Glockfarmer:ReloadLabel();
 end
 function Glockfarmer:CanShowElethium(info)
-    return self.db.profile.Ore.ShowElethium;
+    return self.db.profile.Ore.Elethium.Show;
+end
+function Glockfarmer:SetElethiumNeeded(info,val)
+    self.db.profile.Ore.Elethium.Need = val;
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:GetElethiumNeeded(info)
+    return self.db.profile.Ore.Elethium.Need;
 end
 function Glockfarmer:ToggleShowSolenium(info,val)
-    self.db.profile.Ore.ShowSolenium  = val;
+    self.db.profile.Ore.Solenium.Show  = val;
     Glockfarmer:ReloadLabel();
 end
 function Glockfarmer:CanShowSolenium(info)
-    return self.db.profile.Ore.ShowSolenium;
+    return self.db.profile.Ore.Solenium.Show;
+end
+function Glockfarmer:SetSoleniumNeeded(info,val)
+    self.db.profile.Ore.Solenium.Need = val;
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:GetSoleniumNeeded(info)
+    return self.db.profile.Ore.Solenium.Need;
 end
 function Glockfarmer:ToggleShowOxxein(info,val)
-    self.db.profile.Ore.ShowOxxein = val;
+    self.db.profile.Ore.Oxxein.Show = val;
     Glockfarmer:ReloadLabel();
 end
 function Glockfarmer:CanShowOxxein(info)
-    return self.db.profile.Ore.ShowOxxein;
+    return self.db.profile.Ore.Oxxein.Show;
+end
+function Glockfarmer:SetOxxeinNeeded(info,val)
+    self.db.profile.Ore.Oxxein.Need = val;
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:GetOxxeinNeeded(info)
+    return self.db.profile.Ore.Oxxein.Need;
 end
 function Glockfarmer:ToggleShowPhaedrum(info,val)
-    self.db.profile.Ore.ShowPhaedrum = val;
+    self.db.profile.Ore.Phaedrum.Show = val;
     Glockfarmer:ReloadLabel();
 end
 function Glockfarmer:CanShowPhaedrum(info)
-    return self.db.profile.Ore.ShowPhaedrum;
+    return self.db.profile.Ore.Phaedrum.Show;
+end
+function Glockfarmer:SetPhaedrumNeeded(info,val)
+    self.db.profile.Ore.Phaedrum.Need = val;
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:GetPhaedrumNeeded(info)
+    return self.db.profile.Ore.Phaedrum.Need;
 end
 function Glockfarmer:ToggleShowSinvyr(info,val)
-    self.db.profile.Ore.ShowSinvyr = val;
+    self.db.profile.Ore.Sinvyr.Show = val;
     Glockfarmer:ReloadLabel();
 end
 function Glockfarmer:CanShowSinvyr(info)
-    return self.db.profile.Ore.ShowSinvyr;
+    return self.db.profile.Ore.Sinvyr.Show;
+end
+function Glockfarmer:SetSinvyrNeeded(info,val)
+    self.db.profile.Ore.Sinvyr.Need = val;
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:GetSinvyrNeeded(info)
+    return self.db.profile.Ore.Sinvyr.Need;
+end
+
+function Glockfarmer:CheckNumber(info, num)
+    a = tonumber(num)
+    if (type(a) == "number")
+    then
+        return true
+    else
+        return "This entry must be a number"
+    end
 end
