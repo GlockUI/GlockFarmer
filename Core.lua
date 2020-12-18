@@ -121,6 +121,33 @@ local Defaults = {
                 Need = 0
             }
         },
+        ShowMeat = true,
+        Meat = {
+            Aethereal = {
+                Show = true,
+                Need = 0
+            },
+            CreepingCrawler = {
+                Show = true,
+                Need = 0
+            },
+            PhantasmalHaunch = {
+                Show = true,
+                Need = 0
+            },
+            RawSeraphicWing = {
+                Show = true,
+                Need = 0
+            },
+            ShadowyShank = {
+                Show = true,
+                Need = 0
+            },
+            TenebrousRibs = {
+                Show = true,
+                Need = 0
+            }
+        },
         ShowAllCharacters = false,
     },
     global = {
@@ -274,6 +301,43 @@ local Defaults = {
                     ReagentBank = 0,
                     Bank = 0
                 }
+            },
+            Meat = {
+                ["**"] = {
+                    Bag = 0,
+                    ReagentBank = 0,
+                    Bank = 0
+                },
+                Aethereal = {
+                    Bag = 0,
+                    ReagentBank = 0,
+                    Bank = 0
+                },
+                CreepingCrawler = {
+                    Bag = 0,
+                    ReagentBank = 0,
+                    Bank = 0
+                },
+                PhantasmalHaunch = {
+                    Bag = 0,
+                    ReagentBank = 0,
+                    Bank = 0
+                },
+                RawSeraphicWing = {
+                    Bag = 0,
+                    ReagentBank = 0,
+                    Bank = 0
+                },
+                ShadowyShank = {
+                    Bag = 0,
+                    ReagentBank = 0,
+                    Bank = 0
+                },
+                TenebrousRibs = {
+                    Bag = 0,
+                    ReagentBank = 0,
+                    Bank = 0
+                },
             },
         }
     }
@@ -554,6 +618,141 @@ local myOptionsTable = {
             },
         }
       },
+      MeatOptions={
+        name = "Meat",
+        type = "group",
+        args={
+            Fish = {
+                name = "Shows All Meat",
+                desc = "",
+                type = "toggle",
+                set = "ToggleShowMeat",
+                get = "CanShowMeat",
+                order = 0,
+                width = "full"
+            },            
+            ShowAethereal = {
+                name = "Show Aethereal Meat",
+                desc = "",
+                type = "toggle",
+                set = "ToggleShowAethereal",
+                get = "CanShowAethereal",
+                disabled = function(info) return not Glockfarmer:CanShowMeat(info) end,
+                order = 1,
+            },
+            AetherealNeeded = {
+                name = "Aethereal Meat Needed",
+                desc = "",
+                type = "input",
+                set = "SetAetherealNeeded",
+                get = "GetAetherealNeeded",
+                disabled = function(info) return not Glockfarmer:CanShowMeat(info) or not Glockfarmer:CanShowAethereal(info) end,
+                order = 2,
+                validate = "CheckNumber",
+                confirm = false
+            },
+            ShowCreepingCrawlerMeat = {
+                name = "Show Creeping Crawler Meat",
+                desc = "",
+                type = "toggle",
+                set = "ToggleShowCreepingCrawlerMeat",
+                get = "CanShowCreepingCrawlerMeat",
+                disabled = function(info) return not Glockfarmer:CanShowMeat(info) end,
+                order = 3,
+            },
+            CreepingCrawlerMeatNeeded = {
+                name = "Creeping Crawler Needed",
+                desc = "",
+                type = "input",
+                set = "SetCreepingCrawlerMeatNeeded",
+                get = "GetCreepingCrawlerMeatNeeded",
+                disabled = function(info) return not Glockfarmer:CanShowMeat(info) or not Glockfarmer:CanShowCreepingCrawlerMeat(info) end,
+                order = 4,
+                validate = "CheckNumber",
+                confirm = false
+            },
+            ShowRawSeraphicWing = {
+                name = "Show Raw Seraphic Wing",
+                desc = "",
+                type = "toggle",
+                set = "ToggleShowRawSeraphicWing",
+                get = "CanShowRawSeraphicWing",
+                disabled = function(info) return not Glockfarmer:CanShowMeat(info) end,
+                order = 5,
+            },
+            RawSeraphicWingNeeded = {
+                name = "Creeping Crawler Needed",
+                desc = "",
+                type = "input",
+                set = "SetRawSeraphicWingNeeded",
+                get = "GetRawSeraphicWingNeeded",
+                disabled = function(info) return not Glockfarmer:CanShowMeat(info) or not Glockfarmer:CanShowRawSeraphicWing(info) end,
+                order = 6,
+                validate = "CheckNumber",
+                confirm = false
+            },
+            ShowPhantasmalHaunch = {
+                name = "Show Phantasmal Haunch",
+                desc = "",
+                type = "toggle",
+                set = "ToggleShowPhantasmalHaunch",
+                get = "CanShowPhantasmalHaunch",
+                disabled = function(info) return not Glockfarmer:CanShowMeat(info) end,
+                order = 7,
+            },
+            PhantasmalHaunchNeeded = {
+                name = "Phantasmal Haunch Needed",
+                desc = "",
+                type = "input",
+                set = "SetPhantasmalHaunchNeeded",
+                get = "GetPhantasmalHaunchNeeded",
+                disabled = function(info) return not Glockfarmer:CanShowMeat(info) or not Glockfarmer:CanShowPhantasmalHaunch(info) end,
+                order = 8,
+                validate = "CheckNumber",
+                confirm = false
+            },
+            ShowShadowyShank = {
+                name = "Show Shadowy Shank",
+                desc = "",
+                type = "toggle",
+                set = "ToggleShowShadowyShank",
+                get = "CanShowShadowyShank",
+                disabled = function(info) return not Glockfarmer:CanShowMeat(info) end,
+                order = 9,
+            },
+            ShadowyShankNeeded = {
+                name = "Shadowy Shank Needed",
+                desc = "",
+                type = "input",
+                set = "SetShadowyShankNeeded",
+                get = "GetShadowyShankNeeded",
+                disabled = function(info) return not Glockfarmer:CanShowMeat(info) or not Glockfarmer:CanShowShadowyShank(info) end,
+                order = 10,
+                validate = "CheckNumber",
+                confirm = false
+            },
+            ShowTenebrousRibs = {
+                name = "Show Tenebrous Ribs",
+                desc = "",
+                type = "toggle",
+                set = "ToggleShowTenebrousRibs",
+                get = "CanShowTenebrousRibs",
+                disabled = function(info) return not Glockfarmer:CanShowMeat(info) end,
+                order = 11,
+            },
+            TenebrousRibsNeeded = {
+                name = "Tenebrous Ribs Needed",
+                desc = "",
+                type = "input",
+                set = "SetTenebrousRibsNeeded",
+                get = "GetTenebrousRibsNeeded",
+                disabled = function(info) return not Glockfarmer:CanShowMeat(info) or not Glockfarmer:CanShowTenebrousRibs(info) end,
+                order = 12,
+                validate = "CheckNumber",
+                confirm = false
+            },
+        }
+      },
       ClothOptions={
         name = "Cloth",
         type = "group",
@@ -825,6 +1024,7 @@ local myOptionsTable = {
 local itemsGroup;
 local herbCheckbox;
 local fishingCheckbox;
+local meatCheckbox;
 local clothCheckbox;
 local oreCheckbox;
 local leatherCheckbox;
@@ -988,6 +1188,56 @@ function Glockfarmer:PrintFish(playerFish, itemFrame)
 
     itemFrame:AddChild(fishGroup);
 end
+function Glockfarmer:PrintMeat(playerMeat, itemFrame)
+    local meatGroup = AceGUI:Create("InlineGroup");
+    meatGroup:SetTitle("Meat");
+    meatGroup:SetWidth(400);
+    meatGroup:SetLayout("Flow");   
+    
+    if(Glockfarmer:CanShowAethereal())
+    then
+        local need = Glockfarmer:GetAetherealNeeded() - (playerMeat.Athereal.Bag + playerMeat.Athereal.ReagentBank + playerMeat.Athereal.Bank);
+        local atherealGroup = Glockfarmer:CreateRow("Aethereal Meat", playerMeat.Athereal.Bag, playerMeat.Athereal.ReagentBank, playerMeat.Athereal.Bank, need);
+        meatGroup:AddChild(atherealGroup);
+    end
+
+    if(Glockfarmer:CanShowCreepingCrawlerMeat())
+    then
+        local need = Glockfarmer:GetCreepingCrawlerMeatNeeded() - (playerMeat.CreepingCrawler.Bag + playerMeat.CreepingCrawler.ReagentBank + playerMeat.CreepingCrawler.Bank);
+        local screepingGroup = Glockfarmer:CreateRow("Creeping Crawler Meat ", playerMeat.CreepingCrawler.Bag, playerMeat.CreepingCrawler.ReagentBank, playerMeat.CreepingCrawler.Bank, need);
+        meatGroup:AddChild(screepingGroup);
+    end
+
+    if(Glockfarmer:CanShowPhantasmalHaunch())
+    then
+        local need = Glockfarmer:GetPhantasmalHaunchNeeded() - (playerMeat.PhantasmalHaunch.Bag + playerMeat.PhantasmalHaunch.ReagentBank + playerMeat.PhantasmalHaunch.Bank);
+        local phantasmalGroup = Glockfarmer:CreateRow("Phantasmal Haunch", playerMeat.PhantasmalHaunch.Bag, playerMeat.PhantasmalHaunch.ReagentBank, playerMeat.PhantasmalHaunch.Bank, need);
+        meatGroup:AddChild(phantasmalGroup);
+    end
+
+    if(Glockfarmer:CanShowRawSeraphicWing())
+    then
+        local need = Glockfarmer:GetRawSeraphicWingNeeded() - (playerMeat.RawSeraphicWing.Bag + playerMeat.RawSeraphicWing.ReagentBank + playerMeat.RawSeraphicWing.Bank);
+        local rawGroup = Glockfarmer:CreateRow("Raw Seraphic Wing", playerMeat.RawSeraphicWing.Bag, playerMeat.RawSeraphicWing.ReagentBank, playerMeat.RawSeraphicWing.Bank, need);
+        meatGroup:AddChild(rawGroup);
+    end
+
+    if(Glockfarmer:CanShowShadowyShank())
+    then
+        local need = Glockfarmer:GetShadowyShankNeeded() - (playerMeat.ShadowyShank.Bag + playerMeat.ShadowyShank.ReagentBank + playerMeat.ShadowyShank.Bank);
+        local shadowyGroup = Glockfarmer:CreateRow("Shadowy Shank", playerMeat.ShadowyShank.Bag, playerMeat.ShadowyShank.ReagentBank, playerMeat.ShadowyShank.Bank, need);
+        meatGroup:AddChild(shadowyGroup);
+    end
+
+    if(Glockfarmer:CanShowTenebrousRibs())
+    then
+        local need = Glockfarmer:GetTenebrousRibsNeeded() - (playerMeat.TenebrousRibs.Bag + playerMeat.TenebrousRibs.ReagentBank + playerMeat.TenebrousRibs.Bank);
+        local tenebrousRibsGroup = Glockfarmer:CreateRow("Tenebrous Ribs", playerMeat.TenebrousRibs.Bag, playerMeat.TenebrousRibs.ReagentBank, playerMeat.TenebrousRibs.Bank, need);
+        meatGroup:AddChild(tenebrousRibsGroup);
+    end
+
+    itemFrame:AddChild(meatGroup);
+end
 function Glockfarmer:PrintCloth(playerCloth, itemFrame)    
     local clothGroup = AceGUI:Create("InlineGroup");
     clothGroup:SetTitle("Cloth");
@@ -1113,7 +1363,12 @@ function Glockfarmer:GetPersonalBags()
     desolateLeatherCount = 0;
     pallidBoneCount = 0;
     callousHideCount = 0;
-
+    meatAetheral = 0
+    meatCreepyCrawler = 0
+    meatPhantasmal = 0;
+    meatRawSeraphic = 0;
+    meatShadowy = 0;
+    meatTenebrous = 0;
 
     for i=0,4 do
         local slots = GetContainerNumSlots(i);
@@ -1193,6 +1448,25 @@ function Glockfarmer:GetPersonalBags()
             elseif(itemID == 172094)
             then
                 callousHideCount = callousHideCount + itemCount;
+            --meat
+            elseif(itemID == 172052)
+            then
+                meatAetheral = meatAetheral + itemCount
+            elseif(itemID == 179314)
+            then
+                meatCreepyCrawler = meatCreepyCrawler + itemCount
+            elseif(itemID == 172055)
+            then
+                meatPhantasmal = meatPhantasmal + itemCount
+            elseif(itemID == 172054)
+            then
+                meatRawSeraphic = meatRawSeraphic + itemCount
+            elseif(itemID == 179315)
+            then
+                meatShadowy = meatShadowy + itemCount
+            elseif(itemID == 172053)
+            then
+                meatTenebrous = meatTenebrous + itemCount
             end
         end
     end
@@ -1224,6 +1498,13 @@ function Glockfarmer:GetPersonalBags()
     self.db.global[playerName].Leather.DesolateLeather.Bag = desolateLeatherCount;
     self.db.global[playerName].Leather.PallidBone.Bag = pallidBoneCount;
     self.db.global[playerName].Leather.CallousHide.Bag = callousHideCount;
+
+    self.db.global[playerName].Meat.Athereal.Bag = meatAetheral;
+    self.db.global[playerName].Meat.CreepingCrawler.Bag = meatCreepyCrawler;
+    self.db.global[playerName].Meat.PhantasmalHaunch.Bag = meatPhantasmal;
+    self.db.global[playerName].Meat.RawSeraphicWing.Bag = meatRawSeraphic;
+    self.db.global[playerName].Meat.ShadowyShank.Bag = meatShadowy;
+    self.db.global[playerName].Meat.TenebrousRibs.Bag = meatTenebrous;
 end
 function Glockfarmer:GetReagentBank()
     herbDBCount = 0;
@@ -1249,6 +1530,12 @@ function Glockfarmer:GetReagentBank()
     desolateLeatherCount = 0;
     pallidBoneCount = 0;
     callousHideCount = 0;
+    meatAetheral = 0
+    meatCreepyCrawler = 0
+    meatPhantasmal = 0;
+    meatRawSeraphic = 0;
+    meatShadowy = 0;
+    meatTenebrous = 0;
 
     local slots = GetContainerNumSlots(-3);
     for s=0,slots do
@@ -1326,6 +1613,25 @@ function Glockfarmer:GetReagentBank()
             pallidBoneCount = pallidBoneCount + itemCount;
         elseif(itemID == 172094)
         then
+        --meat
+        elseif(itemID == 172052)
+        then
+            meatAetheral = meatAetheral + itemCount
+        elseif(itemID == 179314)
+        then
+            meatCreepyCrawler = meatCreepyCrawler + itemCount
+        elseif(itemID == 172055)
+        then
+            meatPhantasmal = meatPhantasmal + itemCount
+        elseif(itemID == 172054)
+        then
+            meatRawSeraphic = meatRawSeraphic + itemCount
+        elseif(itemID == 179315)
+        then
+            meatShadowy = meatShadowy + itemCount
+        elseif(itemID == 172053)
+        then
+            meatTenebrous = meatTenebrous + itemCount
         end
     end
 
@@ -1357,6 +1663,13 @@ function Glockfarmer:GetReagentBank()
     self.db.global[playerName].Leather.PallidBone.ReagentBank = pallidBoneCount;
     self.db.global[playerName].Leather.CallousHide.ReagentBank = callousHideCount;
 
+    self.db.global[playerName].Meat.Athereal.ReagentBank = meatAetheral;
+    self.db.global[playerName].Meat.CreepingCrawler.ReagentBank = meatCreepyCrawler;
+    self.db.global[playerName].Meat.PhantasmalHaunch.ReagentBank = meatPhantasmal;
+    self.db.global[playerName].Meat.RawSeraphicWing.ReagentBank = meatRawSeraphic;
+    self.db.global[playerName].Meat.ShadowyShank.ReagentBank = meatShadowy;
+    self.db.global[playerName].Meat.TenebrousRibs.ReagentBank = meatTenebrous;
+
 end
 function Glockfarmer:GetBank()
     herbDBCount = 0;
@@ -1382,7 +1695,12 @@ function Glockfarmer:GetBank()
     desolateLeatherCount = 0;
     pallidBoneCount = 0;
     callousHideCount = 0;
-
+    meatAetheral = 0
+    meatCreepyCrawler = 0
+    meatPhantasmal = 0;
+    meatRawSeraphic = 0;
+    meatShadowy = 0;
+    meatTenebrous = 0;
 
     for i=5,11 do
         local slots = GetContainerNumSlots(i);
@@ -1462,6 +1780,25 @@ function Glockfarmer:GetBank()
             elseif(itemID == 172094)
             then
                 callousHideCount = callousHideCount + itemCount;
+            --meat
+            elseif(itemID == 172052)
+            then
+                meatAetheral = meatAetheral + itemCount
+            elseif(itemID == 179314)
+            then
+                meatCreepyCrawler = meatCreepyCrawler + itemCount
+            elseif(itemID == 172055)
+            then
+                meatPhantasmal = meatPhantasmal + itemCount
+            elseif(itemID == 172054)
+            then
+                meatRawSeraphic = meatRawSeraphic + itemCount
+            elseif(itemID == 179315)
+            then
+                meatShadowy = meatShadowy + itemCount
+            elseif(itemID == 172053)
+            then
+                meatTenebrous = meatTenebrous + itemCount
             end
         end
     end
@@ -1494,6 +1831,13 @@ function Glockfarmer:GetBank()
     self.db.global[playerName].Leather.PallidBone.Bank = pallidBoneCount;
     self.db.global[playerName].Leather.CallousHide.Bank = callousHideCount;
 
+    self.db.global[playerName].Meat.Athereal.ReagentBank = meatAetheral;
+    self.db.global[playerName].Meat.CreepingCrawler.ReagentBank = meatCreepyCrawler;
+    self.db.global[playerName].Meat.PhantasmalHaunch.ReagentBank = meatPhantasmal;
+    self.db.global[playerName].Meat.RawSeraphicWing.ReagentBank = meatRawSeraphic;
+    self.db.global[playerName].Meat.ShadowyShank.ReagentBank = meatShadowy;
+    self.db.global[playerName].Meat.TenebrousRibs.ReagentBank = meatTenebrous;
+
 end
 function Glockfarmer:ReloadLabel()
     itemsGroup:ReleaseChildren();
@@ -1514,6 +1858,11 @@ function Glockfarmer:ReloadLabel()
             if(self.db.profile.ShowFish)
             then
                 Glockfarmer:PrintFish(self.db.global[i].Fish,playerGroup);
+            end
+
+            if(self.db.profile.ShowMeat)
+            then
+                Glockfarmer:PrintMeat(self.db.global[i].Meat,playerGroup);
             end
 
             if(self.db.profile.ShowCloth)
@@ -1548,6 +1897,11 @@ function Glockfarmer:ReloadLabel()
         if(self.db.profile.ShowFish)
         then
             Glockfarmer:PrintFish(self.db.global[playerName].Fish,playerGroup);
+        end
+
+        if(self.db.profile.ShowMeat)
+        then
+            Glockfarmer:PrintMeat(self.db.global[playerName].Meat,playerGroup);
         end
 
         if(self.db.profile.ShowCloth)
@@ -1615,6 +1969,16 @@ function Glockfarmer:OnInitialize()
         Glockfarmer:PrintBags();
     end);
     optsGroup:AddChild(fishingCheckbox);
+
+    meatCheckbox = AceGUI:Create("CheckBox");
+    meatCheckbox:SetType("checkbox");
+    meatCheckbox:SetLabel("Show Meat");
+    meatCheckbox:SetValue(self.db.profile.ShowFish);
+    meatCheckbox:SetCallback("OnValueChanged", function(widget) 
+        self.db.profile.ShowMeat = meatCheckbox:GetValue();
+        Glockfarmer:PrintBags();
+    end);
+    optsGroup:AddChild(meatCheckbox);
 
     clothCheckbox = AceGUI:Create("CheckBox");
     clothCheckbox:SetType("checkbox");
@@ -1783,7 +2147,6 @@ end
 function Glockfarmer:GetVigilsTorchNeeded(info)
     return self.db.profile.Herbs.VigilsTorch.Need;
 end
-
 function Glockfarmer:ToggleShowFish(info,val)
     self.db.profile.ShowFish = val;
     fishingCheckbox:SetValue(self.db.profile.ShowFish);
@@ -2056,6 +2419,99 @@ function Glockfarmer:SetSinvyrNeeded(info,val)
 end
 function Glockfarmer:GetSinvyrNeeded(info)
     return self.db.profile.Ore.Sinvyr.Need;
+end
+
+function Glockfarmer:ToggleShowMeat(info,val)
+    self.db.profile.ShowMeat = val;
+    meatCheckbox:SetValue(self.db.profile.ShowMeat);
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:CanShowMeat(info)
+    return self.db.profile.ShowMeat;
+end
+function Glockfarmer:ToggleShowAethereal(info,val)
+    self.db.profile.Meat.Aethereal.Show = val;
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:CanShowAethereal(info)
+    return self.db.profile.Meat.Aethereal.Show;
+end
+function Glockfarmer:SetAetherealNeeded(info,val)
+    self.db.profile.Meat.Aethereal.Need = val;
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:GetAetherealNeeded(info)
+    return self.db.profile.Meat.Aethereal.Need;
+end
+function Glockfarmer:ToggleShowCreepingCrawlerMeat(info,val)
+    self.db.profile.Meat.CreepingCrawler.Show = val;
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:CanShowCreepingCrawlerMeat(info)
+    return self.db.profile.Meat.CreepingCrawler.Show;
+end
+function Glockfarmer:SetCreepingCrawlerMeatNeeded(info,val)
+    self.db.profile.Meat.CreepingCrawler.Need = val;
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:GetCreepingCrawlerMeatNeeded(info)
+    return self.db.profile.Meat.CreepingCrawler.Need;
+end
+function Glockfarmer:ToggleShowPhantasmalHaunch(info,val)
+    self.db.profile.Meat.PhantasmalHaunch.Show = val;
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:CanShowPhantasmalHaunch(info)
+    return self.db.profile.Meat.PhantasmalHaunch.Show;
+end
+function Glockfarmer:SetPhantasmalHaunchNeeded(info,val)
+    self.db.profile.Meat.PhantasmalHaunch.Need = val;
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:GetPhantasmalHaunchNeeded(info)
+    return self.db.profile.Meat.PhantasmalHaunch.Need;
+end
+function Glockfarmer:ToggleShowRawSeraphicWing(info,val)
+    self.db.profile.Meat.RawSeraphicWing.Show = val;
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:CanShowRawSeraphicWing(info)
+    return self.db.profile.Meat.RawSeraphicWing.Show;
+end
+function Glockfarmer:SetRawSeraphicWingNeeded(info,val)
+    self.db.profile.Meat.RawSeraphicWing.Need = val;
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:GetRawSeraphicWingNeeded(info)
+    return self.db.profile.Meat.RawSeraphicWing.Need;
+end
+function Glockfarmer:ToggleShowShadowyShank(info,val)
+    self.db.profile.Meat.ShadowyShank.Show = val;
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:CanShowShadowyShank(info)
+    return self.db.profile.Meat.ShadowyShank.Show;
+end
+function Glockfarmer:SetShadowyShankNeeded(info,val)
+    self.db.profile.Meat.ShadowyShank.Need = val;
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:GetShadowyShankNeeded(info)
+    return self.db.profile.Meat.ShadowyShank.Need;
+end
+function Glockfarmer:ToggleShowTenebrousRibs(info,val)
+    self.db.profile.Meat.TenebrousRibs.Show = val;
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:CanShowTenebrousRibs(info)
+    return self.db.profile.Meat.TenebrousRibs.Show;
+end
+function Glockfarmer:SetTenebrousRibsNeeded(info,val)
+    self.db.profile.Meat.TenebrousRibs.Need = val;
+    Glockfarmer:ReloadLabel();
+end
+function Glockfarmer:GetTenebrousRibsNeeded(info)
+    return self.db.profile.Meat.TenebrousRibs.Need;
 end
 
 function Glockfarmer:CheckNumber(info, num)
