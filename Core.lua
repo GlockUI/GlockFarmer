@@ -7,6 +7,7 @@ local frame = AceGUI:Create("Frame");
 frame:SetLayout("Fill");
 frame:SetTitle("Glock Farmer");
 
+
 local Defaults = {
     profile = {
         SchemaVersion = 0.2,
@@ -1475,7 +1476,7 @@ function Glockfarmer:GetPersonalBags()
     self.db.global[playerName].Herbs.NightShade.Bag = herbNSCount;
     self.db.global[playerName].Herbs.RisingGlory.Bag = herbRGCount;
     self.db.global[playerName].Herbs.Marrowroot.Bag = herbMTCount;
-    self.db.global[playerName].Herbs.VigilsTorch.Bag = herbWTCount;
+    self.db.global[playerName].Herbs.Widowbloom.Bag = herbWTCount;
     self.db.global[playerName].Herbs.VigilsTorch.Bag = herbVTCount;
 
     self.db.global[playerName].Fish.LostSole.Bag = fishingLSCount;
@@ -1639,7 +1640,7 @@ function Glockfarmer:GetReagentBank()
     self.db.global[playerName].Herbs.NightShade.ReagentBank = herbNSCount;
     self.db.global[playerName].Herbs.RisingGlory.ReagentBank = herbRGCount;
     self.db.global[playerName].Herbs.Marrowroot.ReagentBank = herbMTCount;
-    self.db.global[playerName].Herbs.VigilsTorch.ReagentBank = herbWTCount;
+    self.db.global[playerName].Herbs.Widowbloom.ReagentBank = herbWTCount;
     self.db.global[playerName].Herbs.VigilsTorch.ReagentBank = herbVTCount;
 
     self.db.global[playerName].Fish.LostSole.ReagentBank = fishingLSCount;
@@ -1807,7 +1808,7 @@ function Glockfarmer:GetBank()
     self.db.global[playerName].Herbs.NightShade.Bank = herbNSCount;
     self.db.global[playerName].Herbs.RisingGlory.Bank = herbRGCount;
     self.db.global[playerName].Herbs.Marrowroot.Bank = herbMTCount;
-    self.db.global[playerName].Herbs.VigilsTorch.Bank = herbWTCount;
+    self.db.global[playerName].Herbs.Widowbloom.Bank = herbWTCount;
     self.db.global[playerName].Herbs.VigilsTorch.Bank = herbVTCount;
 
     self.db.global[playerName].Fish.LostSole.Bank = fishingLSCount;
