@@ -1,10 +1,12 @@
-## Interface: 90001
-
+## Interface: 90002
 ## Title: GlockFarmer
 ## Author: Glockness
-## Version: 0.4.0
+## Version: 1.0.0
 ## Notes: Allows for Tracking all of our Farmed Items
 ## SavedVariables: FarmDB
+## X-License: All rights reserved (See license.md)
+## X-Category: Professions
+## X-Embeds: Ace3, LibQTip-1.0, CallbackHandler-1.0, LibStub, LibDataBroker-1.1
 Libs\LibQTip-1.0\LibQTip-1.0.lua
 Core.lua
 MeatFarming.lua
