@@ -5,7 +5,13 @@
 ## Version: 0.4.0
 ## Notes: Allows for Tracking all of our Farmed Items
 ## SavedVariables: FarmDB
+Core.lua
+MeatFarming.lua
+OreFarming.lua
+ClothFarming.lua
+FishingFarming.lua
+HerbFarming.lua
+LeatherFarming.lua
 Glockframe.lua
 GlockButton.lua
 embeds.xml
-Core.lua
