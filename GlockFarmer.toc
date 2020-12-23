@@ -5,5 +5,7 @@
 ## Version: 0.3.2
 ## Notes: Allows for Tracking all of our Farmed Items
 ## SavedVariables: FarmDB
-
+Glockframe.lua
+GlockButton.lua
+embeds.xml
 Core.lua
