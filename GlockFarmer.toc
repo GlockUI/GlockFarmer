@@ -5,6 +5,7 @@
 ## Version: 0.4.0
 ## Notes: Allows for Tracking all of our Farmed Items
 ## SavedVariables: FarmDB
+Libs\LibQTip-1.0\LibQTip-1.0.lua
 Core.lua
 MeatFarming.lua
 OreFarming.lua

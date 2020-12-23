@@ -1,15 +1,15 @@
 local oreCheckbox;
 
 function Glockfarmer:PrintOre(playerOre, itemFrame)
-    local oreGroup = AceGUI:Create("InlineGroup")
-    oreGroup:SetTitle("Ore")
-    oreGroup:SetWidth(400)
-    oreGroup:SetLayout("Flow")
+    local oreGroup = AceGUI:Create("InlineGroup");
+    oreGroup:SetTitle("Ore");
+    oreGroup:SetWidth(400);
+    oreGroup:SetLayout("Flow");
 
     if (Glockfarmer:CanShowLaestrite()) then
         local need =
         Glockfarmer:GetLaestriteNeeded() -
-            (playerOre.LaestriteOre.Bag + playerOre.LaestriteOre.ReagentBank + playerOre.LaestriteOre.Bank)
+            (playerOre.LaestriteOre.Bag + playerOre.LaestriteOre.ReagentBank + playerOre.LaestriteOre.Bank);
         local laestriteGroup =
             Glockfarmer:CreateRow(
             "Laestrite Ore",
@@ -17,14 +17,14 @@ function Glockfarmer:PrintOre(playerOre, itemFrame)
             playerOre.LaestriteOre.ReagentBank,
             playerOre.LaestriteOre.Bank,
             need
-        )
-        oreGroup:AddChild(laestriteGroup)
+        );
+        oreGroup:AddChild(laestriteGroup);
     end
 
     if (Glockfarmer:CanShowElethium()) then
         local need =
         Glockfarmer:GetElethiumNeeded() -
-            (playerOre.ElethiumOre.Bag + playerOre.ElethiumOre.ReagentBank + playerOre.ElethiumOre.Bank)
+            (playerOre.ElethiumOre.Bag + playerOre.ElethiumOre.ReagentBank + playerOre.ElethiumOre.Bank);
         local elethiumGroup =
             Glockfarmer:CreateRow(
             "Elethium Ore",
@@ -32,14 +32,14 @@ function Glockfarmer:PrintOre(playerOre, itemFrame)
             playerOre.ElethiumOre.ReagentBank,
             playerOre.ElethiumOre.Bank,
             need
-        )
-        oreGroup:AddChild(elethiumGroup)
+        );
+        oreGroup:AddChild(elethiumGroup);
     end
 
     if (Glockfarmer:CanShowSolenium()) then
         local need =
         Glockfarmer:GetSoleniumNeeded() -
-            (playerOre.ElethiumOre.Bag + playerOre.ElethiumOre.ReagentBank + playerOre.ElethiumOre.Bank)
+            (playerOre.ElethiumOre.Bag + playerOre.ElethiumOre.ReagentBank + playerOre.ElethiumOre.Bank);
         local soleniumGroup =
             Glockfarmer:CreateRow(
             "Solenium Ore",
@@ -47,14 +47,14 @@ function Glockfarmer:PrintOre(playerOre, itemFrame)
             playerOre.SoleniumOre.ReagentBank,
             playerOre.ElethiumOre.Bank,
             need
-        )
-        oreGroup:AddChild(soleniumGroup)
+        );
+        oreGroup:AddChild(soleniumGroup);
     end
 
     if (Glockfarmer:CanShowOxxein()) then
         local need =
         Glockfarmer:GetOxxeinNeeded() -
-            (playerOre.OxxeinOre.Bag + playerOre.OxxeinOre.ReagentBank + playerOre.OxxeinOre.Bank)
+            (playerOre.OxxeinOre.Bag + playerOre.OxxeinOre.ReagentBank + playerOre.OxxeinOre.Bank);
         local oxxeinGroup =
             Glockfarmer:CreateRow(
             "Oxxein Ore",
@@ -62,14 +62,14 @@ function Glockfarmer:PrintOre(playerOre, itemFrame)
             playerOre.OxxeinOre.ReagentBank,
             playerOre.OxxeinOre.Bank,
             need
-        )
-        oreGroup:AddChild(oxxeinGroup)
+        );
+        oreGroup:AddChild(oxxeinGroup);
     end
 
     if (Glockfarmer:CanShowPhaedrum()) then
         local need =
         Glockfarmer:GetPhaedrumNeeded() -
-            (playerOre.PhaedrumOre.Bag + playerOre.PhaedrumOre.ReagentBank + playerOre.PhaedrumOre.Bank)
+            (playerOre.PhaedrumOre.Bag + playerOre.PhaedrumOre.ReagentBank + playerOre.PhaedrumOre.Bank);
         local phaedrumGroup =
             Glockfarmer:CreateRow(
             "Phaedrum Ore",
@@ -77,14 +77,14 @@ function Glockfarmer:PrintOre(playerOre, itemFrame)
             playerOre.PhaedrumOre.ReagentBank,
             playerOre.PhaedrumOre.Bank,
             need
-        )
-        oreGroup:AddChild(phaedrumGroup)
+        );
+        oreGroup:AddChild(phaedrumGroup);
     end
 
     if (Glockfarmer:CanShowSinvyr()) then
         local need =
         Glockfarmer:GetSinvyrNeeded() -
-            (playerOre.SinvyrOre.Bag + playerOre.SinvyrOre.ReagentBank + playerOre.SinvyrOre.Bank)
+            (playerOre.SinvyrOre.Bag + playerOre.SinvyrOre.ReagentBank + playerOre.SinvyrOre.Bank);
         local sinvyrGroup =
             Glockfarmer:CreateRow(
             "Sinvyr Ore",
@@ -92,10 +92,96 @@ function Glockfarmer:PrintOre(playerOre, itemFrame)
             playerOre.SinvyrOre.ReagentBank,
             playerOre.SinvyrOre.Bank,
             need
-        )
-        oreGroup:AddChild(sinvyrGroup)
+        );
+        oreGroup:AddChild(sinvyrGroup);
     end
-    itemFrame:AddChild(oreGroup)
+    itemFrame:AddChild(oreGroup);
+end
+function Glockfarmer:PrintOreLine(playerOre, toolTip)
+    toolTip:AddLine("Ore: ");
+    if (Glockfarmer:CanShowLaestrite()) then
+        local need =
+        Glockfarmer:GetLaestriteNeeded() -
+            (playerOre.LaestriteOre.Bag + playerOre.LaestriteOre.ReagentBank + playerOre.LaestriteOre.Bank);
+        Glockfarmer:CreateLine(
+            "Laestrite Ore",
+            playerOre.LaestriteOre.Bag,
+            playerOre.LaestriteOre.ReagentBank,
+            playerOre.LaestriteOre.Bank,
+            need,
+            toolTip
+        );
+    end
+
+    if (Glockfarmer:CanShowElethium()) then
+        local need =
+        Glockfarmer:GetElethiumNeeded() -
+            (playerOre.ElethiumOre.Bag + playerOre.ElethiumOre.ReagentBank + playerOre.ElethiumOre.Bank);
+        Glockfarmer:CreateLine(
+            "Elethium Ore",
+            playerOre.ElethiumOre.Bag,
+            playerOre.ElethiumOre.ReagentBank,
+            playerOre.ElethiumOre.Bank,
+            need,
+            toolTip
+        );
+    end
+
+    if (Glockfarmer:CanShowSolenium()) then
+        local need =
+        Glockfarmer:GetSoleniumNeeded() -
+            (playerOre.ElethiumOre.Bag + playerOre.ElethiumOre.ReagentBank + playerOre.ElethiumOre.Bank);
+        Glockfarmer:CreateLine(
+            "Solenium Ore",
+            playerOre.SoleniumOre.Bag,
+            playerOre.SoleniumOre.ReagentBank,
+            playerOre.ElethiumOre.Bank,
+            need,
+            toolTip
+        );
+    end
+
+    if (Glockfarmer:CanShowOxxein()) then
+        local need =
+        Glockfarmer:GetOxxeinNeeded() -
+            (playerOre.OxxeinOre.Bag + playerOre.OxxeinOre.ReagentBank + playerOre.OxxeinOre.Bank);
+        Glockfarmer:CreateLine(
+            "Oxxein Ore",
+            playerOre.OxxeinOre.Bag,
+            playerOre.OxxeinOre.ReagentBank,
+            playerOre.OxxeinOre.Bank,
+            need,
+            toolTip
+        );
+    end
+
+    if (Glockfarmer:CanShowPhaedrum()) then
+        local need =
+        Glockfarmer:GetPhaedrumNeeded() -
+            (playerOre.PhaedrumOre.Bag + playerOre.PhaedrumOre.ReagentBank + playerOre.PhaedrumOre.Bank);
+        Glockfarmer:CreateLine(
+            "Phaedrum Ore",
+            playerOre.PhaedrumOre.Bag,
+            playerOre.PhaedrumOre.ReagentBank,
+            playerOre.PhaedrumOre.Bank,
+            need,
+            toolTip
+        );
+    end
+
+    if (Glockfarmer:CanShowSinvyr()) then
+        local need =
+        Glockfarmer:GetSinvyrNeeded() -
+            (playerOre.SinvyrOre.Bag + playerOre.SinvyrOre.ReagentBank + playerOre.SinvyrOre.Bank);
+        Glockfarmer:CreateLine(
+            "Sinvyr Ore",
+            playerOre.SinvyrOre.Bag,
+            playerOre.SinvyrOre.ReagentBank,
+            playerOre.SinvyrOre.Bank,
+            need,
+            toolTip
+        );
+    end
 end
 function Glockfarmer:GetOreCheckbox()
     if not oreCheckbox then

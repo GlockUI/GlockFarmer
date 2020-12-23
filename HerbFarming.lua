@@ -98,17 +98,103 @@ function Glockfarmer:PrintHerbs(playerHerbs, itemFrame)
 
     itemFrame:AddChild(herbsGroup)
 end
+function Glockfarmer:PrintHerbsLine(playerHerbs, toolTip)
+    toolTip:AddLine("Herbs: ");
+    if (Glockfarmer:CanShowDeathblossom()) then
+        local need =
+        Glockfarmer:GetDeathblossomNeeded() -
+            (playerHerbs.DeathBlossom.Bag + playerHerbs.DeathBlossom.ReagentBank + playerHerbs.DeathBlossom.Bank);
+        Glockfarmer:CreateLine(
+            "Death Blossom",
+            playerHerbs.DeathBlossom.Bag,
+            playerHerbs.DeathBlossom.ReagentBank,
+            playerHerbs.DeathBlossom.Bank,
+            need,
+            toolTip
+        );
+    end
+
+    if (Glockfarmer:CanShowNightShade()) then
+        local need =
+        Glockfarmer:GetNightShadeNeeded() -
+            (playerHerbs.NightShade.Bag + playerHerbs.NightShade.ReagentBank + playerHerbs.NightShade.Bank);
+        Glockfarmer:CreateLine(
+            "Nightshade",
+            playerHerbs.NightShade.Bag,
+            playerHerbs.NightShade.ReagentBank,
+            playerHerbs.NightShade.Bank,
+            need,
+            toolTip
+        );
+    end
+
+    if (Glockfarmer:CanShowRisingGlory()) then
+        local need =
+        Glockfarmer:GetRisingGloryNeeded() -
+            (playerHerbs.RisingGlory.Bag + playerHerbs.RisingGlory.ReagentBank + playerHerbs.RisingGlory.Bank);
+        Glockfarmer:CreateLine(
+            "Rising Glory",
+            playerHerbs.RisingGlory.Bag,
+            playerHerbs.RisingGlory.ReagentBank,
+            playerHerbs.RisingGlory.Bank,
+            need,
+            toolTip
+        );
+    end
+
+    if (Glockfarmer:CanShowMarrowRoot()) then
+        local need =
+        Glockfarmer:GetMarrowRootNeeded() -
+            (playerHerbs.Marrowroot.Bag + playerHerbs.Marrowroot.ReagentBank + playerHerbs.Marrowroot.Bank);
+        Glockfarmer:CreateLine(
+            "Marrowroot",
+            playerHerbs.Marrowroot.Bag,
+            playerHerbs.Marrowroot.ReagentBank,
+            playerHerbs.Marrowroot.Bank,
+            need,
+            toolTip
+        );
+    end
+
+    if (Glockfarmer:CanShowWidowbloom()) then
+        local need =
+        Glockfarmer:GetWidowbloomNeeded() -
+            (playerHerbs.Widowbloom.Bag + playerHerbs.Widowbloom.ReagentBank + playerHerbs.Widowbloom.Bank);
+        Glockfarmer:CreateLine(
+            "Widowbloom",
+            playerHerbs.Widowbloom.Bag,
+            playerHerbs.Widowbloom.ReagentBank,
+            playerHerbs.Widowbloom.Bank,
+            need,
+            toolTip
+        );
+    end
+
+    if (Glockfarmer:CanShowVigilsTorch()) then
+        local need =
+        Glockfarmer:GetWidowbloomNeeded() -
+            (playerHerbs.VigilsTorch.Bag + playerHerbs.VigilsTorch.ReagentBank + playerHerbs.VigilsTorch.Bank);
+        Glockfarmer:CreateLine(
+            "Vigils Torch",
+            playerHerbs.VigilsTorch.Bag,
+            playerHerbs.VigilsTorch.ReagentBank,
+            playerHerbs.VigilsTorch.Bank,
+            need,
+            toolTip
+        );
+    end
+end
 function Glockfarmer:GetHerbCheckbox()
     if not herbCheckbox then
-        herbCheckbox = AceGUI:Create("CheckBox")
-        herbCheckbox:SetType("checkbox")
-        herbCheckbox:SetLabel("Show Herbs")
-        herbCheckbox:SetValue(self.db.profile.ShowHerbalism)
+        herbCheckbox = AceGUI:Create("CheckBox");
+        herbCheckbox:SetType("checkbox");
+        herbCheckbox:SetLabel("Show Herbs");
+        herbCheckbox:SetValue(self.db.profile.ShowHerbalism);
         herbCheckbox:SetCallback(
             "OnValueChanged",
             function(widget)
-                self.db.profile.ShowHerbalism = herbCheckbox:GetValue()
-                Glockfarmer:PrintBags()
+                self.db.profile.ShowHerbalism = herbCheckbox:GetValue();
+                Glockfarmer:PrintBags();
             end
         )
         return herbCheckbox;
@@ -120,12 +206,12 @@ function Glockfarmer:ReleaseHerbCheckbox()
     herbCheckbox = nil;
 end
 function Glockfarmer:UpdateHerbCheckbox()
-    herbCheckbox:SetValue(self.db.profile.ShowHerbalism)
+    herbCheckbox:SetValue(self.db.profile.ShowHerbalism);
 end
 function Glockfarmer:ToggleShowHerbs(info, val)
     self.db.profile.ShowHerbalism = val;   
     if herbCheckbox then
-        Glockfarmer:UpdateHerbCheckbox()
+        Glockfarmer:UpdateHerbCheckbox();
     end
     Glockfarmer:ReloadLabel();
 end

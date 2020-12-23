@@ -1,15 +1,15 @@
 local clothCheckbox;
 
 function Glockfarmer:PrintCloth(playerCloth, itemFrame)
-    local clothGroup = AceGUI:Create("InlineGroup")
-    clothGroup:SetTitle("Cloth")
-    clothGroup:SetWidth(400)
-    clothGroup:SetLayout("Flow")
+    local clothGroup = AceGUI:Create("InlineGroup");
+    clothGroup:SetTitle("Cloth");
+    clothGroup:SetWidth(400);
+    clothGroup:SetLayout("Flow");
 
     if (Glockfarmer:CanShowShroudedCloth()) then
         local need =
         Glockfarmer:GetShroudedClothNeeded() -
-            (playerCloth.ShroudedCloth.Bag + playerCloth.ShroudedCloth.ReagentBank + playerCloth.ShroudedCloth.Bank)
+            (playerCloth.ShroudedCloth.Bag + playerCloth.ShroudedCloth.ReagentBank + playerCloth.ShroudedCloth.Bank);
         local shroudedClothGroup =
             Glockfarmer:CreateRow(
             "Shrouded Cloth",
@@ -17,14 +17,14 @@ function Glockfarmer:PrintCloth(playerCloth, itemFrame)
             playerCloth.ShroudedCloth.ReagentBank,
             playerCloth.ShroudedCloth.Bank,
             need
-        )
-        clothGroup:AddChild(shroudedClothGroup)
+        );
+        clothGroup:AddChild(shroudedClothGroup);
     end
 
     if (Glockfarmer:CanShowLightlessSilk()) then
         local need =
         Glockfarmer:GetLightlessSilkNeeded() -
-            (playerCloth.LightlessSilk.Bag + playerCloth.LightlessSilk.ReagentBank + playerCloth.LightlessSilk.Bank)
+            (playerCloth.LightlessSilk.Bag + playerCloth.LightlessSilk.ReagentBank + playerCloth.LightlessSilk.Bank);
         local lightlessClothGroup =
             Glockfarmer:CreateRow(
             "Lightless Silk",
@@ -32,23 +32,53 @@ function Glockfarmer:PrintCloth(playerCloth, itemFrame)
             playerCloth.LightlessSilk.ReagentBank,
             playerCloth.LightlessSilk.Bank,
             need
-        )
-        clothGroup:AddChild(lightlessClothGroup)
+        );
+        clothGroup:AddChild(lightlessClothGroup);
     end
 
-    itemFrame:AddChild(clothGroup)
+    itemFrame:AddChild(clothGroup);
+end
+function Glockfarmer:PrintClothLine(playerCloth, toolTip)
+    toolTip:AddLine("Cloth: ");
+    if (Glockfarmer:CanShowShroudedCloth()) then
+        local need =
+        Glockfarmer:GetShroudedClothNeeded() -
+            (playerCloth.ShroudedCloth.Bag + playerCloth.ShroudedCloth.ReagentBank + playerCloth.ShroudedCloth.Bank);
+        Glockfarmer:CreateLine(
+            "Shrouded Cloth",
+            playerCloth.ShroudedCloth.Bag,
+            playerCloth.ShroudedCloth.ReagentBank,
+            playerCloth.ShroudedCloth.Bank,
+            need,
+            toolTip
+        );
+    end
+
+    if (Glockfarmer:CanShowLightlessSilk()) then
+        local need =
+        Glockfarmer:GetLightlessSilkNeeded() -
+            (playerCloth.LightlessSilk.Bag + playerCloth.LightlessSilk.ReagentBank + playerCloth.LightlessSilk.Bank);
+        Glockfarmer:CreateLine(
+            "Lightless Silk",
+            playerCloth.LightlessSilk.Bag,
+            playerCloth.LightlessSilk.ReagentBank,
+            playerCloth.LightlessSilk.Bank,
+            need,
+            toolTip
+        );
+    end
 end
 function Glockfarmer:GetClothCheckbox()
     if not clothCheckbox then
-        clothCheckbox = AceGUI:Create("CheckBox")
-        clothCheckbox:SetType("checkbox")
-        clothCheckbox:SetLabel("Show Cloth")
-        clothCheckbox:SetValue(self.db.profile.ShowCloth)
+        clothCheckbox = AceGUI:Create("CheckBox");
+        clothCheckbox:SetType("checkbox");
+        clothCheckbox:SetLabel("Show Cloth");
+        clothCheckbox:SetValue(self.db.profile.ShowCloth);
         clothCheckbox:SetCallback(
             "OnValueChanged",
             function(widget)
-                self.db.profile.ShowCloth = clothCheckbox:GetValue()
-                Glockfarmer:PrintBags()
+                self.db.profile.ShowCloth = clothCheckbox:GetValue();
+                Glockfarmer:PrintBags();
             end
         )
         return clothCheckbox;

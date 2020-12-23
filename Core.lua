@@ -1,8 +1,9 @@
 Glockfarmer = LibStub("AceAddon-3.0"):NewAddon("Glockfarmer", "AceConsole-3.0", "AceEvent-3.0");
-AceGUI = LibStub("AceGUI-3.0")
-local playerN = UnitName("player")
-local realm = GetRealmName()
-local playerName = playerN .. "-" .. realm
+AceGUI = LibStub("AceGUI-3.0");
+LibQTip = LibStub('LibQTip-1.0');
+local playerN = UnitName("player");
+local realm = GetRealmName();
+local playerName = playerN .. "-" .. realm;
 
 local Defaults = {
     profile = {
@@ -1144,196 +1145,203 @@ scroll,
 optionDialog, 
 optionsTabGroup, 
 enableMoveCheckbox, 
-upperGroup
-local IsBankOpen = false
+upperGroup;
+local IsBankOpen = false;
 
-SLASH_GLOCKFARMER1 = "/Glockfarmer"
+SLASH_GLOCKFARMER1 = "/Glockfarmer";
 SlashCmdList["GLOCKFARMER"] = function(msg, ...)
     if (msg == "show") then
-        frame:Show()
+        frame:Show();
     elseif (msg == "hide") then
-        frame:Hide()
+        frame:Hide();
     elseif (msg == "scan") then
-        Glockfarmer:PrintBags()
+        Glockfarmer:PrintBags();
     else
-        print("Proper argument not given! please provide show, hide, or scan")
+        print("Proper argument not given! please provide show, hide, or scan");
     end
 end
 function Glockfarmer:CreateRow(labelName, bag, reagent, bank, need)
-    local group = AceGUI:Create("SimpleGroup")
-    group:SetLayout("Flow")
-    group:SetFullWidth(true)
-    local label = AceGUI:Create("Label")
-    label:SetText(labelName .. ": ")
-    label:SetWidth(110)
-    group:AddChild(label)
+    local group = AceGUI:Create("SimpleGroup");
+    group:SetLayout("Flow");
+    group:SetFullWidth(true);
+    local label = AceGUI:Create("Label");
+    label:SetText(labelName .. ": ");
+    label:SetWidth(110);
+    group:AddChild(label);
 
     if (need > 0) then
-        local needLabel = AceGUI:Create("Label")
-        needLabel:SetText("Need:" .. need)
-        needLabel:SetWidth(60)
-        group:AddChild(needLabel)
+        local needLabel = AceGUI:Create("Label");
+        needLabel:SetText("Need:" .. need);
+        needLabel:SetWidth(60);
+        group:AddChild(needLabel);
     else
-        local needLabel = AceGUI:Create("Label")
-        needLabel:SetText("Need: 0")
-        needLabel:SetWidth(60)
-        group:AddChild(needLabel)
+        local needLabel = AceGUI:Create("Label");
+        needLabel:SetText("Need: 0");
+        needLabel:SetWidth(60);
+        group:AddChild(needLabel);
     end
 
-    local bagLabel = AceGUI:Create("Label")
-    bagLabel:SetText("Bag:" .. bag)
-    bagLabel:SetWidth(60)
-    group:AddChild(bagLabel)
+    local bagLabel = AceGUI:Create("Label");
+    bagLabel:SetText("Bag:" .. bag);
+    bagLabel:SetWidth(60);
+    group:AddChild(bagLabel);
 
-    local reagentLabel = AceGUI:Create("Label")
-    reagentLabel:SetText("Reagent:" .. reagent)
-    reagentLabel:SetWidth(80)
-    group:AddChild(reagentLabel)
+    local reagentLabel = AceGUI:Create("Label");
+    reagentLabel:SetText("Reagent:" .. reagent);
+    reagentLabel:SetWidth(80);
+    group:AddChild(reagentLabel);
 
-    local bankLabel = AceGUI:Create("Label")
-    bankLabel:SetText("Bank:" .. bank)
-    bankLabel:SetWidth(60)
-    group:AddChild(bankLabel)
-    return group
+    local bankLabel = AceGUI:Create("Label");
+    bankLabel:SetText("Bank:" .. bank);
+    bankLabel:SetWidth(60);
+    group:AddChild(bankLabel);
+    return group;
+end
+function Glockfarmer:CreateLine(labelName, bag, reagent, bank, need, toolTip)
+     if (need > 0) then
+        toolTip:AddLine(labelName, "Need:" .. need, "Bag:" .. bag, "Reagent:" .. reagent, "Bank:" .. bank);
+    else
+        toolTip:AddLine(labelName, "Need: 0", "Bag:" .. bag, "Reagent:" .. reagent, "Bank:" .. bank);
+    end
 end
 function Glockfarmer:GetPersonalBags()
-    herbDBCount = 0
-    herbNSCount = 0
-    herbRGCount = 0
-    herbMTCount = 0
-    herbWTCount = 0
-    herbVTCount = 0
-    fishingLSCount = 0
-    fishingSPCount = 0
-    fishingPBCount = 0
-    fishingIACount = 0
-    fishingSpineCount = 0
-    fishingETCount = 0
-    clothSCCount = 0
-    clothLSCount = 0
-    laestriteOreCount = 0
-    elethiumOreCount = 0
-    soleniumOreCount = 0
-    oxxeinOreCount = 0
-    phaedrumOreCount = 0
-    sinvyrOreCount = 0
-    desolateLeatherCount = 0
-    pallidBoneCount = 0
-    callousHideCount = 0
-    meatAetheral = 0
-    meatCreepyCrawler = 0
-    meatPhantasmal = 0
-    meatRawSeraphic = 0
-    meatShadowy = 0
-    meatTenebrous = 0
+    herbDBCount = 0;
+    herbNSCount = 0;
+    herbRGCount = 0;
+    herbMTCount = 0;
+    herbWTCount = 0;
+    herbVTCount = 0;
+    fishingLSCount = 0;
+    fishingSPCount = 0;
+    fishingPBCount = 0;
+    fishingIACount = 0;
+    fishingSpineCount = 0;
+    fishingETCount = 0;
+    clothSCCount = 0;
+    clothLSCount = 0;
+    laestriteOreCount = 0;
+    elethiumOreCount = 0;
+    soleniumOreCount = 0;
+    oxxeinOreCount = 0;
+    phaedrumOreCount = 0;
+    sinvyrOreCount = 0;
+    desolateLeatherCount = 0;
+    pallidBoneCount = 0;
+    callousHideCount = 0;
+    meatAetheral = 0;
+    meatCreepyCrawler = 0;
+    meatPhantasmal = 0;
+    meatRawSeraphic = 0;
+    meatShadowy = 0;
+    meatTenebrous = 0;
 
     for i = 0, 4 do
-        local slots = GetContainerNumSlots(i)
+        local slots = GetContainerNumSlots(i);
         for s = 0, slots do
             icon, itemCount, locked, quality, readable, lootable, itemLink, isFiltered, noValue, itemID =
-                GetContainerItemInfo(i, s)
+                GetContainerItemInfo(i, s);
             --Herbs
             if (itemID == 171315) then
-                herbNSCount = herbNSCount + itemCount
+                herbNSCount = herbNSCount + itemCount;
             elseif (itemID == 169701) then
-                herbDBCount = herbDBCount + itemCount
+                herbDBCount = herbDBCount + itemCount;
             elseif (itemID == 168586) then
-                herbRGCount = herbRGCount + itemCount
+                herbRGCount = herbRGCount + itemCount;
             elseif (itemID == 168589) then
-                herbMTCount = herbMTCount + itemCount
+                herbMTCount = herbMTCount + itemCount;
             elseif (itemID == 168583) then
-                herbWTCount = herbWTCount + itemCount
+                herbWTCount = herbWTCount + itemCount;
             elseif (itemID == 170554) then
-                --Fishing
-                herbVTCount = herbVTCount + itemCount
+            --Fishing
+                herbVTCount = herbVTCount + itemCount;
             elseif (itemID == 173032) then
-                fishingLSCount = fishingLSCount + itemCount
+                fishingLSCount = fishingLSCount + itemCount;
             elseif (itemID == 173034) then
-                fishingSPCount = fishingSPCount + itemCount
+                fishingSPCount = fishingSPCount + itemCount;
             elseif (itemID == 173035) then
-                fishingPBCount = fishingPBCount + itemCount
+                fishingPBCount = fishingPBCount + itemCount;
             elseif (itemID == 173033) then
-                fishingIACount = fishingIACount + itemCount
+                fishingIACount = fishingIACount + itemCount;
             elseif (itemID == 173036) then
-                fishingSpineCount = fishingSpineCount + itemCount
+                fishingSpineCount = fishingSpineCount + itemCount;
             elseif (itemID == 173037) then
                 --Cloth
-                fishingETCount = fishingETCount + itemCount
+                fishingETCount = fishingETCount + itemCount;
             elseif (itemID == 173202) then
-                clothSCCount = clothSCCount + itemCount
+                clothSCCount = clothSCCount + itemCount;
             elseif (itemID == 173204) then
                 --Ore
-                clothLSCount = clothLSCount + itemCount
+                clothLSCount = clothLSCount + itemCount;
             elseif (itemID == 171828) then
-                laestriteOreCount = laestriteOreCount + itemCount
+                laestriteOreCount = laestriteOreCount + itemCount;
             elseif (itemID == 171833) then
-                elethiumOreCount = elethiumOreCount + itemCount
+                elethiumOreCount = elethiumOreCount + itemCount;
             elseif (itemID == 171829) then
-                soleniumOreCount = soleniumOreCount + itemCount
+                soleniumOreCount = soleniumOreCount + itemCount;
             elseif (itemID == 171830) then
-                oxxeinOreCount = oxxeinOreCount + itemCount
+                oxxeinOreCount = oxxeinOreCount + itemCount;
             elseif (itemID == 171831) then
-                phaedrumOreCount = phaedrumOreCount + itemCount
+                phaedrumOreCount = phaedrumOreCount + itemCount;
             elseif (itemID == 171832) then
                 --leather
-                sinvyrOreCount = sinvyrOreCount + itemCount
+                sinvyrOreCount = sinvyrOreCount + itemCount;
             elseif (itemID == 172089) then
-                desolateLeatherCount = desolateLeatherCount + itemCount
+                desolateLeatherCount = desolateLeatherCount + itemCount;
             elseif (itemID == 172092) then
-                pallidBoneCount = pallidBoneCount + itemCount
+                pallidBoneCount = pallidBoneCount + itemCount;
             elseif (itemID == 172094) then
                 --meat
-                callousHideCount = callousHideCount + itemCount
+                callousHideCount = callousHideCount + itemCount;
             elseif (itemID == 172052) then
-                meatAetheral = meatAetheral + itemCount
+                meatAetheral = meatAetheral + itemCount;
             elseif (itemID == 179314) then
-                meatCreepyCrawler = meatCreepyCrawler + itemCount
+                meatCreepyCrawler = meatCreepyCrawler + itemCount;
             elseif (itemID == 172055) then
-                meatPhantasmal = meatPhantasmal + itemCount
+                meatPhantasmal = meatPhantasmal + itemCount;
             elseif (itemID == 172054) then
-                meatRawSeraphic = meatRawSeraphic + itemCount
+                meatRawSeraphic = meatRawSeraphic + itemCount;
             elseif (itemID == 179315) then
-                meatShadowy = meatShadowy + itemCount
+                meatShadowy = meatShadowy + itemCount;
             elseif (itemID == 172053) then
-                meatTenebrous = meatTenebrous + itemCount
+                meatTenebrous = meatTenebrous + itemCount;
             end
         end
     end
 
-    self.db.global[playerName].Herbs.DeathBlossom.Bag = herbDBCount
-    self.db.global[playerName].Herbs.NightShade.Bag = herbNSCount
-    self.db.global[playerName].Herbs.RisingGlory.Bag = herbRGCount
-    self.db.global[playerName].Herbs.Marrowroot.Bag = herbMTCount
-    self.db.global[playerName].Herbs.Widowbloom.Bag = herbWTCount
-    self.db.global[playerName].Herbs.VigilsTorch.Bag = herbVTCount
+    self.db.global[playerName].Herbs.DeathBlossom.Bag = herbDBCount;
+    self.db.global[playerName].Herbs.NightShade.Bag = herbNSCount;
+    self.db.global[playerName].Herbs.RisingGlory.Bag = herbRGCount;
+    self.db.global[playerName].Herbs.Marrowroot.Bag = herbMTCount;
+    self.db.global[playerName].Herbs.Widowbloom.Bag = herbWTCount;
+    self.db.global[playerName].Herbs.VigilsTorch.Bag = herbVTCount;
 
-    self.db.global[playerName].Fish.LostSole.Bag = fishingLSCount
-    self.db.global[playerName].Fish.SilverPike.Bag = fishingSPCount
-    self.db.global[playerName].Fish.PoketBoneFish.Bag = fishingPBCount
-    self.db.global[playerName].Fish.Iridescent.Bag = fishingIACount
-    self.db.global[playerName].Fish.SpinefinPiranha.Bag = fishingSpineCount
-    self.db.global[playerName].Fish.Elysian.Bag = fishingETCount
+    self.db.global[playerName].Fish.LostSole.Bag = fishingLSCount;
+    self.db.global[playerName].Fish.SilverPike.Bag = fishingSPCount;
+    self.db.global[playerName].Fish.PoketBoneFish.Bag = fishingPBCount;
+    self.db.global[playerName].Fish.Iridescent.Bag = fishingIACount;
+    self.db.global[playerName].Fish.SpinefinPiranha.Bag = fishingSpineCount;
+    self.db.global[playerName].Fish.Elysian.Bag = fishingETCount;
 
-    self.db.global[playerName].Cloth.LightlessSilk.Bag = clothLSCount
-    self.db.global[playerName].Cloth.ShroudedCloth.Bag = clothSCCount
+    self.db.global[playerName].Cloth.LightlessSilk.Bag = clothLSCount;
+    self.db.global[playerName].Cloth.ShroudedCloth.Bag = clothSCCount;
 
-    self.db.global[playerName].Ore.LaestriteOre.Bag = laestriteOreCount
-    self.db.global[playerName].Ore.ElethiumOre.Bag = elethiumOreCount
-    self.db.global[playerName].Ore.SoleniumOre.Bag = soleniumOreCount
-    self.db.global[playerName].Ore.OxxeinOre.Bag = oxxeinOreCount
-    self.db.global[playerName].Ore.PhaedrumOre.Bag = phaedrumOreCount
-    self.db.global[playerName].Ore.SinvyrOre.Bag = sinvyrOreCount
+    self.db.global[playerName].Ore.LaestriteOre.Bag = laestriteOreCount;
+    self.db.global[playerName].Ore.ElethiumOre.Bag = elethiumOreCount;
+    self.db.global[playerName].Ore.SoleniumOre.Bag = soleniumOreCount;
+    self.db.global[playerName].Ore.OxxeinOre.Bag = oxxeinOreCount;
+    self.db.global[playerName].Ore.PhaedrumOre.Bag = phaedrumOreCount;
+    self.db.global[playerName].Ore.SinvyrOre.Bag = sinvyrOreCount;
 
-    self.db.global[playerName].Leather.DesolateLeather.Bag = desolateLeatherCount
-    self.db.global[playerName].Leather.PallidBone.Bag = pallidBoneCount
-    self.db.global[playerName].Leather.CallousHide.Bag = callousHideCount
+    self.db.global[playerName].Leather.DesolateLeather.Bag = desolateLeatherCount;
+    self.db.global[playerName].Leather.PallidBone.Bag = pallidBoneCount;
+    self.db.global[playerName].Leather.CallousHide.Bag = callousHideCount;
 
-    self.db.global[playerName].Meat.Athereal.Bag = meatAetheral
-    self.db.global[playerName].Meat.CreepingCrawler.Bag = meatCreepyCrawler
-    self.db.global[playerName].Meat.PhantasmalHaunch.Bag = meatPhantasmal
-    self.db.global[playerName].Meat.RawSeraphicWing.Bag = meatRawSeraphic
-    self.db.global[playerName].Meat.ShadowyShank.Bag = meatShadowy
-    self.db.global[playerName].Meat.TenebrousRibs.Bag = meatTenebrous
+    self.db.global[playerName].Meat.Athereal.Bag = meatAetheral;
+    self.db.global[playerName].Meat.CreepingCrawler.Bag = meatCreepyCrawler;
+    self.db.global[playerName].Meat.PhantasmalHaunch.Bag = meatPhantasmal;
+    self.db.global[playerName].Meat.RawSeraphicWing.Bag = meatRawSeraphic;
+    self.db.global[playerName].Meat.ShadowyShank.Bag = meatShadowy;
+    self.db.global[playerName].Meat.TenebrousRibs.Bag = meatTenebrous;
 end
 function Glockfarmer:GetReagentBank()
     herbDBCount = 0
@@ -1614,72 +1622,97 @@ function Glockfarmer:ReloadLabel()
     itemsGroup:ReleaseChildren()
     if (self.db.profile.ShowAllCharacters) then
         for i, playerTable in pairs(self.db.global) do
-            local playerGroup = AceGUI:Create("InlineGroup")
-            playerGroup:SetTitle(i)
-            playerGroup:SetWidth(420)
-            playerGroup:SetLayout("Flow")
+            local playerGroup = AceGUI:Create("InlineGroup");
+            playerGroup:SetTitle(i);
+            playerGroup:SetWidth(420);
+            playerGroup:SetLayout("Flow");
 
-            if (self.db.profile.ShowHerbalism) then
-                Glockfarmer:PrintHerbs(self.db.global[i].Herbs, playerGroup)
+            if (Glockfarmer:CanShowHerbs()) then
+                Glockfarmer:PrintHerbs(self.db.global[i].Herbs, playerGroup);
             end
 
-            if (self.db.profile.ShowFish) then
-                Glockfarmer:PrintFish(self.db.global[i].Fish, playerGroup)
+            if (Glockfarmer:CanShowFish()) then
+                Glockfarmer:PrintFish(self.db.global[i].Fish, playerGroup);
             end
 
-            if (self.db.profile.ShowMeat) then
-                Glockfarmer:PrintMeat(self.db.global[i].Meat, playerGroup)
+            if (Glockfarmer:CanShowMeat()) then
+                Glockfarmer:PrintMeat(self.db.global[i].Meat, playerGroup);
             end
 
-            if (self.db.profile.ShowCloth) then
-                Glockfarmer:PrintCloth(self.db.global[i].Cloth, playerGroup)
+            if (Glockfarmer:CanShowCloth()) then
+                Glockfarmer:PrintCloth(self.db.global[i].Cloth, playerGroup);
             end
 
-            if (self.db.profile.ShowOre) then
-                Glockfarmer:PrintOre(self.db.global[i].Ore, playerGroup)
+            if (Glockfarmer:CanShowOre()) then
+                Glockfarmer:PrintOre(self.db.global[i].Ore, playerGroup);
             end
 
-            if (self.db.profile.ShowLeather) then
-                Glockfarmer:PrintLeather(self.db.global[i].Leather, playerGroup)
+            if (Glockfarmer:CanShowLeather()) then
+                Glockfarmer:PrintLeather(self.db.global[i].Leather, playerGroup);
             end
 
-            itemsGroup:AddChild(playerGroup)
+            itemsGroup:AddChild(playerGroup);
         end
     else
-        local playerGroup = AceGUI:Create("InlineGroup")
-        playerGroup:SetTitle(playerName)
-        playerGroup:SetFullWidth(true)
-        playerGroup:SetLayout("Flow")
+        local playerGroup = AceGUI:Create("InlineGroup");
+        playerGroup:SetTitle(playerName);
+        playerGroup:SetFullWidth(true);
+        playerGroup:SetLayout("Flow");
 
-        if (self.db.profile.ShowHerbalism) then
-            Glockfarmer:PrintHerbs(self.db.global[playerName].Herbs, playerGroup)
+        if (Glockfarmer:CanShowHerbs()) then
+            Glockfarmer:PrintHerbs(self.db.global[playerName].Herbs, playerGroup);
         end
 
-        if (self.db.profile.ShowFish) then
-            Glockfarmer:PrintFish(self.db.global[playerName].Fish, playerGroup)
+        if (Glockfarmer:CanShowFish()) then
+            Glockfarmer:PrintFish(self.db.global[playerName].Fish, playerGroup);
         end
 
-        if (self.db.profile.ShowMeat) then
-            Glockfarmer:PrintMeat(self.db.global[playerName].Meat, playerGroup)
+        if (Glockfarmer:CanShowMeat()) then
+            Glockfarmer:PrintMeat(self.db.global[playerName].Meat, playerGroup);
         end
 
-        if (self.db.profile.ShowCloth) then
-            Glockfarmer:PrintCloth(self.db.global[playerName].Cloth, playerGroup)
+        if (Glockfarmer:CanShowCloth()) then
+            Glockfarmer:PrintCloth(self.db.global[playerName].Cloth, playerGroup);
         end
 
-        if (self.db.profile.ShowOre) then
-            Glockfarmer:PrintOre(self.db.global[playerName].Ore, playerGroup)
+        if (Glockfarmer:CanShowOre()) then
+            Glockfarmer:PrintOre(self.db.global[playerName].Ore, playerGroup);
         end
 
-        if (self.db.profile.ShowLeather) then
-            Glockfarmer:PrintLeather(self.db.global[playerName].Leather, playerGroup)
+        if (Glockfarmer:CanShowLeather()) then
+            Glockfarmer:PrintLeather(self.db.global[playerName].Leather, playerGroup);
         end
 
-        itemsGroup:AddChild(playerGroup)
+        itemsGroup:AddChild(playerGroup);
     end
 
     scroll:DoLayout()
 end
+function Glockfarmer:GetTooltip(toolTip)
+    if (Glockfarmer:CanShowHerbs()) then
+        Glockfarmer:PrintHerbsLine(self.db.global[playerName].Herbs, toolTip);
+    end
+    if (Glockfarmer:CanShowFish()) then
+        Glockfarmer:PrintFishLine(self.db.global[playerName].Fish, toolTip);
+    end
+
+    if (Glockfarmer:CanShowMeat()) then
+        Glockfarmer:PrintMeatLine(self.db.global[playerName].Meat, toolTip);
+    end
+
+    if (Glockfarmer:CanShowCloth()) then
+        Glockfarmer:PrintClothLine(self.db.global[playerName].Cloth, toolTip);
+    end
+
+    if (Glockfarmer:CanShowOre()) then
+        Glockfarmer:PrintOreLine(self.db.global[playerName].Ore, toolTip);
+    end
+
+    if (Glockfarmer:CanShowLeather()) then
+        Glockfarmer:PrintLeatherLine(self.db.global[playerName].Leather, toolTip);
+    end
+end
+
 function Glockfarmer:PrintBags()
     Glockfarmer:GetPersonalBags()
 
@@ -1695,7 +1728,6 @@ function Glockfarmer:OnInitialize()
     self.db = LibStub("AceDB-3.0"):New("FarmDB", Defaults, true);
     LibStub("AceConfig-3.0"):RegisterOptionsTable("GlockFarmer", myOptionsTable, {"gfopts"});
     self.optionsFrame = LibStub("AceConfigDialog-3.0"):AddToBlizOptions("GlockFarmer", "GlockFarmer");
-
     frame = AceGUI:Create("GlockFrame");
     frame:SetLayout("Fill");
     frame:SetTitle("Glock Farmer");
@@ -1709,9 +1741,9 @@ function Glockfarmer:OnInitialize()
     frame:SetHeight(self.db.profile.FrameHeight);
     frame:SetWidth(self.db.profile.FrameWidth);
 
-    scroll = AceGUI:Create("ScrollFrame")
-    scroll:SetLayout("List")
-    frame:AddChild(scroll)
+    scroll = AceGUI:Create("ScrollFrame");
+    scroll:SetLayout("List");
+    frame:AddChild(scroll);
 
     upperGroup = AceGUI:Create("SimpleGroup");
     upperGroup:SetFullWidth(true);
@@ -1725,12 +1757,12 @@ function Glockfarmer:OnInitialize()
     upperGroup:AddChild(optionsTabGroup);
     scroll:AddChild(upperGroup);
 
-    itemsGroup = AceGUI:Create("InlineGroup")
-    itemsGroup:SetTitle("Items")
-    itemsGroup:SetFullWidth(true)
-    itemsGroup:SetLayout("Flow")
-    scroll:AddChild(itemsGroup)
-    frame:Show()
+    itemsGroup = AceGUI:Create("InlineGroup");
+    itemsGroup:SetTitle("Items");
+    itemsGroup:SetFullWidth(true);
+    itemsGroup:SetLayout("Flow");
+    scroll:AddChild(itemsGroup);
+    frame:Show();
 end
 function Glockfarmer:OnEnable()
     -- Called when the addon is enabled
@@ -1741,6 +1773,32 @@ function Glockfarmer:OnEnable()
 end
 function Glockfarmer:PLAYER_ENTERING_WORLD()
     Glockfarmer:PrintBags();
+    GlockfarmerLDB = LibStub("LibDataBroker-1.1"):NewDataObject("GlockFarmer", {
+		type = "data source",
+		text = "Glock Farmer",
+		icon = "Interface\\Icons\\Spell_Holy_Dizzy",
+		OnEnter = function(self)
+			-- GameTooltip:SetOwner(self, "ANCHOR_NONE")
+            -- GameTooltip:SetPoint("TOPLEFT", self, "BOTTOMLEFT")
+            -- GameTooltip:ClearLines()
+            -- Glockfarmer:GetTooltip(GameTooltip);
+            -- GameTooltip:Show()
+            -- Acquire a tooltip with 3 columns, respectively aligned to left, center and right
+            local tooltip = LibQTip:Acquire("GlockFarmerTooltip", 5, "LEFT", "LEFT", "LEFT", "LEFT", "LEFT");
+            self.tooltip = tooltip;   
+            -- Use smart anchoring code to anchor the tooltip to our frame
+            tooltip:SmartAnchorTo(self);
+            Glockfarmer:GetTooltip(tooltip);
+            -- Show it, et voilà !
+            tooltip:Show();
+		end,
+		OnLeave = function(self)
+            --GameTooltip:Hide()
+            self.tooltip:Hide();
+            LibQTip:Release(self.tooltip);
+            self.tooltip = nil;
+		end,
+	});
 end
 function Glockfarmer:BAG_UPDATE()
     Glockfarmer:PrintBags()

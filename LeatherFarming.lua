@@ -1,16 +1,16 @@
 local leatherCheckbox;
 
 function Glockfarmer:PrintLeather(playerLeather, itemFrame)
-    local leatherGroup = AceGUI:Create("InlineGroup")
-    leatherGroup:SetTitle("Leather")
-    leatherGroup:SetWidth(400)
-    leatherGroup:SetLayout("Flow")
+    local leatherGroup = AceGUI:Create("InlineGroup");
+    leatherGroup:SetTitle("Leather");
+    leatherGroup:SetWidth(400);
+    leatherGroup:SetLayout("Flow");
 
     if (Glockfarmer:CanShowDesolate()) then
         local need =
             Glockfarmer:GetDesolateNeeded() -
             (playerLeather.DesolateLeather.Bag + playerLeather.DesolateLeather.ReagentBank +
-                playerLeather.DesolateLeather.Bank)
+                playerLeather.DesolateLeather.Bank);
         local desolateGroup =
             Glockfarmer:CreateRow(
             "Desolate Leather",
@@ -18,14 +18,14 @@ function Glockfarmer:PrintLeather(playerLeather, itemFrame)
             playerLeather.DesolateLeather.ReagentBank,
             playerLeather.DesolateLeather.Bank,
             need
-        )
-        leatherGroup:AddChild(desolateGroup)
+        );
+        leatherGroup:AddChild(desolateGroup);
     end
 
     if (Glockfarmer:CanShowPallidBone()) then
         local need =
             Glockfarmer:GetPallidBoneNeeded() -
-            (playerLeather.PallidBone.Bag + playerLeather.PallidBone.ReagentBank + playerLeather.PallidBone.Bank)
+            (playerLeather.PallidBone.Bag + playerLeather.PallidBone.ReagentBank + playerLeather.PallidBone.Bank);
         local pallidBoneGroup =
             Glockfarmer:CreateRow(
             "Pallid Bone",
@@ -33,14 +33,14 @@ function Glockfarmer:PrintLeather(playerLeather, itemFrame)
             playerLeather.PallidBone.ReagentBank,
             playerLeather.PallidBone.Bank,
             need
-        )
-        leatherGroup:AddChild(pallidBoneGroup)
+        );
+        leatherGroup:AddChild(pallidBoneGroup);
     end
 
     if (Glockfarmer:CanShowCallous()) then
         local need =
             Glockfarmer:GetCallousNeeded() -
-            (playerLeather.CallousHide.Bag + playerLeather.CallousHide.ReagentBank + playerLeather.CallousHide.Bank)
+            (playerLeather.CallousHide.Bag + playerLeather.CallousHide.ReagentBank + playerLeather.CallousHide.Bank);
         local callousHideGroup =
             Glockfarmer:CreateRow(
             "Callous Hide",
@@ -48,11 +48,56 @@ function Glockfarmer:PrintLeather(playerLeather, itemFrame)
             playerLeather.CallousHide.ReagentBank,
             playerLeather.CallousHide.Bank,
             need
-        )
-        leatherGroup:AddChild(callousHideGroup)
+        );
+        leatherGroup:AddChild(callousHideGroup);
     end
 
-    itemFrame:AddChild(leatherGroup)
+    itemFrame:AddChild(leatherGroup);
+end
+function Glockfarmer:PrintLeatherLine(playerLeather, toolTip)
+    toolTip:AddLine("Leather: ");
+    if (Glockfarmer:CanShowDesolate()) then
+        local need =
+            Glockfarmer:GetDesolateNeeded() -
+            (playerLeather.DesolateLeather.Bag + playerLeather.DesolateLeather.ReagentBank +
+                playerLeather.DesolateLeather.Bank);
+        Glockfarmer:CreateLine(
+            "Desolate Leather",
+            playerLeather.DesolateLeather.Bag,
+            playerLeather.DesolateLeather.ReagentBank,
+            playerLeather.DesolateLeather.Bank,
+            need,
+            toolTip
+        );
+    end
+
+    if (Glockfarmer:CanShowPallidBone()) then
+        local need =
+            Glockfarmer:GetPallidBoneNeeded() -
+            (playerLeather.PallidBone.Bag + playerLeather.PallidBone.ReagentBank + playerLeather.PallidBone.Bank);
+        Glockfarmer:CreateLine(
+            "Pallid Bone",
+            playerLeather.PallidBone.Bag,
+            playerLeather.PallidBone.ReagentBank,
+            playerLeather.PallidBone.Bank,
+            need,
+            toolTip
+        );
+    end
+
+    if (Glockfarmer:CanShowCallous()) then
+        local need =
+            Glockfarmer:GetCallousNeeded() -
+            (playerLeather.CallousHide.Bag + playerLeather.CallousHide.ReagentBank + playerLeather.CallousHide.Bank);
+        Glockfarmer:CreateLine(
+            "Callous Hide",
+            playerLeather.CallousHide.Bag,
+            playerLeather.CallousHide.ReagentBank,
+            playerLeather.CallousHide.Bank,
+            need,
+            toolTip
+        );
+    end
 end
 function Glockfarmer:GetLeatherCheckbox()
     if not leatherCheckbox then
