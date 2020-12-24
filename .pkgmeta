@@ -1,0 +1,12 @@
+required-dependencies:
+    - ACE3
+    - LibQTip-1.0
+    - CallbackHandler
+    - LibDataBroker-1.1
+
+optional-dependencies:
+    - Titan Panel
+
+license-output: LICENSE
+
+manual-changelog: CHANGELOG.txt

@@ -1,3 +1,4 @@
+local L = LibStub("AceLocale-3.0"):GetLocale("GlockFarmer");
 local oreCheckbox;
 
 function Glockfarmer:PrintOre(playerOre, itemFrame)
@@ -12,12 +13,12 @@ function Glockfarmer:PrintOre(playerOre, itemFrame)
             (playerOre.LaestriteOre.Bag + playerOre.LaestriteOre.ReagentBank + playerOre.LaestriteOre.Bank);
         local laestriteGroup =
             Glockfarmer:CreateRow(
-            "Laestrite Ore",
-            playerOre.LaestriteOre.Bag,
-            playerOre.LaestriteOre.ReagentBank,
-            playerOre.LaestriteOre.Bank,
-            need
-        );
+                L["Laestrite"],
+                playerOre.LaestriteOre.Bag,
+                playerOre.LaestriteOre.ReagentBank,
+                playerOre.LaestriteOre.Bank,
+                need
+            );
         oreGroup:AddChild(laestriteGroup);
     end
 
@@ -27,12 +28,12 @@ function Glockfarmer:PrintOre(playerOre, itemFrame)
             (playerOre.ElethiumOre.Bag + playerOre.ElethiumOre.ReagentBank + playerOre.ElethiumOre.Bank);
         local elethiumGroup =
             Glockfarmer:CreateRow(
-            "Elethium Ore",
-            playerOre.ElethiumOre.Bag,
-            playerOre.ElethiumOre.ReagentBank,
-            playerOre.ElethiumOre.Bank,
-            need
-        );
+                L["Elethium"],
+                playerOre.ElethiumOre.Bag,
+                playerOre.ElethiumOre.ReagentBank,
+                playerOre.ElethiumOre.Bank,
+                need
+            );
         oreGroup:AddChild(elethiumGroup);
     end
 
@@ -42,12 +43,12 @@ function Glockfarmer:PrintOre(playerOre, itemFrame)
             (playerOre.ElethiumOre.Bag + playerOre.ElethiumOre.ReagentBank + playerOre.ElethiumOre.Bank);
         local soleniumGroup =
             Glockfarmer:CreateRow(
-            "Solenium Ore",
-            playerOre.SoleniumOre.Bag,
-            playerOre.SoleniumOre.ReagentBank,
-            playerOre.ElethiumOre.Bank,
-            need
-        );
+                L["Solenium"],
+                playerOre.SoleniumOre.Bag,
+                playerOre.SoleniumOre.ReagentBank,
+                playerOre.ElethiumOre.Bank,
+                need
+            );
         oreGroup:AddChild(soleniumGroup);
     end
 
@@ -57,12 +58,12 @@ function Glockfarmer:PrintOre(playerOre, itemFrame)
             (playerOre.OxxeinOre.Bag + playerOre.OxxeinOre.ReagentBank + playerOre.OxxeinOre.Bank);
         local oxxeinGroup =
             Glockfarmer:CreateRow(
-            "Oxxein Ore",
-            playerOre.OxxeinOre.Bag,
-            playerOre.OxxeinOre.ReagentBank,
-            playerOre.OxxeinOre.Bank,
-            need
-        );
+                L["Oxxein"],
+                playerOre.OxxeinOre.Bag,
+                playerOre.OxxeinOre.ReagentBank,
+                playerOre.OxxeinOre.Bank,
+                need
+            );
         oreGroup:AddChild(oxxeinGroup);
     end
 
@@ -72,12 +73,12 @@ function Glockfarmer:PrintOre(playerOre, itemFrame)
             (playerOre.PhaedrumOre.Bag + playerOre.PhaedrumOre.ReagentBank + playerOre.PhaedrumOre.Bank);
         local phaedrumGroup =
             Glockfarmer:CreateRow(
-            "Phaedrum Ore",
-            playerOre.PhaedrumOre.Bag,
-            playerOre.PhaedrumOre.ReagentBank,
-            playerOre.PhaedrumOre.Bank,
-            need
-        );
+                L["Phaedrum"],
+                playerOre.PhaedrumOre.Bag,
+                playerOre.PhaedrumOre.ReagentBank,
+                playerOre.PhaedrumOre.Bank,
+                need
+            );
         oreGroup:AddChild(phaedrumGroup);
     end
 
@@ -87,12 +88,12 @@ function Glockfarmer:PrintOre(playerOre, itemFrame)
             (playerOre.SinvyrOre.Bag + playerOre.SinvyrOre.ReagentBank + playerOre.SinvyrOre.Bank);
         local sinvyrGroup =
             Glockfarmer:CreateRow(
-            "Sinvyr Ore",
-            playerOre.SinvyrOre.Bag,
-            playerOre.SinvyrOre.ReagentBank,
-            playerOre.SinvyrOre.Bank,
-            need
-        );
+                L["Sinvyr"],
+                playerOre.SinvyrOre.Bag,
+                playerOre.SinvyrOre.ReagentBank,
+                playerOre.SinvyrOre.Bank,
+                need
+            );
         oreGroup:AddChild(sinvyrGroup);
     end
     itemFrame:AddChild(oreGroup);
@@ -104,7 +105,7 @@ function Glockfarmer:PrintOreLine(playerOre, toolTip)
         Glockfarmer:GetLaestriteNeeded() -
             (playerOre.LaestriteOre.Bag + playerOre.LaestriteOre.ReagentBank + playerOre.LaestriteOre.Bank);
         Glockfarmer:CreateLine(
-            "Laestrite Ore",
+            L["Laestrite"],
             playerOre.LaestriteOre.Bag,
             playerOre.LaestriteOre.ReagentBank,
             playerOre.LaestriteOre.Bank,
@@ -118,7 +119,7 @@ function Glockfarmer:PrintOreLine(playerOre, toolTip)
         Glockfarmer:GetElethiumNeeded() -
             (playerOre.ElethiumOre.Bag + playerOre.ElethiumOre.ReagentBank + playerOre.ElethiumOre.Bank);
         Glockfarmer:CreateLine(
-            "Elethium Ore",
+            L["Elethium"],
             playerOre.ElethiumOre.Bag,
             playerOre.ElethiumOre.ReagentBank,
             playerOre.ElethiumOre.Bank,
@@ -132,7 +133,7 @@ function Glockfarmer:PrintOreLine(playerOre, toolTip)
         Glockfarmer:GetSoleniumNeeded() -
             (playerOre.ElethiumOre.Bag + playerOre.ElethiumOre.ReagentBank + playerOre.ElethiumOre.Bank);
         Glockfarmer:CreateLine(
-            "Solenium Ore",
+            L["Solenium"],
             playerOre.SoleniumOre.Bag,
             playerOre.SoleniumOre.ReagentBank,
             playerOre.ElethiumOre.Bank,
@@ -146,7 +147,7 @@ function Glockfarmer:PrintOreLine(playerOre, toolTip)
         Glockfarmer:GetOxxeinNeeded() -
             (playerOre.OxxeinOre.Bag + playerOre.OxxeinOre.ReagentBank + playerOre.OxxeinOre.Bank);
         Glockfarmer:CreateLine(
-            "Oxxein Ore",
+            L["Oxxein"],
             playerOre.OxxeinOre.Bag,
             playerOre.OxxeinOre.ReagentBank,
             playerOre.OxxeinOre.Bank,
@@ -160,7 +161,7 @@ function Glockfarmer:PrintOreLine(playerOre, toolTip)
         Glockfarmer:GetPhaedrumNeeded() -
             (playerOre.PhaedrumOre.Bag + playerOre.PhaedrumOre.ReagentBank + playerOre.PhaedrumOre.Bank);
         Glockfarmer:CreateLine(
-            "Phaedrum Ore",
+            L["Phaedrum"],
             playerOre.PhaedrumOre.Bag,
             playerOre.PhaedrumOre.ReagentBank,
             playerOre.PhaedrumOre.Bank,
@@ -174,7 +175,7 @@ function Glockfarmer:PrintOreLine(playerOre, toolTip)
         Glockfarmer:GetSinvyrNeeded() -
             (playerOre.SinvyrOre.Bag + playerOre.SinvyrOre.ReagentBank + playerOre.SinvyrOre.Bank);
         Glockfarmer:CreateLine(
-            "Sinvyr Ore",
+            L["Sinvyr"],
             playerOre.SinvyrOre.Bag,
             playerOre.SinvyrOre.ReagentBank,
             playerOre.SinvyrOre.Bank,
@@ -187,7 +188,7 @@ function Glockfarmer:GetOreCheckbox()
     if not oreCheckbox then
         oreCheckbox = AceGUI:Create("CheckBox");
         oreCheckbox:SetType("checkbox");
-        oreCheckbox:SetLabel("Show Ore");
+        oreCheckbox:SetLabel(L["ShowsAllOre"]);
         oreCheckbox:SetValue(self.db.profile.ShowOre);
         oreCheckbox:SetCallback(
             "OnValueChanged",

@@ -1,4 +1,5 @@
 Glockfarmer = LibStub("AceAddon-3.0"):NewAddon("Glockfarmer", "AceConsole-3.0", "AceEvent-3.0");
+local L = LibStub("AceLocale-3.0"):GetLocale("GlockFarmer");
 AceGUI = LibStub("AceGUI-3.0");
 LibQTip = LibStub('LibQTip-1.0');
 local playerN = UnitName("player");
@@ -345,7 +346,7 @@ local Defaults = {
 }
 
 local myOptionsTable = {
-    name = "Glock Farmer",
+    name = L["AddonTitle"],
     handler = Glockfarmer,
     type = "group",
     args = {
@@ -354,7 +355,7 @@ local myOptionsTable = {
             type = "group",
             args = {
                 Herbalism = {
-                    name = "Shows All Herbs",
+                    name = L["ShowAllHerbs"],
                     desc = "",
                     type = "toggle",
                     set = "ToggleShowHerbs",
@@ -363,7 +364,7 @@ local myOptionsTable = {
                     width = "full"
                 },
                 ShowDeathBlossom = {
-                    name = "Show Death Blossom",
+                    name = L["ShowDeathBlossom"],
                     desc = "",
                     type = "toggle",
                     set = "ToggleShowDeathblossom",
@@ -374,7 +375,7 @@ local myOptionsTable = {
                     order = 1
                 },
                 DeathBlossomNeeded = {
-                    name = "Death Blossom Needed",
+                    name = L["NeedDeathBlossom"],
                     desc = "",
                     type = "input",
                     set = "SetDeathblossomNeeded",
@@ -387,7 +388,7 @@ local myOptionsTable = {
                     confirm = false
                 },
                 ShowNightShade = {
-                    name = "Show Night Shade",
+                    name = L["ShowNightshade"],
                     desc = "",
                     type = "toggle",
                     set = "ToggleShowNightShade",
@@ -398,7 +399,7 @@ local myOptionsTable = {
                     order = 3
                 },
                 NightShadeNeeded = {
-                    name = "Night Shade Needed",
+                    name = L["NeedNightshade"],
                     desc = "",
                     type = "input",
                     set = "SetNightShadeNeeded",
@@ -411,7 +412,7 @@ local myOptionsTable = {
                     confirm = false
                 },
                 ShowRisingGlory = {
-                    name = "Show Rising Glory",
+                    name = L["ShowRisingGlory"],
                     desc = "",
                     type = "toggle",
                     set = "ToggleShowRisingGlory",
@@ -422,7 +423,7 @@ local myOptionsTable = {
                     order = 5
                 },
                 RisingGloryNeeded = {
-                    name = "Rising Glory Needed",
+                    name = L["NeedRisingGlory"],
                     desc = "",
                     type = "input",
                     set = "SetRisingGloryNeeded",
@@ -435,7 +436,7 @@ local myOptionsTable = {
                     confirm = false
                 },
                 ShowMarrowRoot = {
-                    name = "Show MarrowRoot",
+                    name = L["ShowMarrowRoot"],
                     desc = "",
                     type = "toggle",
                     set = "ToggleShowMarrowRoot",
@@ -446,7 +447,7 @@ local myOptionsTable = {
                     order = 7
                 },
                 MarrowRootNeeded = {
-                    name = "MarrowRoot Needed",
+                    name = L["NeedMarrowRoot"],
                     desc = "",
                     type = "input",
                     set = "SetMarrowRootNeeded",
@@ -459,7 +460,7 @@ local myOptionsTable = {
                     confirm = false
                 },
                 ShowWidowbloom = {
-                    name = "Show Widowbloom",
+                    name = L["ShowWidowbloom"],
                     desc = "",
                     type = "toggle",
                     set = "ToggleShowWidowbloom",
@@ -470,7 +471,7 @@ local myOptionsTable = {
                     order = 9
                 },
                 WidowbloomNeeded = {
-                    name = "Widowbloom Needed",
+                    name = L["NeedWidowbloom"],
                     desc = "",
                     type = "input",
                     set = "SetWidowbloomNeeded",
@@ -483,7 +484,7 @@ local myOptionsTable = {
                     confirm = false
                 },
                 ShowVigilsTorch = {
-                    name = "Show Vigils Torch",
+                    name = L["ShowVigilsTorch"],
                     desc = "",
                     type = "toggle",
                     set = "ToggleShowVigilsTorch",
@@ -494,7 +495,7 @@ local myOptionsTable = {
                     order = 11
                 },
                 VigilsTorchNeeded = {
-                    name = "Vigils Torch Needed",
+                    name = L["NeedVigilsTorch"],
                     desc = "",
                     type = "input",
                     set = "SetVigilsTorchNeeded",
@@ -513,7 +514,7 @@ local myOptionsTable = {
             type = "group",
             args = {
                 Fish = {
-                    name = "Shows All Fish",
+                    name = L["ShowsAllFish"],
                     desc = "",
                     type = "toggle",
                     set = "ToggleShowFish",
@@ -522,7 +523,7 @@ local myOptionsTable = {
                     width = "full"
                 },
                 ShowLostSole = {
-                    name = "Show Lost Sole",
+                    name = L["ShowLostSole"],
                     desc = "",
                     type = "toggle",
                     set = "ToggleShowLostSole",
@@ -533,7 +534,7 @@ local myOptionsTable = {
                     order = 1
                 },
                 LostSoleNeeded = {
-                    name = "Lost Sole Needed",
+                    name = L["NeedLostSole"],
                     desc = "",
                     type = "input",
                     set = "SetLostSoleNeeded",
@@ -546,7 +547,7 @@ local myOptionsTable = {
                     confirm = false
                 },
                 ShowSilverPike = {
-                    name = "Show Silver Pike",
+                    name = L["ShowSilverPike"],
                     desc = "",
                     type = "toggle",
                     set = "ToggleShowSilverPike",
@@ -557,7 +558,7 @@ local myOptionsTable = {
                     order = 3
                 },
                 SilverPikeNeeded = {
-                    name = "Silver Pike Needed",
+                    name = L["NeedSilverPike"],
                     desc = "",
                     type = "input",
                     set = "SetSilverPikeNeeded",
@@ -570,7 +571,7 @@ local myOptionsTable = {
                     confirm = false
                 },
                 ShowPocketBonefish = {
-                    name = "Show Pocket Bonefish",
+                    name = L["ShowPocketBonefish"],
                     desc = "",
                     type = "toggle",
                     set = "ToggleShowPocketBonefish",
@@ -581,7 +582,7 @@ local myOptionsTable = {
                     order = 5
                 },
                 PocketBonefishNeeded = {
-                    name = "Pocket Bonefish Needed",
+                    name = L["NeedPocketBonefish"],
                     desc = "",
                     type = "input",
                     set = "SetPocketBonefishNeeded",
@@ -594,7 +595,7 @@ local myOptionsTable = {
                     confirm = false
                 },
                 ShowIridescent = {
-                    name = "Show Iridescent Amberjack",
+                    name = L["ShowIridescent"],
                     desc = "",
                     type = "toggle",
                     set = "ToggleShowIridescent",
@@ -605,7 +606,7 @@ local myOptionsTable = {
                     order = 7
                 },
                 IridescentNeeded = {
-                    name = "Iridescent Amberjack Needed",
+                    name = L["NeedIridescent"],
                     desc = "",
                     type = "input",
                     set = "SetIridescentNeeded",
@@ -618,7 +619,7 @@ local myOptionsTable = {
                     confirm = false
                 },
                 ShowSpinefinPiranha = {
-                    name = "Show Spinefin Piranha",
+                    name = L["ShowSpinefinPiranha"],
                     desc = "",
                     type = "toggle",
                     set = "ToggleShowSpinefinPiranha",
@@ -629,7 +630,7 @@ local myOptionsTable = {
                     order = 9
                 },
                 SpinefinPiranhaNeeded = {
-                    name = "Spinefin Piranha Needed",
+                    name = L["NeedSpinefinPiranha"],
                     desc = "",
                     type = "input",
                     set = "SetSpinefinPiranhaNeeded",
@@ -642,7 +643,7 @@ local myOptionsTable = {
                     confirm = false
                 },
                 ShowElysian = {
-                    name = "Show Elysian Thade",
+                    name = L["ShowElysian"],
                     desc = "",
                     type = "toggle",
                     set = "ToggleShowElysian",
@@ -653,7 +654,7 @@ local myOptionsTable = {
                     order = 11
                 },
                 ElysianNeeded = {
-                    name = "Elysian Thade Needed",
+                    name = L["NeedElysian"],
                     desc = "",
                     type = "input",
                     set = "SetElysianNeeded",
@@ -681,7 +682,7 @@ local myOptionsTable = {
                     width = "full"
                 },
                 ShowAethereal = {
-                    name = "Show Aethereal Meat",
+                    name = L["ShowAethereal"],
                     desc = "",
                     type = "toggle",
                     set = "ToggleShowAethereal",
@@ -692,7 +693,7 @@ local myOptionsTable = {
                     order = 1
                 },
                 AetherealNeeded = {
-                    name = "Aethereal Meat Needed",
+                    name = L["NeedAethereal"],
                     desc = "",
                     type = "input",
                     set = "SetAetherealNeeded",
@@ -705,7 +706,7 @@ local myOptionsTable = {
                     confirm = false
                 },
                 ShowCreepingCrawlerMeat = {
-                    name = "Show Creeping Crawler Meat",
+                    name = L["ShowCreepingCrawler"],
                     desc = "",
                     type = "toggle",
                     set = "ToggleShowCreepingCrawlerMeat",
@@ -716,7 +717,7 @@ local myOptionsTable = {
                     order = 3
                 },
                 CreepingCrawlerMeatNeeded = {
-                    name = "Creeping Crawler Needed",
+                    name = L["NeedCreepingCrawler"],
                     desc = "",
                     type = "input",
                     set = "SetCreepingCrawlerMeatNeeded",
@@ -729,7 +730,7 @@ local myOptionsTable = {
                     confirm = false
                 },
                 ShowRawSeraphicWing = {
-                    name = "Show Raw Seraphic Wing",
+                    name = L["ShowRawSeraphicWing"],
                     desc = "",
                     type = "toggle",
                     set = "ToggleShowRawSeraphicWing",
@@ -740,7 +741,7 @@ local myOptionsTable = {
                     order = 5
                 },
                 RawSeraphicWingNeeded = {
-                    name = "Creeping Crawler Needed",
+                    name = L["NeedRawSeraphicWing"],
                     desc = "",
                     type = "input",
                     set = "SetRawSeraphicWingNeeded",
@@ -753,7 +754,7 @@ local myOptionsTable = {
                     confirm = false
                 },
                 ShowPhantasmalHaunch = {
-                    name = "Show Phantasmal Haunch",
+                    name = L["ShowPhantasmalHaunch"],
                     desc = "",
                     type = "toggle",
                     set = "ToggleShowPhantasmalHaunch",
@@ -764,7 +765,7 @@ local myOptionsTable = {
                     order = 7
                 },
                 PhantasmalHaunchNeeded = {
-                    name = "Phantasmal Haunch Needed",
+                    name = L["NeedPhantasmalHaunch"],
                     desc = "",
                     type = "input",
                     set = "SetPhantasmalHaunchNeeded",
@@ -777,7 +778,7 @@ local myOptionsTable = {
                     confirm = false
                 },
                 ShowShadowyShank = {
-                    name = "Show Shadowy Shank",
+                    name = L["ShowShadowyShank"],
                     desc = "",
                     type = "toggle",
                     set = "ToggleShowShadowyShank",
@@ -788,7 +789,7 @@ local myOptionsTable = {
                     order = 9
                 },
                 ShadowyShankNeeded = {
-                    name = "Shadowy Shank Needed",
+                    name = L["NeedShadowyShank"],
                     desc = "",
                     type = "input",
                     set = "SetShadowyShankNeeded",
@@ -801,7 +802,7 @@ local myOptionsTable = {
                     confirm = false
                 },
                 ShowTenebrousRibs = {
-                    name = "Show Tenebrous Ribs",
+                    name = L["ShowTenebrousRibs"],
                     desc = "",
                     type = "toggle",
                     set = "ToggleShowTenebrousRibs",
@@ -812,7 +813,7 @@ local myOptionsTable = {
                     order = 11
                 },
                 TenebrousRibsNeeded = {
-                    name = "Tenebrous Ribs Needed",
+                    name = L["NeedTenebrousRibs"],
                     desc = "",
                     type = "input",
                     set = "SetTenebrousRibsNeeded",
@@ -831,7 +832,7 @@ local myOptionsTable = {
             type = "group",
             args = {
                 Cloth = {
-                    name = "Shows All Cloth",
+                    name = L["ShowsAllCloth"],
                     desc = "",
                     type = "toggle",
                     set = "ToggleShowCloth",
@@ -840,7 +841,7 @@ local myOptionsTable = {
                     width = "full"
                 },
                 ShowShroudedCloth = {
-                    name = "Show Shrouded Cloth",
+                    name = L["ShowShroudedCloth"],
                     desc = "",
                     type = "toggle",
                     set = "ToggleShowShroudedCloth",
@@ -851,7 +852,7 @@ local myOptionsTable = {
                     order = 1
                 },
                 ShroudedClothNeeded = {
-                    name = "Shrouded Cloth Needed",
+                    name = L["NeedShroudedCloth"],
                     desc = "",
                     type = "input",
                     set = "SetShroudedClothNeeded",
@@ -864,7 +865,7 @@ local myOptionsTable = {
                     confirm = false
                 },
                 ShowLightlessSilk = {
-                    name = "Show Lightless Silk",
+                    name = L["ShowLightlessSilk"],
                     desc = "",
                     type = "toggle",
                     set = "ToggleShowLightlessSilk",
@@ -875,7 +876,7 @@ local myOptionsTable = {
                     order = 3
                 },
                 LightlessSilkNeeded = {
-                    name = "Lightless Silk Needed",
+                    name = L["NeedLightlessSilk"],
                     desc = "",
                     type = "input",
                     set = "SetLightlessSilkNeeded",
@@ -894,7 +895,7 @@ local myOptionsTable = {
             type = "group",
             args = {
                 Leather = {
-                    name = "Shows All Leather",
+                    name = L["ShowsAllLeather"],
                     desc = "",
                     type = "toggle",
                     set = "ToggleShowLeather",
@@ -903,7 +904,7 @@ local myOptionsTable = {
                     width = "full"
                 },
                 ShowDesolate = {
-                    name = "Show Desolate",
+                    name = L["ShowDesolate"],
                     desc = "",
                     type = "toggle",
                     set = "ToggleShowDesolate",
@@ -914,7 +915,7 @@ local myOptionsTable = {
                     order = 1
                 },
                 DesolateNeeded = {
-                    name = "Desolate Needed",
+                    name = L["NeedDesolate"],
                     desc = "",
                     type = "input",
                     set = "SetDesolateNeeded",
@@ -927,7 +928,7 @@ local myOptionsTable = {
                     confirm = false
                 },
                 ShowPallidBone = {
-                    name = "Show Pallid Bone",
+                    name = L["ShowPallidBone"],
                     desc = "",
                     type = "toggle",
                     set = "ToggleShowPallidBone",
@@ -938,7 +939,7 @@ local myOptionsTable = {
                     order = 3
                 },
                 PallidBoneNeeded = {
-                    name = "Pallid Bone Needed",
+                    name = L["NeedPallidBone"],
                     desc = "",
                     type = "input",
                     set = "SetPallidBoneNeeded",
@@ -951,7 +952,7 @@ local myOptionsTable = {
                     confirm = false
                 },
                 ShowCallous = {
-                    name = "Show Callous Hide",
+                    name = L["ShowCallousHide"],
                     desc = "",
                     type = "toggle",
                     set = "ToggleShowCallous",
@@ -962,7 +963,7 @@ local myOptionsTable = {
                     order = 5
                 },
                 CallousNeeded = {
-                    name = "Callous Hide Needed",
+                    name = L["NeedCallousHide"],
                     desc = "",
                     type = "input",
                     set = "SetCallousNeeded",
@@ -981,7 +982,7 @@ local myOptionsTable = {
             type = "group",
             args = {
                 Ore = {
-                    name = "Shows All Ore",
+                    name = L["ShowsAllOre"],
                     desc = "",
                     type = "toggle",
                     set = "ToggleShowOre",
@@ -990,7 +991,7 @@ local myOptionsTable = {
                     width = "full"
                 },
                 ShowLaestrite = {
-                    name = "Show Laestrite",
+                    name = L["ShowLaestrite"],
                     desc = "",
                     type = "toggle",
                     set = "ToggleShowLaestrite",
@@ -1001,7 +1002,7 @@ local myOptionsTable = {
                     order = 1
                 },
                 LaestriteNeeded = {
-                    name = "Laestrite Needed",
+                    name = L["NeedLaestrite"],
                     desc = "",
                     type = "input",
                     set = "SetLaestriteNeeded",
@@ -1014,7 +1015,7 @@ local myOptionsTable = {
                     confirm = false
                 },
                 ShowElethium = {
-                    name = "Show Elethium",
+                    name = L["ShowElethium"],
                     desc = "",
                     type = "toggle",
                     set = "ToggleShowElethium",
@@ -1025,7 +1026,7 @@ local myOptionsTable = {
                     order = 3
                 },
                 ElethiumNeeded = {
-                    name = "Elethium Needed",
+                    name = L["NeedElethium"],
                     desc = "",
                     type = "input",
                     set = "SetElethiumNeeded",
@@ -1038,7 +1039,7 @@ local myOptionsTable = {
                     confirm = false
                 },
                 ShowSolenium = {
-                    name = "Show Solenium",
+                    name = L["ShowSolenium"],
                     desc = "",
                     type = "toggle",
                     set = "ToggleShowSolenium",
@@ -1049,7 +1050,7 @@ local myOptionsTable = {
                     order = 5
                 },
                 SoleniumNeeded = {
-                    name = "Solenium Needed",
+                    name = L["NeedSolenium"],
                     desc = "",
                     type = "input",
                     set = "SetSoleniumNeeded",
@@ -1062,7 +1063,7 @@ local myOptionsTable = {
                     confirm = false
                 },
                 ShowOxxein = {
-                    name = "Show Oxxein",
+                    name = L["ShowOxxein"],
                     desc = "",
                     type = "toggle",
                     set = "ToggleShowOxxein",
@@ -1073,7 +1074,7 @@ local myOptionsTable = {
                     order = 7
                 },
                 OxxeinNeeded = {
-                    name = "Oxxein Needed",
+                    name = L["NeedOxxein"],
                     desc = "",
                     type = "input",
                     set = "SetOxxeinNeeded",
@@ -1086,7 +1087,7 @@ local myOptionsTable = {
                     confirm = false
                 },
                 ShowPhaedrum = {
-                    name = "Show Phaedrum",
+                    name = L["ShowPhaedrum"],
                     desc = "",
                     type = "toggle",
                     set = "ToggleShowPhaedrum",
@@ -1097,7 +1098,7 @@ local myOptionsTable = {
                     order = 9
                 },
                 PhaedrumNeeded = {
-                    name = "Phaedrum Needed",
+                    name = L["NeedPhaedrum"] ,
                     desc = "",
                     type = "input",
                     set = "SetPhaedrumNeeded",
@@ -1110,7 +1111,7 @@ local myOptionsTable = {
                     confirm = false
                 },
                 ShowSinvyr = {
-                    name = "Show Sinvyr",
+                    name = L["ShowSinvyr"],
                     desc = "",
                     type = "toggle",
                     set = "ToggleShowSinvyr",
@@ -1121,7 +1122,7 @@ local myOptionsTable = {
                     order = 11
                 },
                 SinvyrNeeded = {
-                    name = "Sinvyr Needed",
+                    name = L["NeedSinvyr"],
                     desc = "",
                     type = "input",
                     set = "SetSinvyrNeeded",
@@ -1164,9 +1165,11 @@ function Glockfarmer:CreateRow(labelName, bag, reagent, bank, need)
     local group = AceGUI:Create("SimpleGroup");
     group:SetLayout("Flow");
     group:SetFullWidth(true);
-    local label = AceGUI:Create("Label");
+    local label = AceGUI:Create("GlockLabel");
     label:SetText(labelName .. ": ");
     label:SetWidth(110);
+    label:SetCallback("OnEnter", LabelTooltipOnEnter);
+    label:SetCallback("OnLeave", LabelTooltipLeave);
     group:AddChild(label);
 
     if (need > 0) then
@@ -1196,6 +1199,87 @@ function Glockfarmer:CreateRow(labelName, bag, reagent, bank, need)
     bankLabel:SetWidth(60);
     group:AddChild(bankLabel);
     return group;
+end
+function LabelTooltipOnEnter(self)
+    local tooltip = LibQTip:Acquire("GlockFarmerTooltip", 1, "LEFT");
+    self.tooltip = tooltip;   
+    -- Use smart anchoring code to anchor the tooltip to our frame
+    tooltip:SmartAnchorTo(self.frame);
+    local labelText = self.label:GetText();
+    if labelText == L["Nightshade"] .. ": " then
+        tooltip:AddLine(L["NightshadeLocation"]);
+    elseif labelText == L["DeathBlossom"] .. ": " then
+        tooltip:AddLine(L["DeathBlossomLocation"]);
+    elseif labelText == L["RisingGlory"] .. ": " then
+        tooltip:AddLine(L["RisingGloryLocation"] );
+    elseif labelText == L["MarrowRoot"] .. ": " then
+        tooltip:AddLine(L["MarrowRootLocation"] );
+    elseif labelText == L["Widowbloom"] .. ": " then
+        tooltip:AddLine(L["WidowbloomLocation"] );
+    elseif labelText == L["VigilsTorch"] .. ": " then
+        tooltip:AddLine(L["VigilsTorchLocation"] );
+    --Fish
+    elseif labelText == L["LostSole"] .. ": " then
+        tooltip:AddLine(L["LostSoleLocation"]);
+    elseif labelText == L["SilverPike"] .. ": " then
+        tooltip:AddLine(L["SilverPikeLocation"]);
+    elseif labelText == L["PocketBonefish"] .. ": " then
+        tooltip:AddLine(L["PocketBonefishLocation"]);
+    elseif labelText == L["Iridescent"] .. ": " then
+        tooltip:AddLine(L["IridescentLocation"]);
+    elseif labelText == L["SpinefinPiranha"] .. ": " then
+        tooltip:AddLine(L["SpinefinPiranhaLocation"]);
+    elseif labelText == L["Elysian"] .. ": " then
+        tooltip:AddLine(L["ElysianLocation"]);
+    --Fish
+    elseif labelText == L["ShroudedCloth"] .. ": " then
+        tooltip:AddLine(L["ShroudedClothLocation"]);
+    elseif labelText == L["LightlessSilk"] .. ": " then
+        tooltip:AddLine(L["LightlessSilkLocation"]);
+    --Leather
+    elseif labelText == L["Desolate"] .. ": " then
+        tooltip:AddLine(L["DesolateLocation"]);
+    elseif labelText == L["PallidBone"] .. ": " then
+        tooltip:AddLine(L["PallidBoneLocation"]);
+    elseif labelText == L["CallousHide"] .. ": " then
+        tooltip:AddLine(L["CallousHideLocation"]);
+    --Ore
+    elseif labelText == L["Laestrite"] .. ": " then
+        tooltip:AddLine(L["LaestriteLocation"]);
+    elseif labelText == L["Elethium"] .. ": " then
+        tooltip:AddLine(L["ElethiumLocation"]);
+    elseif labelText == L["Solenium"] .. ": " then
+        tooltip:AddLine(L["SoleniumLocation"]);
+    elseif labelText == L["Oxxein"] .. ": " then
+        tooltip:AddLine(L["OxxeinLocation"]);
+    elseif labelText == L["Phaedrum"] .. ": " then
+        tooltip:AddLine(L["PhaedrumLocation"]);
+    elseif labelText == L["Sinvyr"] .. ": " then
+        tooltip:AddLine(L["SinvyrLocation"]);
+    --Meat
+    elseif labelText == L["Aethereal"] .. ": " then
+        tooltip:AddLine(L["AetherealLocation"]);
+    elseif labelText == L["CreepingCrawler"] .. ": " then
+        tooltip:AddLine(L["CreepingCrawlerLocation"]);
+    elseif labelText == L["RawSeraphicWing"] .. ": " then
+        tooltip:AddLine(L["RawSeraphicWingLocation"]);
+    elseif labelText == L["PhantasmalHaunch"] .. ": " then
+        tooltip:AddLine(L["PhantasmalHaunchLocation"]);
+    elseif labelText == L["ShadowyShank"] .. ": " then
+        tooltip:AddLine(L["ShadowyShankLocation"]);
+    elseif labelText == L["TenebrousRibs"] .. ": " then
+        tooltip:AddLine(L["TenebrousRibsLocation"]);
+    else
+        tooltip:AddLine("A tooltip has not been added for this item.");
+    end
+    -- Show it, et voilà !
+    tooltip:Show();
+    --print(self.label:GetText());
+end
+function LabelTooltipLeave(self)
+    self.tooltip:Hide();
+    LibQTip:Release(self.tooltip);
+    self.tooltip = nil;
 end
 function Glockfarmer:CreateLine(labelName, bag, reagent, bank, need, toolTip)
      if (need > 0) then
@@ -1778,12 +1862,6 @@ function Glockfarmer:PLAYER_ENTERING_WORLD()
 		text = "Glock Farmer",
 		icon = "Interface\\Icons\\Spell_Holy_Dizzy",
 		OnEnter = function(self)
-			-- GameTooltip:SetOwner(self, "ANCHOR_NONE")
-            -- GameTooltip:SetPoint("TOPLEFT", self, "BOTTOMLEFT")
-            -- GameTooltip:ClearLines()
-            -- Glockfarmer:GetTooltip(GameTooltip);
-            -- GameTooltip:Show()
-            -- Acquire a tooltip with 3 columns, respectively aligned to left, center and right
             local tooltip = LibQTip:Acquire("GlockFarmerTooltip", 5, "LEFT", "LEFT", "LEFT", "LEFT", "LEFT");
             self.tooltip = tooltip;   
             -- Use smart anchoring code to anchor the tooltip to our frame
@@ -1817,7 +1895,7 @@ function Glockfarmer:CheckNumber(info, num)
     if (type(a) == "number") then
         return true
     else
-        return "This entry must be a number"
+        return L["CheckNumberError"];
     end
 end
 
@@ -1825,7 +1903,7 @@ end
 function Glockfarmer:DrawMainOptionsGroup(container)
     local enableMoveCheckbox = AceGUI:Create("CheckBox")
     enableMoveCheckbox:SetType("checkbox")
-    enableMoveCheckbox:SetLabel("Enable Move");
+    enableMoveCheckbox:SetLabel(L["EnableMove"]);
     enableMoveCheckbox:SetValue(false)
     enableMoveCheckbox:SetCallback(
         "OnValueChanged",
@@ -1839,7 +1917,7 @@ function Glockfarmer:DrawMainOptionsGroup(container)
 
     local enableResizeCheckbox = AceGUI:Create("CheckBox")
     enableResizeCheckbox:SetType("checkbox");
-    enableResizeCheckbox:SetLabel("Enable Resize");
+    enableResizeCheckbox:SetLabel(L["EnableResize"]);
     enableResizeCheckbox:SetValue(false)
     enableResizeCheckbox:SetCallback(
         "OnValueChanged",
@@ -1867,7 +1945,7 @@ function Glockfarmer:DrawGatheringOptionsGroup(container)
 
     allCharsCheckbox = AceGUI:Create("CheckBox")
     allCharsCheckbox:SetType("checkbox")
-    allCharsCheckbox:SetLabel("Show All Characters")
+    allCharsCheckbox:SetLabel(L["ShowAllChars"])
     allCharsCheckbox:SetValue(self.db.profile.ShowAllCharacters)
     allCharsCheckbox:SetCallback(
         "OnValueChanged",
@@ -1879,7 +1957,7 @@ function Glockfarmer:DrawGatheringOptionsGroup(container)
     container:AddChild(allCharsCheckbox)
 
     local button = AceGUI:Create("GlockButton");
-    button:SetText("More Options");
+    button:SetText(L["MoreOptions"]);
     button:SetWidth(100);
     button:SetCallback(
         "OnClick",

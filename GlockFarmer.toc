@@ -1,13 +1,20 @@
 ## Interface: 90002
 ## Title: GlockFarmer
 ## Author: Glockness
-## Version: 1.0.0
+## Version: 1.1.0
 ## Notes: Allows for Tracking all of our Farmed Items
 ## SavedVariables: FarmDB
 ## X-License: All rights reserved (See license.md)
 ## X-Category: Professions
 ## X-Embeds: Ace3, LibQTip-1.0, CallbackHandler-1.0, LibStub, LibDataBroker-1.1
 Libs\LibQTip-1.0\LibQTip-1.0.lua
+
+Glockframe.lua
+GlockButton.lua
+GlockLabel.lua
+
+Locales\enUS.lua
+
 Core.lua
 MeatFarming.lua
 OreFarming.lua
@@ -15,6 +22,5 @@ ClothFarming.lua
 FishingFarming.lua
 HerbFarming.lua
 LeatherFarming.lua
-Glockframe.lua
-GlockButton.lua
+
 embeds.xml

@@ -1,3 +1,4 @@
+local L = LibStub("AceLocale-3.0"):GetLocale("GlockFarmer");
 local leatherCheckbox;
 
 function Glockfarmer:PrintLeather(playerLeather, itemFrame)
@@ -13,12 +14,12 @@ function Glockfarmer:PrintLeather(playerLeather, itemFrame)
                 playerLeather.DesolateLeather.Bank);
         local desolateGroup =
             Glockfarmer:CreateRow(
-            "Desolate Leather",
-            playerLeather.DesolateLeather.Bag,
-            playerLeather.DesolateLeather.ReagentBank,
-            playerLeather.DesolateLeather.Bank,
-            need
-        );
+                L["Desolate"],
+                playerLeather.DesolateLeather.Bag,
+                playerLeather.DesolateLeather.ReagentBank,
+                playerLeather.DesolateLeather.Bank,
+                need
+            );
         leatherGroup:AddChild(desolateGroup);
     end
 
@@ -28,12 +29,12 @@ function Glockfarmer:PrintLeather(playerLeather, itemFrame)
             (playerLeather.PallidBone.Bag + playerLeather.PallidBone.ReagentBank + playerLeather.PallidBone.Bank);
         local pallidBoneGroup =
             Glockfarmer:CreateRow(
-            "Pallid Bone",
-            playerLeather.PallidBone.Bag,
-            playerLeather.PallidBone.ReagentBank,
-            playerLeather.PallidBone.Bank,
-            need
-        );
+                L["PallidBone"],
+                playerLeather.PallidBone.Bag,
+                playerLeather.PallidBone.ReagentBank,
+                playerLeather.PallidBone.Bank,
+                need
+            );
         leatherGroup:AddChild(pallidBoneGroup);
     end
 
@@ -43,12 +44,12 @@ function Glockfarmer:PrintLeather(playerLeather, itemFrame)
             (playerLeather.CallousHide.Bag + playerLeather.CallousHide.ReagentBank + playerLeather.CallousHide.Bank);
         local callousHideGroup =
             Glockfarmer:CreateRow(
-            "Callous Hide",
-            playerLeather.CallousHide.Bag,
-            playerLeather.CallousHide.ReagentBank,
-            playerLeather.CallousHide.Bank,
-            need
-        );
+                L["CallousHide"],
+                playerLeather.CallousHide.Bag,
+                playerLeather.CallousHide.ReagentBank,
+                playerLeather.CallousHide.Bank,
+                need
+            );
         leatherGroup:AddChild(callousHideGroup);
     end
 
@@ -62,7 +63,7 @@ function Glockfarmer:PrintLeatherLine(playerLeather, toolTip)
             (playerLeather.DesolateLeather.Bag + playerLeather.DesolateLeather.ReagentBank +
                 playerLeather.DesolateLeather.Bank);
         Glockfarmer:CreateLine(
-            "Desolate Leather",
+            L["Desolate"],
             playerLeather.DesolateLeather.Bag,
             playerLeather.DesolateLeather.ReagentBank,
             playerLeather.DesolateLeather.Bank,
@@ -76,7 +77,7 @@ function Glockfarmer:PrintLeatherLine(playerLeather, toolTip)
             Glockfarmer:GetPallidBoneNeeded() -
             (playerLeather.PallidBone.Bag + playerLeather.PallidBone.ReagentBank + playerLeather.PallidBone.Bank);
         Glockfarmer:CreateLine(
-            "Pallid Bone",
+            L["PallidBone"],
             playerLeather.PallidBone.Bag,
             playerLeather.PallidBone.ReagentBank,
             playerLeather.PallidBone.Bank,
@@ -90,7 +91,7 @@ function Glockfarmer:PrintLeatherLine(playerLeather, toolTip)
             Glockfarmer:GetCallousNeeded() -
             (playerLeather.CallousHide.Bag + playerLeather.CallousHide.ReagentBank + playerLeather.CallousHide.Bank);
         Glockfarmer:CreateLine(
-            "Callous Hide",
+            L["CallousHide"],
             playerLeather.CallousHide.Bag,
             playerLeather.CallousHide.ReagentBank,
             playerLeather.CallousHide.Bank,
@@ -103,7 +104,7 @@ function Glockfarmer:GetLeatherCheckbox()
     if not leatherCheckbox then
         leatherCheckbox = AceGUI:Create("CheckBox");
         leatherCheckbox:SetType("checkbox");
-        leatherCheckbox:SetLabel("Show Leather");
+        leatherCheckbox:SetLabel(L["ShowsAllLeather"]);
         leatherCheckbox:SetValue(self.db.profile.ShowLeather);
         leatherCheckbox:SetCallback(
             "OnValueChanged",

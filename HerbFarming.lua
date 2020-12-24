@@ -1,3 +1,5 @@
+LibQTip = LibStub('LibQTip-1.0');
+local L = LibStub("AceLocale-3.0"):GetLocale("GlockFarmer")
 local herbCheckbox;
 
 function Glockfarmer:PrintHerbs(playerHerbs, itemFrame)
@@ -12,12 +14,12 @@ function Glockfarmer:PrintHerbs(playerHerbs, itemFrame)
             (playerHerbs.DeathBlossom.Bag + playerHerbs.DeathBlossom.ReagentBank + playerHerbs.DeathBlossom.Bank)
         local deathBlossomGroup =
             Glockfarmer:CreateRow(
-            "Death Blossom",
-            playerHerbs.DeathBlossom.Bag,
-            playerHerbs.DeathBlossom.ReagentBank,
-            playerHerbs.DeathBlossom.Bank,
-            need
-        )
+                L["DeathBlossom"],
+                playerHerbs.DeathBlossom.Bag,
+                playerHerbs.DeathBlossom.ReagentBank,
+                playerHerbs.DeathBlossom.Bank,
+                need
+            )
         herbsGroup:AddChild(deathBlossomGroup)
     end
 
@@ -27,12 +29,12 @@ function Glockfarmer:PrintHerbs(playerHerbs, itemFrame)
             (playerHerbs.NightShade.Bag + playerHerbs.NightShade.ReagentBank + playerHerbs.NightShade.Bank)
         local nightshadeGroup =
             Glockfarmer:CreateRow(
-            "Nightshade",
-            playerHerbs.NightShade.Bag,
-            playerHerbs.NightShade.ReagentBank,
-            playerHerbs.NightShade.Bank,
-            need
-        )
+                L["Nightshade"],
+                playerHerbs.NightShade.Bag,
+                playerHerbs.NightShade.ReagentBank,
+                playerHerbs.NightShade.Bank,
+                need
+            )
         herbsGroup:AddChild(nightshadeGroup)
     end
 
@@ -42,12 +44,12 @@ function Glockfarmer:PrintHerbs(playerHerbs, itemFrame)
             (playerHerbs.RisingGlory.Bag + playerHerbs.RisingGlory.ReagentBank + playerHerbs.RisingGlory.Bank)
         local risingGloryGroup =
             Glockfarmer:CreateRow(
-            "Rising Glory",
-            playerHerbs.RisingGlory.Bag,
-            playerHerbs.RisingGlory.ReagentBank,
-            playerHerbs.RisingGlory.Bank,
-            need
-        )
+                L["RisingGlory"],
+                playerHerbs.RisingGlory.Bag,
+                playerHerbs.RisingGlory.ReagentBank,
+                playerHerbs.RisingGlory.Bank,
+                need
+            )
         herbsGroup:AddChild(risingGloryGroup)
     end
 
@@ -57,12 +59,12 @@ function Glockfarmer:PrintHerbs(playerHerbs, itemFrame)
             (playerHerbs.Marrowroot.Bag + playerHerbs.Marrowroot.ReagentBank + playerHerbs.Marrowroot.Bank)
         local marrowrootGroup =
             Glockfarmer:CreateRow(
-            "Marrowroot",
-            playerHerbs.Marrowroot.Bag,
-            playerHerbs.Marrowroot.ReagentBank,
-            playerHerbs.Marrowroot.Bank,
-            need
-        )
+                L["MarrowRoot"],
+                playerHerbs.Marrowroot.Bag,
+                playerHerbs.Marrowroot.ReagentBank,
+                playerHerbs.Marrowroot.Bank,
+                need
+            )
         herbsGroup:AddChild(marrowrootGroup)
     end
 
@@ -72,12 +74,12 @@ function Glockfarmer:PrintHerbs(playerHerbs, itemFrame)
             (playerHerbs.Widowbloom.Bag + playerHerbs.Widowbloom.ReagentBank + playerHerbs.Widowbloom.Bank)
         local widowbloomGroup =
             Glockfarmer:CreateRow(
-            "Widowbloom",
-            playerHerbs.Widowbloom.Bag,
-            playerHerbs.Widowbloom.ReagentBank,
-            playerHerbs.Widowbloom.Bank,
-            need
-        )
+                L["Widowbloom"],
+                playerHerbs.Widowbloom.Bag,
+                playerHerbs.Widowbloom.ReagentBank,
+                playerHerbs.Widowbloom.Bank,
+                need
+            )
         herbsGroup:AddChild(widowbloomGroup)
     end
 
@@ -87,12 +89,12 @@ function Glockfarmer:PrintHerbs(playerHerbs, itemFrame)
             (playerHerbs.VigilsTorch.Bag + playerHerbs.VigilsTorch.ReagentBank + playerHerbs.VigilsTorch.Bank)
         local vigilsTorchGroup =
             Glockfarmer:CreateRow(
-            "Vigils Torch",
-            playerHerbs.VigilsTorch.Bag,
-            playerHerbs.VigilsTorch.ReagentBank,
-            playerHerbs.VigilsTorch.Bank,
-            need
-        )
+                L["VigilsTorch"],
+                playerHerbs.VigilsTorch.Bag,
+                playerHerbs.VigilsTorch.ReagentBank,
+                playerHerbs.VigilsTorch.Bank,
+                need
+            )
         herbsGroup:AddChild(vigilsTorchGroup)
     end
 
@@ -105,7 +107,7 @@ function Glockfarmer:PrintHerbsLine(playerHerbs, toolTip)
         Glockfarmer:GetDeathblossomNeeded() -
             (playerHerbs.DeathBlossom.Bag + playerHerbs.DeathBlossom.ReagentBank + playerHerbs.DeathBlossom.Bank);
         Glockfarmer:CreateLine(
-            "Death Blossom",
+            L["DeathBlossom"],
             playerHerbs.DeathBlossom.Bag,
             playerHerbs.DeathBlossom.ReagentBank,
             playerHerbs.DeathBlossom.Bank,
@@ -119,7 +121,7 @@ function Glockfarmer:PrintHerbsLine(playerHerbs, toolTip)
         Glockfarmer:GetNightShadeNeeded() -
             (playerHerbs.NightShade.Bag + playerHerbs.NightShade.ReagentBank + playerHerbs.NightShade.Bank);
         Glockfarmer:CreateLine(
-            "Nightshade",
+            L["Nightshade"],
             playerHerbs.NightShade.Bag,
             playerHerbs.NightShade.ReagentBank,
             playerHerbs.NightShade.Bank,
@@ -133,7 +135,7 @@ function Glockfarmer:PrintHerbsLine(playerHerbs, toolTip)
         Glockfarmer:GetRisingGloryNeeded() -
             (playerHerbs.RisingGlory.Bag + playerHerbs.RisingGlory.ReagentBank + playerHerbs.RisingGlory.Bank);
         Glockfarmer:CreateLine(
-            "Rising Glory",
+            L["RisingGlory"],
             playerHerbs.RisingGlory.Bag,
             playerHerbs.RisingGlory.ReagentBank,
             playerHerbs.RisingGlory.Bank,
@@ -147,7 +149,7 @@ function Glockfarmer:PrintHerbsLine(playerHerbs, toolTip)
         Glockfarmer:GetMarrowRootNeeded() -
             (playerHerbs.Marrowroot.Bag + playerHerbs.Marrowroot.ReagentBank + playerHerbs.Marrowroot.Bank);
         Glockfarmer:CreateLine(
-            "Marrowroot",
+            L["MarrowRoot"],
             playerHerbs.Marrowroot.Bag,
             playerHerbs.Marrowroot.ReagentBank,
             playerHerbs.Marrowroot.Bank,
@@ -161,7 +163,7 @@ function Glockfarmer:PrintHerbsLine(playerHerbs, toolTip)
         Glockfarmer:GetWidowbloomNeeded() -
             (playerHerbs.Widowbloom.Bag + playerHerbs.Widowbloom.ReagentBank + playerHerbs.Widowbloom.Bank);
         Glockfarmer:CreateLine(
-            "Widowbloom",
+            L["Widowbloom"],
             playerHerbs.Widowbloom.Bag,
             playerHerbs.Widowbloom.ReagentBank,
             playerHerbs.Widowbloom.Bank,
@@ -175,7 +177,7 @@ function Glockfarmer:PrintHerbsLine(playerHerbs, toolTip)
         Glockfarmer:GetWidowbloomNeeded() -
             (playerHerbs.VigilsTorch.Bag + playerHerbs.VigilsTorch.ReagentBank + playerHerbs.VigilsTorch.Bank);
         Glockfarmer:CreateLine(
-            "Vigils Torch",
+            L["VigilsTorch"],
             playerHerbs.VigilsTorch.Bag,
             playerHerbs.VigilsTorch.ReagentBank,
             playerHerbs.VigilsTorch.Bank,
@@ -188,7 +190,7 @@ function Glockfarmer:GetHerbCheckbox()
     if not herbCheckbox then
         herbCheckbox = AceGUI:Create("CheckBox");
         herbCheckbox:SetType("checkbox");
-        herbCheckbox:SetLabel("Show Herbs");
+        herbCheckbox:SetLabel(L["ShowAllHerbs"]);
         herbCheckbox:SetValue(self.db.profile.ShowHerbalism);
         herbCheckbox:SetCallback(
             "OnValueChanged",

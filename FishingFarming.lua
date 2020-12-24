@@ -1,3 +1,5 @@
+local L = LibStub("AceLocale-3.0"):GetLocale("GlockFarmer");
+
 local fishingCheckbox;
 
 function Glockfarmer:PrintFish(playerFish, itemFrame)
@@ -12,12 +14,12 @@ function Glockfarmer:PrintFish(playerFish, itemFrame)
             (playerFish.LostSole.Bag + playerFish.LostSole.ReagentBank + playerFish.LostSole.Bank)
         local lostSoleGroup =
             Glockfarmer:CreateRow(
-            "Lost Sole",
-            playerFish.LostSole.Bag,
-            playerFish.LostSole.ReagentBank,
-            playerFish.LostSole.Bank,
-            need
-        )
+                L["LostSole"],
+                playerFish.LostSole.Bag,
+                playerFish.LostSole.ReagentBank,
+                playerFish.LostSole.Bank,
+                need
+            )
         fishGroup:AddChild(lostSoleGroup)
     end
 
@@ -27,12 +29,12 @@ function Glockfarmer:PrintFish(playerFish, itemFrame)
             (playerFish.SilverPike.Bag + playerFish.SilverPike.ReagentBank + playerFish.SilverPike.Bank)
         local silvergillGroup =
             Glockfarmer:CreateRow(
-            "Silvergill Pike",
-            playerFish.SilverPike.Bag,
-            playerFish.SilverPike.ReagentBank,
-            playerFish.SilverPike.Bank,
-            need
-        )
+                L["SilverPike"],
+                playerFish.SilverPike.Bag,
+                playerFish.SilverPike.ReagentBank,
+                playerFish.SilverPike.Bank,
+                need
+            )
         fishGroup:AddChild(silvergillGroup)
     end
 
@@ -42,12 +44,12 @@ function Glockfarmer:PrintFish(playerFish, itemFrame)
             (playerFish.PoketBoneFish.Bag + playerFish.PoketBoneFish.ReagentBank + playerFish.PoketBoneFish.Bank)
         local poketGroup =
             Glockfarmer:CreateRow(
-            "Pocked Bonefish",
-            playerFish.PoketBoneFish.Bag,
-            playerFish.PoketBoneFish.ReagentBank,
-            playerFish.PoketBoneFish.Bank,
-            need
-        )
+                L["PocketBonefish"] ,
+                playerFish.PoketBoneFish.Bag,
+                playerFish.PoketBoneFish.ReagentBank,
+                playerFish.PoketBoneFish.Bank,
+                need
+            )
         fishGroup:AddChild(poketGroup)
     end
 
@@ -57,12 +59,12 @@ function Glockfarmer:PrintFish(playerFish, itemFrame)
             (playerFish.Iridescent.Bag + playerFish.Iridescent.ReagentBank + playerFish.Iridescent.Bank)
         local iridenscentGroup =
             Glockfarmer:CreateRow(
-            "Iridescent Amberjack",
-            playerFish.Iridescent.Bag,
-            playerFish.Iridescent.ReagentBank,
-            playerFish.Iridescent.Bank,
-            need
-        )
+                L["Iridescent"],
+                playerFish.Iridescent.Bag,
+                playerFish.Iridescent.ReagentBank,
+                playerFish.Iridescent.Bank,
+                need
+            )
         fishGroup:AddChild(iridenscentGroup)
     end
 
@@ -72,12 +74,12 @@ function Glockfarmer:PrintFish(playerFish, itemFrame)
             (playerFish.SpinefinPiranha.Bag + playerFish.SpinefinPiranha.ReagentBank + playerFish.SpinefinPiranha.Bank)
         local spinefishroup =
             Glockfarmer:CreateRow(
-            "Spinefin Piranha",
-            playerFish.SpinefinPiranha.Bag,
-            playerFish.SpinefinPiranha.ReagentBank,
-            playerFish.SpinefinPiranha.Bank,
-            need
-        )
+                L["SpinefinPiranha"],
+                playerFish.SpinefinPiranha.Bag,
+                playerFish.SpinefinPiranha.ReagentBank,
+                playerFish.SpinefinPiranha.Bank,
+                need
+            )
         fishGroup:AddChild(spinefishroup)
     end
 
@@ -87,12 +89,12 @@ function Glockfarmer:PrintFish(playerFish, itemFrame)
             (playerFish.Elysian.Bag + playerFish.Elysian.ReagentBank + playerFish.Elysian.Bank)
         local elysianGroup =
             Glockfarmer:CreateRow(
-            "Elysian Thade",
-            playerFish.Elysian.Bag,
-            playerFish.Elysian.ReagentBank,
-            playerFish.Elysian.Bank,
-            need
-        )
+                L["Elysian"],
+                playerFish.Elysian.Bag,
+                playerFish.Elysian.ReagentBank,
+                playerFish.Elysian.Bank,
+                need
+            )
         fishGroup:AddChild(elysianGroup)
     end
 
@@ -105,7 +107,7 @@ function Glockfarmer:PrintFishLine(playerFish, toolTip)
         Glockfarmer:GetLostSoleNeeded() -
             (playerFish.LostSole.Bag + playerFish.LostSole.ReagentBank + playerFish.LostSole.Bank);
         Glockfarmer:CreateLine(
-            "Lost Sole",
+            L["LostSole"],
             playerFish.LostSole.Bag,
             playerFish.LostSole.ReagentBank,
             playerFish.LostSole.Bank,
@@ -119,7 +121,7 @@ function Glockfarmer:PrintFishLine(playerFish, toolTip)
         Glockfarmer:GetSilverPikeNeeded() -
             (playerFish.SilverPike.Bag + playerFish.SilverPike.ReagentBank + playerFish.SilverPike.Bank);
         Glockfarmer:CreateLine(
-            "Silvergill Pike",
+            L["SilverPike"],
             playerFish.SilverPike.Bag,
             playerFish.SilverPike.ReagentBank,
             playerFish.SilverPike.Bank,
@@ -133,7 +135,7 @@ function Glockfarmer:PrintFishLine(playerFish, toolTip)
         Glockfarmer:GetPocketBonefishNeeded() -
             (playerFish.PoketBoneFish.Bag + playerFish.PoketBoneFish.ReagentBank + playerFish.PoketBoneFish.Bank);
         Glockfarmer:CreateLine(
-            "Pocked Bonefish",
+            L["PocketBonefish"],
             playerFish.PoketBoneFish.Bag,
             playerFish.PoketBoneFish.ReagentBank,
             playerFish.PoketBoneFish.Bank,
@@ -147,7 +149,7 @@ function Glockfarmer:PrintFishLine(playerFish, toolTip)
         Glockfarmer:GetIridescentNeeded() -
             (playerFish.Iridescent.Bag + playerFish.Iridescent.ReagentBank + playerFish.Iridescent.Bank);
         Glockfarmer:CreateLine(
-            "Iridescent Amberjack",
+            L["Iridescent"],
             playerFish.Iridescent.Bag,
             playerFish.Iridescent.ReagentBank,
             playerFish.Iridescent.Bank,
@@ -161,7 +163,7 @@ function Glockfarmer:PrintFishLine(playerFish, toolTip)
         Glockfarmer:GetSpinefinPiranhaNeeded() -
             (playerFish.SpinefinPiranha.Bag + playerFish.SpinefinPiranha.ReagentBank + playerFish.SpinefinPiranha.Bank);
         Glockfarmer:CreateLine(
-            "Spinefin Piranha",
+            L["SpinefinPiranha"],
             playerFish.SpinefinPiranha.Bag,
             playerFish.SpinefinPiranha.ReagentBank,
             playerFish.SpinefinPiranha.Bank,
@@ -175,7 +177,7 @@ function Glockfarmer:PrintFishLine(playerFish, toolTip)
         Glockfarmer:GetElysianNeeded() -
             (playerFish.Elysian.Bag + playerFish.Elysian.ReagentBank + playerFish.Elysian.Bank);
         Glockfarmer:CreateLine(
-            "Elysian Thade",
+            L["Elysian"],
             playerFish.Elysian.Bag,
             playerFish.Elysian.ReagentBank,
             playerFish.Elysian.Bank,
@@ -188,7 +190,7 @@ function Glockfarmer:GetFishingCheckbox()
     if not fishingCheckbox then
         fishingCheckbox = AceGUI:Create("CheckBox");
         fishingCheckbox:SetType("checkbox");
-        fishingCheckbox:SetLabel("Show Fish");
+        fishingCheckbox:SetLabel(L["ShowsAllFish"]);
         fishingCheckbox:SetValue(self.db.profile.ShowFish);
         fishingCheckbox:SetCallback(
             "OnValueChanged",

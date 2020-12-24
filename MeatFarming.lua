@@ -1,85 +1,86 @@
+local L = LibStub("AceLocale-3.0"):GetLocale("GlockFarmer");
 local meatCheckbox;
 
 function Glockfarmer:PrintMeat(playerMeat, itemFrame)
-    local meatGroup = AceGUI:Create("InlineGroup")
-    meatGroup:SetTitle("Meat")
-    meatGroup:SetWidth(400)
-    meatGroup:SetLayout("Flow")
+    local meatGroup = AceGUI:Create("InlineGroup");
+    meatGroup:SetTitle("Meat");
+    meatGroup:SetWidth(400);
+    meatGroup:SetLayout("Flow");
 
     if (Glockfarmer:CanShowAethereal()) then
         local need =
         Glockfarmer:GetAetherealNeeded() -
-            (playerMeat.Athereal.Bag + playerMeat.Athereal.ReagentBank + playerMeat.Athereal.Bank)
+            (playerMeat.Athereal.Bag + playerMeat.Athereal.ReagentBank + playerMeat.Athereal.Bank);
         local atherealGroup =
             Glockfarmer:CreateRow(
-            "Aethereal Meat",
-            playerMeat.Athereal.Bag,
-            playerMeat.Athereal.ReagentBank,
-            playerMeat.Athereal.Bank,
-            need
-        )
-        meatGroup:AddChild(atherealGroup)
+                L["Aethereal"],
+                playerMeat.Athereal.Bag,
+                playerMeat.Athereal.ReagentBank,
+                playerMeat.Athereal.Bank,
+                need
+            );
+        meatGroup:AddChild(atherealGroup);
     end
 
     if (Glockfarmer:CanShowCreepingCrawlerMeat()) then
         local need =
         Glockfarmer:GetCreepingCrawlerMeatNeeded() -
-            (playerMeat.CreepingCrawler.Bag + playerMeat.CreepingCrawler.ReagentBank + playerMeat.CreepingCrawler.Bank)
+            (playerMeat.CreepingCrawler.Bag + playerMeat.CreepingCrawler.ReagentBank + playerMeat.CreepingCrawler.Bank);
         local screepingGroup =
             Glockfarmer:CreateRow(
-            "Creeping Crawler Meat ",
-            playerMeat.CreepingCrawler.Bag,
-            playerMeat.CreepingCrawler.ReagentBank,
-            playerMeat.CreepingCrawler.Bank,
-            need
-        )
-        meatGroup:AddChild(screepingGroup)
+                L["CreepingCrawler"],
+                playerMeat.CreepingCrawler.Bag,
+                playerMeat.CreepingCrawler.ReagentBank,
+                playerMeat.CreepingCrawler.Bank,
+                need
+            );
+        meatGroup:AddChild(screepingGroup);
     end
 
     if (Glockfarmer:CanShowPhantasmalHaunch()) then
         local need =
         Glockfarmer:GetPhantasmalHaunchNeeded() -
             (playerMeat.PhantasmalHaunch.Bag + playerMeat.PhantasmalHaunch.ReagentBank +
-                playerMeat.PhantasmalHaunch.Bank)
+                playerMeat.PhantasmalHaunch.Bank);
         local phantasmalGroup =
             Glockfarmer:CreateRow(
-            "Phantasmal Haunch",
-            playerMeat.PhantasmalHaunch.Bag,
-            playerMeat.PhantasmalHaunch.ReagentBank,
-            playerMeat.PhantasmalHaunch.Bank,
-            need
-        )
-        meatGroup:AddChild(phantasmalGroup)
+                L["PhantasmalHaunch"],
+                playerMeat.PhantasmalHaunch.Bag,
+                playerMeat.PhantasmalHaunch.ReagentBank,
+                playerMeat.PhantasmalHaunch.Bank,
+                need
+            );
+        meatGroup:AddChild(phantasmalGroup);
     end
 
     if (Glockfarmer:CanShowRawSeraphicWing()) then
         local need =
         Glockfarmer:GetRawSeraphicWingNeeded() -
-            (playerMeat.RawSeraphicWing.Bag + playerMeat.RawSeraphicWing.ReagentBank + playerMeat.RawSeraphicWing.Bank)
+            (playerMeat.RawSeraphicWing.Bag + playerMeat.RawSeraphicWing.ReagentBank + playerMeat.RawSeraphicWing.Bank);
         local rawGroup =
             Glockfarmer:CreateRow(
-            "Raw Seraphic Wing",
-            playerMeat.RawSeraphicWing.Bag,
-            playerMeat.RawSeraphicWing.ReagentBank,
-            playerMeat.RawSeraphicWing.Bank,
-            need
-        )
-        meatGroup:AddChild(rawGroup)
+                L["RawSeraphicWing"],
+                playerMeat.RawSeraphicWing.Bag,
+                playerMeat.RawSeraphicWing.ReagentBank,
+                playerMeat.RawSeraphicWing.Bank,
+                need
+            );
+        meatGroup:AddChild(rawGroup);
     end
 
     if (Glockfarmer:CanShowShadowyShank()) then
         local need =
         Glockfarmer:GetShadowyShankNeeded() -
-            (playerMeat.ShadowyShank.Bag + playerMeat.ShadowyShank.ReagentBank + playerMeat.ShadowyShank.Bank)
+            (playerMeat.ShadowyShank.Bag + playerMeat.ShadowyShank.ReagentBank + playerMeat.ShadowyShank.Bank);
         local shadowyGroup =
             Glockfarmer:CreateRow(
-            "Shadowy Shank",
-            playerMeat.ShadowyShank.Bag,
-            playerMeat.ShadowyShank.ReagentBank,
-            playerMeat.ShadowyShank.Bank,
-            need
-        )
-        meatGroup:AddChild(shadowyGroup)
+                L["ShadowyShank"],
+                playerMeat.ShadowyShank.Bag,
+                playerMeat.ShadowyShank.ReagentBank,
+                playerMeat.ShadowyShank.Bank,
+                need
+            );
+        meatGroup:AddChild(shadowyGroup);
     end
 
     if (Glockfarmer:CanShowTenebrousRibs()) then
@@ -88,16 +89,16 @@ function Glockfarmer:PrintMeat(playerMeat, itemFrame)
             (playerMeat.TenebrousRibs.Bag + playerMeat.TenebrousRibs.ReagentBank + playerMeat.TenebrousRibs.Bank)
         local tenebrousRibsGroup =
             Glockfarmer:CreateRow(
-            "Tenebrous Ribs",
+                L["TenebrousRibs"] ,
             playerMeat.TenebrousRibs.Bag,
             playerMeat.TenebrousRibs.ReagentBank,
             playerMeat.TenebrousRibs.Bank,
             need
-        )
-        meatGroup:AddChild(tenebrousRibsGroup)
+        );
+        meatGroup:AddChild(tenebrousRibsGroup);
     end
 
-    itemFrame:AddChild(meatGroup)
+    itemFrame:AddChild(meatGroup);
 end
 function Glockfarmer:PrintMeatLine(playerMeat, toolTip)
     toolTip:AddLine("Meat: ");
@@ -106,7 +107,7 @@ function Glockfarmer:PrintMeatLine(playerMeat, toolTip)
         Glockfarmer:GetAetherealNeeded() -
             (playerMeat.Athereal.Bag + playerMeat.Athereal.ReagentBank + playerMeat.Athereal.Bank);
         Glockfarmer:CreateLine(
-            "Aethereal Meat",
+            L["Aethereal"],
             playerMeat.Athereal.Bag,
             playerMeat.Athereal.ReagentBank,
             playerMeat.Athereal.Bank,
@@ -120,7 +121,7 @@ function Glockfarmer:PrintMeatLine(playerMeat, toolTip)
         Glockfarmer:GetCreepingCrawlerMeatNeeded() -
             (playerMeat.CreepingCrawler.Bag + playerMeat.CreepingCrawler.ReagentBank + playerMeat.CreepingCrawler.Bank);
         Glockfarmer:CreateLine(
-            "Creeping Crawler Meat ",
+            L["CreepingCrawler"],
             playerMeat.CreepingCrawler.Bag,
             playerMeat.CreepingCrawler.ReagentBank,
             playerMeat.CreepingCrawler.Bank,
@@ -135,7 +136,7 @@ function Glockfarmer:PrintMeatLine(playerMeat, toolTip)
             (playerMeat.PhantasmalHaunch.Bag + playerMeat.PhantasmalHaunch.ReagentBank +
                 playerMeat.PhantasmalHaunch.Bank);
         Glockfarmer:CreateLine(
-            "Phantasmal Haunch",
+            L["PhantasmalHaunch"],
             playerMeat.PhantasmalHaunch.Bag,
             playerMeat.PhantasmalHaunch.ReagentBank,
             playerMeat.PhantasmalHaunch.Bank,
@@ -149,7 +150,7 @@ function Glockfarmer:PrintMeatLine(playerMeat, toolTip)
         Glockfarmer:GetRawSeraphicWingNeeded() -
             (playerMeat.RawSeraphicWing.Bag + playerMeat.RawSeraphicWing.ReagentBank + playerMeat.RawSeraphicWing.Bank);
         Glockfarmer:CreateLine(
-            "Raw Seraphic Wing",
+            L["RawSeraphicWing"],
             playerMeat.RawSeraphicWing.Bag,
             playerMeat.RawSeraphicWing.ReagentBank,
             playerMeat.RawSeraphicWing.Bank,
@@ -163,7 +164,7 @@ function Glockfarmer:PrintMeatLine(playerMeat, toolTip)
         Glockfarmer:GetShadowyShankNeeded() -
             (playerMeat.ShadowyShank.Bag + playerMeat.ShadowyShank.ReagentBank + playerMeat.ShadowyShank.Bank);
         Glockfarmer:CreateLine(
-            "Shadowy Shank",
+            L["ShadowyShank"],
             playerMeat.ShadowyShank.Bag,
             playerMeat.ShadowyShank.ReagentBank,
             playerMeat.ShadowyShank.Bank,
@@ -177,7 +178,7 @@ function Glockfarmer:PrintMeatLine(playerMeat, toolTip)
         Glockfarmer:GetTenebrousRibsNeeded() -
             (playerMeat.TenebrousRibs.Bag + playerMeat.TenebrousRibs.ReagentBank + playerMeat.TenebrousRibs.Bank);
         Glockfarmer:CreateLine(
-            "Tenebrous Ribs",
+            L["TenebrousRibs"] ,
             playerMeat.TenebrousRibs.Bag,
             playerMeat.TenebrousRibs.ReagentBank,
             playerMeat.TenebrousRibs.Bank,
@@ -190,7 +191,7 @@ function Glockfarmer:GetMeatCheckbox()
     if not meatCheckbox then
         meatCheckbox = AceGUI:Create("CheckBox");
         meatCheckbox:SetType("checkbox");
-        meatCheckbox:SetLabel("Show Meat");
+        meatCheckbox:SetLabel(L["ShowsAllMeat"]);
         meatCheckbox:SetValue(self.db.profile.ShowFish);
         meatCheckbox:SetCallback(
             "OnValueChanged",

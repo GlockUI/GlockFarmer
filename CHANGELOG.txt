@@ -1,0 +1,43 @@
+Version  1.1.0
+    - Adds Setup for Localization.  Currently only English is supported but more in the future.
+    - Adds Tooltips for each item being tracked to give guidence where to farm them.
+    - Adds .pkgmeta for Curseforge intergration.
+
+Version  1.0.0
+    - Adds LDB support for TitanPanel and Restructure code for easier maintainablility.
+
+Version  0.4.0
+    - Big UI overhaul, adds skins for panels and groups.
+
+Version  0.3.2
+    - Fixes bug where widowbloom wasnt being tracked.
+
+Version  0.3.1
+    - Adds tracking of meat.
+
+Version  0.3.0
+    - Allows for tracking amount needed for specific items.
+
+Version  0.2.0
+    - Update Libs and adds various other options to fine tune tracking
+
+Version  0.1.0
+    - Adds Reagent and Regular Bank Scanning
+
+Version  0.0.6
+    - Adds Tracking of items across characters
+
+Version  0.0.5
+    - Bug fixes and adds persistant Settings
+
+Version  0.0.4
+    - Bug fixes
+
+Version  0.0.3
+    - Bug fixes and Tweak UI
+
+Version  0.0.2
+    - Adds Support for Ore Bag Scanning
+
+Version 0.0.1
+    - Initial Creation With support for Cloth, Herbs and Fish Bag scanning
